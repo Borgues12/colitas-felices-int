@@ -1,0 +1,361 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="panel.Master.cs" Inherits="colitas_felices.src.webform.panel" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Admin Panel</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/src/assets/vendors/mdi/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="~/src/assets/vendors/css/vendor.bundle.base.css" />
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="~/src/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" />
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/src/assets/css/style.css" />
+    <!-- endinject -->
+
+    <link rel="stylesheet" href="~/src/css/custom-panel-admin-styles.css" />
+
+    <%--    LINK PARA NOTIFICACIONES Y PARA EL LOADER--%>
+    <link rel="stylesheet" href="~/src/css/loader.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <div class="container-scroller">
+            <!-- ═══════════════════════════════════════════════════════════════ -->
+            <!-- SIDEBAR                                                         -->
+            <!-- ═══════════════════════════════════════════════════════════════ -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
+                    <a class="sidebar-brand brand-logo" href='<%= ResolveUrl("~/src/webform/admin/ad_main.aspx") %>'>
+                        <img src='<%= ResolveUrl("~/src/assets/images/logo.svg") %>' alt="logo" /></a>
+                    <a class="sidebar-brand brand-logo-mini pl-4 pt-3" href='<%= ResolveUrl("~/src/webform/admin/ad_main.aspx") %>'>
+                        <img src='<%= ResolveUrl("~/src/assets/images/logo_mini.svg") %>' alt="logo" /></a>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item"  style="padding-top: 1rem;">
+                        <a class="nav-link" href="index.html">
+                            <i class="mdi mdi-home menu-icon"></i>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                            <span class="menu-title">CRUD</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="ui-basic">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href='<%= ResolveUrl("~/src/webform/admin/ad_main.aspx") %>'>Cuentas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href='<%= ResolveUrl("~/src/webform/admin/ad_perfiles.aspx") %>'>Perfiles</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Pendiente</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="mdi mdi-contacts menu-icon"></i>
+                            <span class="menu-title">PENDIENTE</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                            <span class="menu-title">PENDIENTE</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="mdi mdi-chart-bar menu-icon"></i>
+                            <span class="menu-title">PENDIENTE</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="mdi mdi-table-large menu-icon"></i>
+                            <span class="menu-title">PENDIENTE</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link" href="#">
+                            <span class="menu-title">Opciones</span>
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="mdi mdi-file-document-box menu-icon"></i>
+                            <span class="menu-title">Como usar</span>
+                        </a>
+                    </li>
+                    <li class="nav-item sidebar-actions">
+                        <div class="nav-link">
+                            <div class="mt-4">
+                                <div class="border-none">
+                                    <p class="text-black">Notification</p>
+                                </div>
+                                <ul class="mt-4 pl-0">
+                                    <li>
+                                        <asp:LinkButton ID="lnk_salir" runat="server" Text="Cerrar Sesión" OnClick="Logout_Click" />
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="container-fluid page-body-wrapper">
+                <!-- ═══════════════════════════════════════════════════════════════ -->
+                <!-- THEME SETTINGS PANEL                                            -->
+                <!-- ═══════════════════════════════════════════════════════════════ -->
+                <div id="theme-settings" class="settings-panel">
+                    <i class="settings-close mdi mdi-close"></i>
+                    <p class="settings-heading">SIDEBAR SKINS</p>
+                    <div class="sidebar-bg-options selected" id="sidebar-default-theme">
+                        <div class="img-ss rounded-circle bg-light border mr-3"></div>
+                        Default
+                   
+                    </div>
+                    <div class="sidebar-bg-options" id="sidebar-dark-theme">
+                        <div class="img-ss rounded-circle bg-dark border mr-3"></div>
+                        Dark
+                   
+                    </div>
+                    <p class="settings-heading mt-2">HEADER SKINS</p>
+                    <div class="color-tiles mx-0 px-4">
+                        <div class="tiles light"></div>
+                        <div class="tiles dark"></div>
+                    </div>
+                </div>
+
+                <!-- ═══════════════════════════════════════════════════════════════ -->
+                <!-- NAVBAR                                                          -->
+                <!-- ═══════════════════════════════════════════════════════════════ -->
+                <nav class="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
+                    <div class="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
+                        <a class="navbar-brand brand-logo-mini align-self-center d-lg-none" href="index.html">
+                            <img src='<%= ResolveUrl("~/src/assets/images/logo_mini.svg") %>' alt="logo" /></a>
+                        <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
+                            <i class="mdi mdi-menu"></i>
+                        </button>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                                    <i class="mdi mdi-bell-outline"></i>
+                                    <span class="count count-varient1">7</span>
+                                </a>
+                                <div class="dropdown-menu navbar-dropdown navbar-dropdown-large preview-list" aria-labelledby="notificationDropdown">
+                                    <h6 class="p-3 mb-0">Notifications</h6>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <img src='<%= ResolveUrl("~/src/assets/images/faces/face4.jpg") %>' alt="" class="profile-pic" />
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <p class="mb-0">
+                                                Dany Miles <span class="text-small text-muted">commented on your photo</span>
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <img src='<%= ResolveUrl("~/src/assets/images/faces/face3.jpg") %>' alt="" class="profile-pic" />
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <p class="mb-0">
+                                                James <span class="text-small text-muted">posted a photo on your wall</span>
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <img src='<%= ResolveUrl("~/src/assets/images/faces/face2.jpg") %>' alt="" class="profile-pic" />
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <p class="mb-0">
+                                                Alex <span class="text-small text-muted">just mentioned you in his post</span>
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <p class="p-3 mb-0">View all activities</p>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown d-none d-sm-flex">
+                                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown">
+                                    <i class="mdi mdi-email-outline"></i>
+                                    <span class="count count-varient2">5</span>
+                                </a>
+                                <div class="dropdown-menu navbar-dropdown navbar-dropdown-large preview-list" aria-labelledby="messageDropdown">
+                                    <h6 class="p-3 mb-0">Messages</h6>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-item-content flex-grow">
+                                            <span class="badge badge-pill badge-success">Request</span>
+                                            <p class="text-small text-muted ellipsis mb-0">Suport needed for user123 </p>
+                                        </div>
+                                        <p class="text-small text-muted align-self-start">4:10 PM </p>
+                                    </a>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-item-content flex-grow">
+                                            <span class="badge badge-pill badge-warning">Invoices</span>
+                                            <p class="text-small text-muted ellipsis mb-0">Invoice for order is mailed </p>
+                                        </div>
+                                        <p class="text-small text-muted align-self-start">4:10 PM </p>
+                                    </a>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-item-content flex-grow">
+                                            <span class="badge badge-pill badge-danger">Projects</span>
+                                            <p class="text-small text-muted ellipsis mb-0">New project will start tomorrow </p>
+                                        </div>
+                                        <p class="text-small text-muted align-self-start">4:10 PM </p>
+                                    </a>
+                                    <h6 class="p-3 mb-0">See all activity</h6>
+                                </div>
+                            </li>
+                            <li class="nav-item nav-search border-0 ml-1 ml-md-3 ml-lg-5 d-none d-md-flex">
+                                <div class="nav-link form-inline mt-2 mt-md-0">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search" />
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="mdi mdi-magnify"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav navbar-nav-right ml-lg-auto">
+                            <li class="nav-item dropdown d-none d-xl-flex border-0">
+                                <a class="nav-link dropdown-toggle" id="languageDropdown" href="#" data-toggle="dropdown">
+                                    <i class="mdi mdi-earth"></i>English </a>
+                                <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
+                                    <a class="dropdown-item" href="#">French </a>
+                                    <a class="dropdown-item" href="#">Spain </a>
+                                    <a class="dropdown-item" href="#">Latin </a>
+                                    <a class="dropdown-item" href="#">Japanese </a>
+                                </div>
+                            </li>
+                            <li class="nav-item nav-profile dropdown border-0">
+                                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown">
+                                    <img class="nav-profile-img mr-2" alt=""
+                                        src='<%= ObtenerFotoUsuario() %>' />
+                                    <span class="profile-name">
+                                        <%= ObtenerNombreNormalizado() %>
+                                    </span>
+                                </a>
+
+                                <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
+                                    <div class="dropdown-header text-center">
+                                        <img class="rounded-circle mb-2"
+                                            src='<%= ObtenerFotoUsuario() %>'
+                                            alt="Profile" />
+
+                                        <p class="mb-1 font-weight-semibold">
+                                            <%= perfilUsuario?.Nombres ?? "" %><br />
+                                            <%= perfilUsuario?.Apellidos ?? "" %>
+                                        </p>
+
+                                        <p class="font-weight-light text-muted mb-0">
+                                            <%= perfilUsuario?.Email ?? "" %>
+                                        </p>
+
+                                        <span class="badge badge-info">
+                                            <%= ObtenerNombreRol() %>
+                                        </span>
+                                    </div>
+
+                                    <div class="dropdown-divider"></div>
+
+                                    <a class="dropdown-item" href="#">
+                                        <i class="mdi mdi-account mr-2 text-info"></i>
+                                        Mi Perfil
+                                    </a>
+
+                                    <a class="dropdown-item" href="#">
+                                        <i class="mdi mdi-cached mr-2 text-success"></i>
+                                        Actividad
+                                    </a>
+
+                                    <div class="dropdown-divider"></div>
+
+                                    <asp:LinkButton
+                                        ID="btnLogout"
+                                        runat="server"
+                                        CssClass="dropdown-item"
+                                        OnClick="Logout_Click">
+                                         <i class="mdi mdi-logout mr-2 text-danger"></i>
+                                     Cerrar Sesión
+                                    </asp:LinkButton>
+                                </div>
+                            </li>
+
+                        </ul>
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                            <span class="mdi mdi-menu"></span>
+                        </button>
+                    </div>
+                </nav>
+
+                <!-- ═══════════════════════════════════════════════════════════════ -->
+                <!-- MAIN PANEL - Aquí va el contenido de cada página               -->
+                <!-- ═══════════════════════════════════════════════════════════════ -->
+                <div class="main-panel">
+                    <div class="content-wrapper pb-0">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+
+                    <!-- FOOTER -->
+                    <footer class="footer">
+                        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Colitas Felices 2025</span>
+                        </div>
+                    </footer>
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+        <!-- container-scroller -->
+
+    </form>
+
+    <!-- plugins:js -->
+    <script src='<%= ResolveUrl("~/src/assets/vendors/js/vendor.bundle.base.js") %>'></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src='<%= ResolveUrl("~/src/assets/vendors/chart.js/Chart.min.js") %>'></script>
+    <script src='<%= ResolveUrl("~/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js") %>'></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src='<%= ResolveUrl("~/src/assets/js/off-canvas.js") %>'></script>
+    <script src='<%= ResolveUrl("~/src/assets/js/hoverable-collapse.js") %>'></script>
+    <script src='<%= ResolveUrl("~/src/assets/js/misc.js") %>'></script>
+    <!-- endinject -->
+
+    <%--metodo para cargar el loader--%>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src='<%= ResolveUrl("~/src/js/loader.js") %>'></script>
+
+    <asp:ContentPlaceHolder ID="scripts" runat="server">
+    </asp:ContentPlaceHolder>
+
+</body>
+</html>

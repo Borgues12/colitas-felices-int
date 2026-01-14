@@ -1,0 +1,101 @@
+﻿
+/* Dropdown más compacto */
+.nav-profile .dropdown-menu.navbar-dropdown {
+    width: auto !important;
+    min-width: 220px !important;
+    max-width: 280px !important; /* Reducido de 320px */
+    box-sizing: border-box !important;
+    right: 0 !important;
+    left: auto !important;
+}
+
+/* Header con menos padding */
+.nav-profile .dropdown-header {
+    padding: 0.75rem !important; /* Reducido de 1rem */
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+    /* Imagen más pequeña */
+    .nav-profile .dropdown-header img.rounded-circle {
+        width: 50px !important; /* Reducido de 60px */
+        height: 50px !important;
+        object-fit: cover !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    /* Nombre completo */
+    .nav-profile .dropdown-header p.font-weight-semibold {
+        max-width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        margin-bottom: 0.25rem !important;
+        font-size: 0.875rem !important; /* Texto más pequeño */
+        line-height: 1.3 !important;
+    }
+
+    /* Email más compacto */
+    .nav-profile .dropdown-header p.text-muted {
+        white-space: normal !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        line-height: 1.3 !important;
+        font-size: 0.7rem !important; /* Más pequeño */
+        margin-bottom: 0.5rem !important;
+        max-width: 100% !important;
+    }
+
+    /* Badge del rol */
+    .nav-profile .dropdown-header .badge {
+        display: inline-block !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        font-size: 0.7rem !important;
+        padding: 0.25rem 0.5rem !important;
+    }
+
+/* Items del menú más compactos */
+.nav-profile .dropdown-item {
+    padding: 0.5rem 0.75rem !important; /* Reducido */
+    font-size: 0.875rem !important;
+    white-space: nowrap !important;
+}
+
+    .nav-profile .dropdown-item i {
+        font-size: 1rem !important;
+    }
+
+/* Divider más delgado */
+.nav-profile .dropdown-divider {
+    margin: 0.5rem 0 !important;
+}
+
+/* Nombre en navbar */
+.nav-profile .nav-link .profile-name {
+    display: inline-block !important;
+    max-width: 100px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .nav-profile .dropdown-menu.navbar-dropdown {
+        min-width: 200px !important;
+        max-width: 250px !important;
+    }
+
+    .nav-profile .dropdown-header {
+        padding: 0.5rem !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .nav-profile .nav-link .profile-name {
+        max-width: 120px !important;
+    }
+}
