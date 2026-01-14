@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="../capa_datos/capa_datos.csproj" Id="7a099ded-14bd-48a7-accb-8a9819bdc4d8" />
+  <Project Path="../capa_DTO/capa_dto.csproj" Id="f8f7759b-e6cd-4fa4-b4e4-1e1c3c3efa32" />
+  <Project Path="../capa_negocio/capa_negocio.csproj" Id="471279ad-e5c3-44f7-aefb-a53357e1c16c" />
+  <Project Path="colitas_felices.csproj" Id="65e3a5b1-8de5-4d9e-86c0-2fb7a8a0b34f" />
+</Solution>

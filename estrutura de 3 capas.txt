@@ -1,0 +1,40 @@
+┌─────────────────────────────────────────────────────────────────┐
+│                    CAPA DE PRESENTACIÓN                         │
+│                    (Code-Behind: Login.aspx.cs)                 │
+├─────────────────────────────────────────────────────────────────┤
+│  ✓ Validar que campos no estén vacíos                          │
+│  ✓ Capturar datos del formulario                               │
+│  ✓ Mostrar mensajes al usuario (Notyf, alertas)                │
+│  ✓ Redirigir a otras páginas                                   │
+│  ✓ Manejar sesiones de ASP.NET (Session)                       │
+│  ✗ NO consulta la base de datos directamente                   │
+│  ✗ NO tiene lógica de negocio (bloqueos, cálculos)             │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    CAPA DE NEGOCIO                              │
+│                    (CN_Usuario.cs)                              │
+├─────────────────────────────────────────────────────────────────┤
+│  ✓ Lógica de autenticación                                     │
+│  ✓ Validar contraseña con BCrypt                               │
+│  ✓ Lógica de bloqueo progresivo (15min, 1hr, día siguiente)    │
+│  ✓ Reglas de negocio (¿usuario activo? ¿bloqueado?)            │
+│  ✓ Decidir qué hacer según el resultado                        │
+│  ✗ NO accede directamente a la BD                              │
+│  ✗ NO muestra mensajes al usuario                              │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    CAPA DE DATOS                                │
+│                    (CD_Usuario.cs)                              │
+├─────────────────────────────────────────────────────────────────┤
+│  ✓ Consultas LINQ a la base de datos                           │
+│  ✓ Obtener usuario por email                                   │
+│  ✓ Actualizar intentos fallidos                                │
+│  ✓ Actualizar bloqueo                                          │
+│  ✓ CRUD básico                                                 │
+│  ✗ NO tiene lógica de negocio                                  │
+│  ✗ NO decide si bloquear o no (solo ejecuta)                   │
+└─────────────────────────────────────────────────────────────────┘

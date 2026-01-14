@@ -1,0 +1,6 @@
+MASTER KEY= BASE DE DATOS
+##MS_DatabaseMasterKey##
+
+PASSWORD='ColitasFelices_MasterKey_2025$.,'
+
+CERTIFICADO= CertRefugio
