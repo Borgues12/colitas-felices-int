@@ -21,7 +21,7 @@ namespace capa_datos
         public const byte ESTADO_PENDIENTE = 3;
 
 
-        // Select - Listar todas las cuentas
+        // SELECT - Listar todas las cuentas
         public List<UsuarioCuentaDTO> ListarCuentas(byte? estadoFiltro = null)
         {
             try
