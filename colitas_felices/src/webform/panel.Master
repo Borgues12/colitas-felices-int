@@ -1,5 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="panel.Master.cs" Inherits="colitas_felices.src.webform.panel" %>
-
+<%--hola--%>
 <!DOCTYPE html>
 
 <html>
