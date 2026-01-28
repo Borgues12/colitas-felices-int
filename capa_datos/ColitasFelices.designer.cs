@@ -36,13 +36,10 @@ namespace capa_datos
     partial void InsertPerfil(Perfil instance);
     partial void UpdatePerfil(Perfil instance);
     partial void DeletePerfil(Perfil instance);
-    partial void InsertProveedorExterno(ProveedorExterno instance);
-    partial void UpdateProveedorExterno(ProveedorExterno instance);
-    partial void DeleteProveedorExterno(ProveedorExterno instance);
     #endregion
 		
 		public ColitasFelicesDataContext() : 
-				base(global::capa_datos.Properties.Settings.Default.colitas_felices_2ConnectionString, mappingSource)
+				base(global::capa_datos.Properties.Settings.Default.colitas_felices_2ConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -87,99 +84,145 @@ namespace capa_datos
 			}
 		}
 		
-		public System.Data.Linq.Table<ProveedorExterno> ProveedorExterno
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_AdminCuenta")]
+		public int SEG_AdminCuenta([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaIDAdmin", DbType="Int")] System.Nullable<int> cuentaIDAdmin, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaIDObjetivo", DbType="Int")] System.Nullable<int> cuentaIDObjetivo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(20)")] string accion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevoRol", DbType="TinyInt")] System.Nullable<byte> nuevoRol, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevoEstado", DbType="TinyInt")] System.Nullable<byte> nuevoEstado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Motivo", DbType="NVarChar(255)")] string motivo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
 		{
-			get
-			{
-				return this.GetTable<ProveedorExterno>();
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_CrearUsuario_Admin")]
-		public int SP_CrearUsuario_Admin([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="VarChar(255)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Rol", DbType="TinyInt")] System.Nullable<byte> rol, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(15)")] string cedula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombres", DbType="VarChar(100)")] string nombres, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Apellidos", DbType="VarChar(100)")] string apellidos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Telefono", DbType="VarChar(15)")] string telefono, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Direccion", DbType="VarChar(255)")] string direccion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoPerfil", DbType="VarBinary(MAX)")] System.Data.Linq.Binary fotoPerfil, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] ref System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PerfilID", DbType="Int")] ref System.Nullable<int> perfilID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="VarChar(500)")] ref string mensaje)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, password, rol, cedula, nombres, apellidos, telefono, direccion, fotoPerfil, cuentaID, perfilID, exitoso, mensaje);
-			cuentaID = ((System.Nullable<int>)(result.GetParameterValue(9)));
-			perfilID = ((System.Nullable<int>)(result.GetParameterValue(10)));
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(11)));
-			mensaje = ((string)(result.GetParameterValue(12)));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cuentaIDAdmin, cuentaIDObjetivo, accion, nuevoRol, nuevoEstado, motivo, exitoso, mensaje);
+			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(6)));
+			mensaje = ((string)(result.GetParameterValue(7)));
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_VerificarLogin")]
-		public int SP_VerificarLogin([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="VarChar(255)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LoginExitoso", DbType="Bit")] ref System.Nullable<bool> loginExitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] ref System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RolUsuario", DbType="TinyInt")] ref System.Nullable<byte> rolUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="VarChar(500)")] ref string mensaje)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_Login")]
+		public int SEG_Login([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(10)")] string accion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PasswordCorrecto", DbType="Bit")] System.Nullable<bool> passwordCorrecto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] ref System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PasswordHash", DbType="NVarChar(255)")] ref string passwordHash, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Rol", DbType="TinyInt")] ref System.Nullable<byte> rol, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerNombre", DbType="VarChar(50)")] ref string primerNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerApellido", DbType="VarChar(50)")] ref string primerApellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoPerfil", DbType="VarBinary(MAX)")] ref System.Data.Linq.Binary fotoPerfil, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, password, loginExitoso, cuentaID, rolUsuario, mensaje);
-			loginExitoso = ((System.Nullable<bool>)(result.GetParameterValue(2)));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, accion, passwordCorrecto, cuentaID, passwordHash, rol, primerNombre, primerApellido, fotoPerfil, exitoso, mensaje);
 			cuentaID = ((System.Nullable<int>)(result.GetParameterValue(3)));
-			rolUsuario = ((System.Nullable<byte>)(result.GetParameterValue(4)));
+			passwordHash = ((string)(result.GetParameterValue(4)));
+			rol = ((System.Nullable<byte>)(result.GetParameterValue(5)));
+			primerNombre = ((string)(result.GetParameterValue(6)));
+			primerApellido = ((string)(result.GetParameterValue(7)));
+			fotoPerfil = ((System.Data.Linq.Binary)(result.GetParameterValue(8)));
+			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(9)));
+			mensaje = ((string)(result.GetParameterValue(10)));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_LoginExterno")]
+		public int SEG_LoginExterno([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ProveedorID", DbType="VarChar(100)")] string proveedorID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Proveedor", DbType="VarChar(20)")] string proveedor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerNombre", DbType="VarChar(50)")] string primerNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerApellido", DbType="VarChar(50)")] string primerApellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoUrl", DbType="VarChar(500)")] string fotoUrl, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(10)")] string accion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] ref System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Rol", DbType="TinyInt")] ref System.Nullable<byte> rol, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreSalida", DbType="VarChar(50)")] ref string nombreSalida, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ApellidoSalida", DbType="VarChar(50)")] ref string apellidoSalida, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoPerfil", DbType="VarBinary(MAX)")] ref System.Data.Linq.Binary fotoPerfil, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EsNuevo", DbType="Bit")] ref System.Nullable<bool> esNuevo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, proveedorID, proveedor, primerNombre, primerApellido, fotoUrl, accion, cuentaID, rol, nombreSalida, apellidoSalida, fotoPerfil, esNuevo, exitoso, mensaje);
+			cuentaID = ((System.Nullable<int>)(result.GetParameterValue(7)));
+			rol = ((System.Nullable<byte>)(result.GetParameterValue(8)));
+			nombreSalida = ((string)(result.GetParameterValue(9)));
+			apellidoSalida = ((string)(result.GetParameterValue(10)));
+			fotoPerfil = ((System.Data.Linq.Binary)(result.GetParameterValue(11)));
+			esNuevo = ((System.Nullable<bool>)(result.GetParameterValue(12)));
+			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(13)));
+			mensaje = ((string)(result.GetParameterValue(14)));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_LoginResultado")]
+		public int SEG_LoginResultado([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LoginExitoso", DbType="Bit")] System.Nullable<bool> loginExitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cuentaID, loginExitoso, exitoso, mensaje);
+			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(2)));
+			mensaje = ((string)(result.GetParameterValue(3)));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_ObtenerDatos")]
+		public ISingleResult<SEG_ObtenerDatosResult> SEG_ObtenerDatos([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(15)")] string accion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(100)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Rol", DbType="TinyInt")] System.Nullable<byte> rol, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Estado", DbType="TinyInt")] System.Nullable<byte> estado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Pagina", DbType="Int")] System.Nullable<int> pagina, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PorPagina", DbType="Int")] System.Nullable<int> porPagina, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalRegistros", DbType="Int")] ref System.Nullable<int> totalRegistros, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalPaginas", DbType="Int")] ref System.Nullable<int> totalPaginas, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), accion, cuentaID, email, nombre, rol, estado, pagina, porPagina, totalRegistros, totalPaginas, exitoso, mensaje);
+			totalRegistros = ((System.Nullable<int>)(result.GetParameterValue(8)));
+			totalPaginas = ((System.Nullable<int>)(result.GetParameterValue(9)));
+			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(10)));
+			mensaje = ((string)(result.GetParameterValue(11)));
+			return ((ISingleResult<SEG_ObtenerDatosResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_Perfil")]
+		public int SEG_Perfil(
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] System.Nullable<int> cuentaID, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(15)")] string accion, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerNombre", DbType="VarChar(50)")] string primerNombre, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SegundoNombre", DbType="VarChar(50)")] string segundoNombre, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerApellido", DbType="VarChar(50)")] string primerApellido, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SegundoApellido", DbType="VarChar(50)")] string segundoApellido, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Telefono", DbType="VarChar(15)")] string telefono, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Direccion", DbType="VarChar(255)")] string direccion, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FechaNacimiento", DbType="Date")] System.Nullable<System.DateTime> fechaNacimiento, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Ocupacion", DbType="VarChar(100)")] string ocupacion, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoPerfil", DbType="VarBinary(MAX)")] System.Data.Linq.Binary fotoPerfil, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] ref string email, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Rol", DbType="TinyInt")] ref System.Nullable<byte> rol, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerNombreOut", DbType="VarChar(50)")] ref string primerNombreOut, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SegundoNombreOut", DbType="VarChar(50)")] ref string segundoNombreOut, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerApellidoOut", DbType="VarChar(50)")] ref string primerApellidoOut, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SegundoApellidoOut", DbType="VarChar(50)")] ref string segundoApellidoOut, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaOut", DbType="VarChar(10)")] ref string cedulaOut, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="TelefonoOut", DbType="VarChar(15)")] ref string telefonoOut, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="DireccionOut", DbType="VarChar(255)")] ref string direccionOut, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FechaNacimientoOut", DbType="Date")] ref System.Nullable<System.DateTime> fechaNacimientoOut, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="OcupacionOut", DbType="VarChar(100)")] ref string ocupacionOut, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoPerfilOut", DbType="VarBinary(MAX)")] ref System.Data.Linq.Binary fotoPerfilOut, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="TieneGoogle", DbType="Bit")] ref System.Nullable<bool> tieneGoogle, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FechaRegistro", DbType="DateTime")] ref System.Nullable<System.DateTime> fechaRegistro, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cuentaID, accion, primerNombre, segundoNombre, primerApellido, segundoApellido, cedula, telefono, direccion, fechaNacimiento, ocupacion, fotoPerfil, email, rol, primerNombreOut, segundoNombreOut, primerApellidoOut, segundoApellidoOut, cedulaOut, telefonoOut, direccionOut, fechaNacimientoOut, ocupacionOut, fotoPerfilOut, tieneGoogle, fechaRegistro, exitoso, mensaje);
+			email = ((string)(result.GetParameterValue(12)));
+			rol = ((System.Nullable<byte>)(result.GetParameterValue(13)));
+			primerNombreOut = ((string)(result.GetParameterValue(14)));
+			segundoNombreOut = ((string)(result.GetParameterValue(15)));
+			primerApellidoOut = ((string)(result.GetParameterValue(16)));
+			segundoApellidoOut = ((string)(result.GetParameterValue(17)));
+			cedulaOut = ((string)(result.GetParameterValue(18)));
+			telefonoOut = ((string)(result.GetParameterValue(19)));
+			direccionOut = ((string)(result.GetParameterValue(20)));
+			fechaNacimientoOut = ((System.Nullable<System.DateTime>)(result.GetParameterValue(21)));
+			ocupacionOut = ((string)(result.GetParameterValue(22)));
+			fotoPerfilOut = ((System.Data.Linq.Binary)(result.GetParameterValue(23)));
+			tieneGoogle = ((System.Nullable<bool>)(result.GetParameterValue(24)));
+			fechaRegistro = ((System.Nullable<System.DateTime>)(result.GetParameterValue(25)));
+			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(26)));
+			mensaje = ((string)(result.GetParameterValue(27)));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_RecuperarPassword")]
+		public int SEG_RecuperarPassword([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(10)")] string accion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Codigo", DbType="VarChar(6)")] string codigo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevoPasswordHash", DbType="NVarChar(255)")] string nuevoPasswordHash, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] ref System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Token", DbType="VarChar(6)")] ref string token, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, accion, codigo, nuevoPasswordHash, cuentaID, token, exitoso, mensaje);
+			cuentaID = ((System.Nullable<int>)(result.GetParameterValue(4)));
+			token = ((string)(result.GetParameterValue(5)));
+			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(6)));
+			mensaje = ((string)(result.GetParameterValue(7)));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_Registrar")]
+		public int SEG_Registrar([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PasswordHash", DbType="NVarChar(255)")] string passwordHash, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerNombre", DbType="VarChar(50)")] string primerNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerApellido", DbType="VarChar(50)")] string primerApellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] ref System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Token", DbType="VarChar(6)")] ref string token, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, passwordHash, primerNombre, primerApellido, cuentaID, token, exitoso, mensaje);
+			cuentaID = ((System.Nullable<int>)(result.GetParameterValue(4)));
+			token = ((string)(result.GetParameterValue(5)));
+			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(6)));
+			mensaje = ((string)(result.GetParameterValue(7)));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_VerificarCodigo")]
+		public int SEG_VerificarCodigo([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(10)")] string accion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Codigo", DbType="VarChar(6)")] string codigo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Token", DbType="VarChar(6)")] ref string token, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), accion, email, codigo, token, exitoso, mensaje);
+			token = ((string)(result.GetParameterValue(3)));
+			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(4)));
 			mensaje = ((string)(result.GetParameterValue(5)));
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_CambiarEstadoCuenta")]
-		public int SP_CambiarEstadoCuenta([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevoEstado", DbType="TinyInt")] System.Nullable<byte> nuevoEstado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Resultado", DbType="Bit")] ref System.Nullable<bool> resultado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Codigo", DbType="TinyInt")] ref System.Nullable<byte> codigo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cuentaID, nuevoEstado, resultado, codigo, mensaje);
-			resultado = ((System.Nullable<bool>)(result.GetParameterValue(2)));
-			codigo = ((System.Nullable<byte>)(result.GetParameterValue(3)));
-			mensaje = ((string)(result.GetParameterValue(4)));
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Cuenta_Buscar")]
-		public ISingleResult<sp_Cuenta_BuscarResult> sp_Cuenta_Buscar([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Termino", DbType="VarChar(100)")] string termino)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), termino);
-			return ((ISingleResult<sp_Cuenta_BuscarResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_LoginGoogle")]
-		public int SP_LoginGoogle([global::System.Data.Linq.Mapping.ParameterAttribute(Name="GoogleID", DbType="VarChar(255)")] string googleID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(100)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] ref System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RolUsuario", DbType="TinyInt")] ref System.Nullable<byte> rolUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RequiereCompletarPerfil", DbType="Bit")] ref System.Nullable<bool> requiereCompletarPerfil, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EsNuevoUsuario", DbType="Bit")] ref System.Nullable<bool> esNuevoUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="VarChar(500)")] ref string mensaje)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), googleID, email, nombre, cuentaID, rolUsuario, requiereCompletarPerfil, esNuevoUsuario, exitoso, mensaje);
-			cuentaID = ((System.Nullable<int>)(result.GetParameterValue(3)));
-			rolUsuario = ((System.Nullable<byte>)(result.GetParameterValue(4)));
-			requiereCompletarPerfil = ((System.Nullable<bool>)(result.GetParameterValue(5)));
-			esNuevoUsuario = ((System.Nullable<bool>)(result.GetParameterValue(6)));
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(7)));
-			mensaje = ((string)(result.GetParameterValue(8)));
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_EliminarCuenta")]
-		public int SP_EliminarCuenta([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="VarChar(500)")] ref string mensaje)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cuentaID, exitoso, mensaje);
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(1)));
-			mensaje = ((string)(result.GetParameterValue(2)));
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_CambiarRol")]
-		public int SP_CambiarRol([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevoRol", DbType="TinyInt")] System.Nullable<byte> nuevoRol, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="VarChar(500)")] ref string mensaje)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cuentaID, nuevoRol, exitoso, mensaje);
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(2)));
-			mensaje = ((string)(result.GetParameterValue(3)));
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_ActualizarPerfil")]
-		public int SP_ActualizarPerfil([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PerfilID", DbType="Int")] System.Nullable<int> perfilID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(15)")] string cedula, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombres", DbType="VarChar(100)")] string nombres, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Apellidos", DbType="VarChar(100)")] string apellidos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Telefono", DbType="VarChar(15)")] string telefono, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Direccion", DbType="VarChar(255)")] string direccion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoPerfil", DbType="VarBinary(MAX)")] System.Data.Linq.Binary fotoPerfil, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="VarChar(500)")] ref string mensaje)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), perfilID, cedula, nombres, apellidos, telefono, direccion, fotoPerfil, exitoso, mensaje);
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(7)));
-			mensaje = ((string)(result.GetParameterValue(8)));
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SP_CambiarPassword")]
-		public int SP_CambiarPassword([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevoPassword", DbType="VarChar(255)")] string nuevoPassword, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="VarChar(500)")] ref string mensaje)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cuentaID, nuevoPassword, exitoso, mensaje);
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(2)));
-			mensaje = ((string)(result.GetParameterValue(3)));
 			return ((int)(result.ReturnValue));
 		}
 	}
@@ -194,35 +237,29 @@ namespace capa_datos
 		
 		private string _Email;
 		
-		private System.Data.Linq.Binary _Password;
+		private string _Password;
+		
+		private string _GoogleID;
 		
 		private byte _Rol;
+		
+		private byte _Estado;
+		
+		private string _TokenVerificacion;
+		
+		private System.Nullable<System.DateTime> _TokenExpiracion;
+		
+		private byte _IntentosFallidos;
+		
+		private System.Nullable<System.DateTime> _BloqueadoHasta;
+		
+		private byte _VecesBloqueo;
 		
 		private System.DateTime _FechaRegistro;
 		
 		private System.Nullable<System.DateTime> _UltimoAcceso;
 		
-		private int _IntentosFallidos;
-		
-		private System.Nullable<System.DateTime> _BloqueadoHasta;
-		
-		private int _VecesBloqueo;
-		
-		private string _TokenRecuperacion;
-		
-		private System.Nullable<System.DateTime> _TokenExpiracion;
-		
-		private string _ClaveTemporal;
-		
-		private System.Nullable<System.DateTime> _ClaveTemporalExpira;
-		
-		private string _TipoAutenticacion;
-		
-		private byte _Estado;
-		
 		private EntitySet<Perfil> _Perfil;
-		
-		private EntitySet<ProveedorExterno> _ProveedorExterno;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -232,38 +269,33 @@ namespace capa_datos
     partial void OnCuentaIDChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
-    partial void OnPasswordChanging(System.Data.Linq.Binary value);
+    partial void OnPasswordChanging(string value);
     partial void OnPasswordChanged();
+    partial void OnGoogleIDChanging(string value);
+    partial void OnGoogleIDChanged();
     partial void OnRolChanging(byte value);
     partial void OnRolChanged();
+    partial void OnEstadoChanging(byte value);
+    partial void OnEstadoChanged();
+    partial void OnTokenVerificacionChanging(string value);
+    partial void OnTokenVerificacionChanged();
+    partial void OnTokenExpiracionChanging(System.Nullable<System.DateTime> value);
+    partial void OnTokenExpiracionChanged();
+    partial void OnIntentosFallidosChanging(byte value);
+    partial void OnIntentosFallidosChanged();
+    partial void OnBloqueadoHastaChanging(System.Nullable<System.DateTime> value);
+    partial void OnBloqueadoHastaChanged();
+    partial void OnVecesBloqueoChanging(byte value);
+    partial void OnVecesBloqueoChanged();
     partial void OnFechaRegistroChanging(System.DateTime value);
     partial void OnFechaRegistroChanged();
     partial void OnUltimoAccesoChanging(System.Nullable<System.DateTime> value);
     partial void OnUltimoAccesoChanged();
-    partial void OnIntentosFallidosChanging(int value);
-    partial void OnIntentosFallidosChanged();
-    partial void OnBloqueadoHastaChanging(System.Nullable<System.DateTime> value);
-    partial void OnBloqueadoHastaChanged();
-    partial void OnVecesBloqueoChanging(int value);
-    partial void OnVecesBloqueoChanged();
-    partial void OnTokenRecuperacionChanging(string value);
-    partial void OnTokenRecuperacionChanged();
-    partial void OnTokenExpiracionChanging(System.Nullable<System.DateTime> value);
-    partial void OnTokenExpiracionChanged();
-    partial void OnClaveTemporalChanging(string value);
-    partial void OnClaveTemporalChanged();
-    partial void OnClaveTemporalExpiraChanging(System.Nullable<System.DateTime> value);
-    partial void OnClaveTemporalExpiraChanged();
-    partial void OnTipoAutenticacionChanging(string value);
-    partial void OnTipoAutenticacionChanged();
-    partial void OnEstadoChanging(byte value);
-    partial void OnEstadoChanged();
     #endregion
 		
 		public Cuenta()
 		{
 			this._Perfil = new EntitySet<Perfil>(new Action<Perfil>(this.attach_Perfil), new Action<Perfil>(this.detach_Perfil));
-			this._ProveedorExterno = new EntitySet<ProveedorExterno>(new Action<ProveedorExterno>(this.attach_ProveedorExterno), new Action<ProveedorExterno>(this.detach_ProveedorExterno));
 			OnCreated();
 		}
 		
@@ -307,8 +339,8 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarBinary(500)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary Password
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(255)")]
+		public string Password
 		{
 			get
 			{
@@ -323,6 +355,26 @@ namespace capa_datos
 					this._Password = value;
 					this.SendPropertyChanged("Password");
 					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GoogleID", DbType="VarChar(100)")]
+		public string GoogleID
+		{
+			get
+			{
+				return this._GoogleID;
+			}
+			set
+			{
+				if ((this._GoogleID != value))
+				{
+					this.OnGoogleIDChanging(value);
+					this.SendPropertyChanging();
+					this._GoogleID = value;
+					this.SendPropertyChanged("GoogleID");
+					this.OnGoogleIDChanged();
 				}
 			}
 		}
@@ -343,6 +395,126 @@ namespace capa_datos
 					this._Rol = value;
 					this.SendPropertyChanged("Rol");
 					this.OnRolChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="TinyInt NOT NULL")]
+		public byte Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this.OnEstadoChanging(value);
+					this.SendPropertyChanging();
+					this._Estado = value;
+					this.SendPropertyChanged("Estado");
+					this.OnEstadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TokenVerificacion", DbType="VarChar(6)")]
+		public string TokenVerificacion
+		{
+			get
+			{
+				return this._TokenVerificacion;
+			}
+			set
+			{
+				if ((this._TokenVerificacion != value))
+				{
+					this.OnTokenVerificacionChanging(value);
+					this.SendPropertyChanging();
+					this._TokenVerificacion = value;
+					this.SendPropertyChanged("TokenVerificacion");
+					this.OnTokenVerificacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TokenExpiracion", DbType="DateTime")]
+		public System.Nullable<System.DateTime> TokenExpiracion
+		{
+			get
+			{
+				return this._TokenExpiracion;
+			}
+			set
+			{
+				if ((this._TokenExpiracion != value))
+				{
+					this.OnTokenExpiracionChanging(value);
+					this.SendPropertyChanging();
+					this._TokenExpiracion = value;
+					this.SendPropertyChanged("TokenExpiracion");
+					this.OnTokenExpiracionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IntentosFallidos", DbType="TinyInt NOT NULL")]
+		public byte IntentosFallidos
+		{
+			get
+			{
+				return this._IntentosFallidos;
+			}
+			set
+			{
+				if ((this._IntentosFallidos != value))
+				{
+					this.OnIntentosFallidosChanging(value);
+					this.SendPropertyChanging();
+					this._IntentosFallidos = value;
+					this.SendPropertyChanged("IntentosFallidos");
+					this.OnIntentosFallidosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BloqueadoHasta", DbType="DateTime")]
+		public System.Nullable<System.DateTime> BloqueadoHasta
+		{
+			get
+			{
+				return this._BloqueadoHasta;
+			}
+			set
+			{
+				if ((this._BloqueadoHasta != value))
+				{
+					this.OnBloqueadoHastaChanging(value);
+					this.SendPropertyChanging();
+					this._BloqueadoHasta = value;
+					this.SendPropertyChanged("BloqueadoHasta");
+					this.OnBloqueadoHastaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VecesBloqueo", DbType="TinyInt NOT NULL")]
+		public byte VecesBloqueo
+		{
+			get
+			{
+				return this._VecesBloqueo;
+			}
+			set
+			{
+				if ((this._VecesBloqueo != value))
+				{
+					this.OnVecesBloqueoChanging(value);
+					this.SendPropertyChanging();
+					this._VecesBloqueo = value;
+					this.SendPropertyChanged("VecesBloqueo");
+					this.OnVecesBloqueoChanged();
 				}
 			}
 		}
@@ -387,186 +559,6 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IntentosFallidos", DbType="Int NOT NULL")]
-		public int IntentosFallidos
-		{
-			get
-			{
-				return this._IntentosFallidos;
-			}
-			set
-			{
-				if ((this._IntentosFallidos != value))
-				{
-					this.OnIntentosFallidosChanging(value);
-					this.SendPropertyChanging();
-					this._IntentosFallidos = value;
-					this.SendPropertyChanged("IntentosFallidos");
-					this.OnIntentosFallidosChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BloqueadoHasta", DbType="DateTime")]
-		public System.Nullable<System.DateTime> BloqueadoHasta
-		{
-			get
-			{
-				return this._BloqueadoHasta;
-			}
-			set
-			{
-				if ((this._BloqueadoHasta != value))
-				{
-					this.OnBloqueadoHastaChanging(value);
-					this.SendPropertyChanging();
-					this._BloqueadoHasta = value;
-					this.SendPropertyChanged("BloqueadoHasta");
-					this.OnBloqueadoHastaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VecesBloqueo", DbType="Int NOT NULL")]
-		public int VecesBloqueo
-		{
-			get
-			{
-				return this._VecesBloqueo;
-			}
-			set
-			{
-				if ((this._VecesBloqueo != value))
-				{
-					this.OnVecesBloqueoChanging(value);
-					this.SendPropertyChanging();
-					this._VecesBloqueo = value;
-					this.SendPropertyChanged("VecesBloqueo");
-					this.OnVecesBloqueoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TokenRecuperacion", DbType="VarChar(255)")]
-		public string TokenRecuperacion
-		{
-			get
-			{
-				return this._TokenRecuperacion;
-			}
-			set
-			{
-				if ((this._TokenRecuperacion != value))
-				{
-					this.OnTokenRecuperacionChanging(value);
-					this.SendPropertyChanging();
-					this._TokenRecuperacion = value;
-					this.SendPropertyChanged("TokenRecuperacion");
-					this.OnTokenRecuperacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TokenExpiracion", DbType="DateTime")]
-		public System.Nullable<System.DateTime> TokenExpiracion
-		{
-			get
-			{
-				return this._TokenExpiracion;
-			}
-			set
-			{
-				if ((this._TokenExpiracion != value))
-				{
-					this.OnTokenExpiracionChanging(value);
-					this.SendPropertyChanging();
-					this._TokenExpiracion = value;
-					this.SendPropertyChanged("TokenExpiracion");
-					this.OnTokenExpiracionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClaveTemporal", DbType="VarChar(255)")]
-		public string ClaveTemporal
-		{
-			get
-			{
-				return this._ClaveTemporal;
-			}
-			set
-			{
-				if ((this._ClaveTemporal != value))
-				{
-					this.OnClaveTemporalChanging(value);
-					this.SendPropertyChanging();
-					this._ClaveTemporal = value;
-					this.SendPropertyChanged("ClaveTemporal");
-					this.OnClaveTemporalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClaveTemporalExpira", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ClaveTemporalExpira
-		{
-			get
-			{
-				return this._ClaveTemporalExpira;
-			}
-			set
-			{
-				if ((this._ClaveTemporalExpira != value))
-				{
-					this.OnClaveTemporalExpiraChanging(value);
-					this.SendPropertyChanging();
-					this._ClaveTemporalExpira = value;
-					this.SendPropertyChanged("ClaveTemporalExpira");
-					this.OnClaveTemporalExpiraChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoAutenticacion", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string TipoAutenticacion
-		{
-			get
-			{
-				return this._TipoAutenticacion;
-			}
-			set
-			{
-				if ((this._TipoAutenticacion != value))
-				{
-					this.OnTipoAutenticacionChanging(value);
-					this.SendPropertyChanging();
-					this._TipoAutenticacion = value;
-					this.SendPropertyChanged("TipoAutenticacion");
-					this.OnTipoAutenticacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="TinyInt NOT NULL")]
-		public byte Estado
-		{
-			get
-			{
-				return this._Estado;
-			}
-			set
-			{
-				if ((this._Estado != value))
-				{
-					this.OnEstadoChanging(value);
-					this.SendPropertyChanging();
-					this._Estado = value;
-					this.SendPropertyChanged("Estado");
-					this.OnEstadoChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cuenta_Perfil", Storage="_Perfil", ThisKey="CuentaID", OtherKey="CuentaID")]
 		public EntitySet<Perfil> Perfil
 		{
@@ -577,19 +569,6 @@ namespace capa_datos
 			set
 			{
 				this._Perfil.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cuenta_ProveedorExterno", Storage="_ProveedorExterno", ThisKey="CuentaID", OtherKey="CuentaID")]
-		public EntitySet<ProveedorExterno> ProveedorExterno
-		{
-			get
-			{
-				return this._ProveedorExterno;
-			}
-			set
-			{
-				this._ProveedorExterno.Assign(value);
 			}
 		}
 		
@@ -624,18 +603,6 @@ namespace capa_datos
 			this.SendPropertyChanging();
 			entity.Cuenta = null;
 		}
-		
-		private void attach_ProveedorExterno(ProveedorExterno entity)
-		{
-			this.SendPropertyChanging();
-			entity.Cuenta = this;
-		}
-		
-		private void detach_ProveedorExterno(ProveedorExterno entity)
-		{
-			this.SendPropertyChanging();
-			entity.Cuenta = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Perfil")]
@@ -648,19 +615,29 @@ namespace capa_datos
 		
 		private int _CuentaID;
 		
+		private string _PrimerNombre;
+		
+		private string _SegundoNombre;
+		
+		private string _PrimerApellido;
+		
+		private string _SegundoApellido;
+		
 		private string _Cedula;
-		
-		private string _Nombres;
-		
-		private string _Apellidos;
 		
 		private string _Telefono;
 		
 		private string _Direccion;
 		
+		private System.Nullable<System.DateTime> _FechaNacimiento;
+		
+		private string _Ocupacion;
+		
 		private System.Data.Linq.Binary _FotoPerfil;
 		
-		private char _PerfilCompleto;
+		private System.DateTime _FechaCreacion;
+		
+		private System.Nullable<System.DateTime> _FechaActualizacion;
 		
 		private EntityRef<Cuenta> _Cuenta;
 		
@@ -672,20 +649,30 @@ namespace capa_datos
     partial void OnPerfilIDChanged();
     partial void OnCuentaIDChanging(int value);
     partial void OnCuentaIDChanged();
+    partial void OnPrimerNombreChanging(string value);
+    partial void OnPrimerNombreChanged();
+    partial void OnSegundoNombreChanging(string value);
+    partial void OnSegundoNombreChanged();
+    partial void OnPrimerApellidoChanging(string value);
+    partial void OnPrimerApellidoChanged();
+    partial void OnSegundoApellidoChanging(string value);
+    partial void OnSegundoApellidoChanged();
     partial void OnCedulaChanging(string value);
     partial void OnCedulaChanged();
-    partial void OnNombresChanging(string value);
-    partial void OnNombresChanged();
-    partial void OnApellidosChanging(string value);
-    partial void OnApellidosChanged();
     partial void OnTelefonoChanging(string value);
     partial void OnTelefonoChanged();
     partial void OnDireccionChanging(string value);
     partial void OnDireccionChanged();
+    partial void OnFechaNacimientoChanging(System.Nullable<System.DateTime> value);
+    partial void OnFechaNacimientoChanged();
+    partial void OnOcupacionChanging(string value);
+    partial void OnOcupacionChanged();
     partial void OnFotoPerfilChanging(System.Data.Linq.Binary value);
     partial void OnFotoPerfilChanged();
-    partial void OnPerfilCompletoChanging(char value);
-    partial void OnPerfilCompletoChanged();
+    partial void OnFechaCreacionChanging(System.DateTime value);
+    partial void OnFechaCreacionChanged();
+    partial void OnFechaActualizacionChanging(System.Nullable<System.DateTime> value);
+    partial void OnFechaActualizacionChanged();
     #endregion
 		
 		public Perfil()
@@ -738,7 +725,87 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="VarChar(15)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerNombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string PrimerNombre
+		{
+			get
+			{
+				return this._PrimerNombre;
+			}
+			set
+			{
+				if ((this._PrimerNombre != value))
+				{
+					this.OnPrimerNombreChanging(value);
+					this.SendPropertyChanging();
+					this._PrimerNombre = value;
+					this.SendPropertyChanged("PrimerNombre");
+					this.OnPrimerNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoNombre", DbType="VarChar(50)")]
+		public string SegundoNombre
+		{
+			get
+			{
+				return this._SegundoNombre;
+			}
+			set
+			{
+				if ((this._SegundoNombre != value))
+				{
+					this.OnSegundoNombreChanging(value);
+					this.SendPropertyChanging();
+					this._SegundoNombre = value;
+					this.SendPropertyChanged("SegundoNombre");
+					this.OnSegundoNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerApellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string PrimerApellido
+		{
+			get
+			{
+				return this._PrimerApellido;
+			}
+			set
+			{
+				if ((this._PrimerApellido != value))
+				{
+					this.OnPrimerApellidoChanging(value);
+					this.SendPropertyChanging();
+					this._PrimerApellido = value;
+					this.SendPropertyChanged("PrimerApellido");
+					this.OnPrimerApellidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoApellido", DbType="VarChar(50)")]
+		public string SegundoApellido
+		{
+			get
+			{
+				return this._SegundoApellido;
+			}
+			set
+			{
+				if ((this._SegundoApellido != value))
+				{
+					this.OnSegundoApellidoChanging(value);
+					this.SendPropertyChanging();
+					this._SegundoApellido = value;
+					this.SendPropertyChanged("SegundoApellido");
+					this.OnSegundoApellidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="VarChar(10)")]
 		public string Cedula
 		{
 			get
@@ -754,46 +821,6 @@ namespace capa_datos
 					this._Cedula = value;
 					this.SendPropertyChanged("Cedula");
 					this.OnCedulaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombres", DbType="VarChar(100)")]
-		public string Nombres
-		{
-			get
-			{
-				return this._Nombres;
-			}
-			set
-			{
-				if ((this._Nombres != value))
-				{
-					this.OnNombresChanging(value);
-					this.SendPropertyChanging();
-					this._Nombres = value;
-					this.SendPropertyChanged("Nombres");
-					this.OnNombresChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellidos", DbType="VarChar(100)")]
-		public string Apellidos
-		{
-			get
-			{
-				return this._Apellidos;
-			}
-			set
-			{
-				if ((this._Apellidos != value))
-				{
-					this.OnApellidosChanging(value);
-					this.SendPropertyChanging();
-					this._Apellidos = value;
-					this.SendPropertyChanged("Apellidos");
-					this.OnApellidosChanged();
 				}
 			}
 		}
@@ -838,6 +865,46 @@ namespace capa_datos
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaNacimiento", DbType="Date")]
+		public System.Nullable<System.DateTime> FechaNacimiento
+		{
+			get
+			{
+				return this._FechaNacimiento;
+			}
+			set
+			{
+				if ((this._FechaNacimiento != value))
+				{
+					this.OnFechaNacimientoChanging(value);
+					this.SendPropertyChanging();
+					this._FechaNacimiento = value;
+					this.SendPropertyChanged("FechaNacimiento");
+					this.OnFechaNacimientoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ocupacion", DbType="VarChar(100)")]
+		public string Ocupacion
+		{
+			get
+			{
+				return this._Ocupacion;
+			}
+			set
+			{
+				if ((this._Ocupacion != value))
+				{
+					this.OnOcupacionChanging(value);
+					this.SendPropertyChanging();
+					this._Ocupacion = value;
+					this.SendPropertyChanged("Ocupacion");
+					this.OnOcupacionChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FotoPerfil", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary FotoPerfil
 		{
@@ -858,27 +925,47 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PerfilCompleto", DbType="Char(1) NOT NULL")]
-		public char PerfilCompleto
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaCreacion", DbType="DateTime NOT NULL")]
+		public System.DateTime FechaCreacion
 		{
 			get
 			{
-				return this._PerfilCompleto;
+				return this._FechaCreacion;
 			}
 			set
 			{
-				if ((this._PerfilCompleto != value))
+				if ((this._FechaCreacion != value))
 				{
-					this.OnPerfilCompletoChanging(value);
+					this.OnFechaCreacionChanging(value);
 					this.SendPropertyChanging();
-					this._PerfilCompleto = value;
-					this.SendPropertyChanged("PerfilCompleto");
-					this.OnPerfilCompletoChanged();
+					this._FechaCreacion = value;
+					this.SendPropertyChanged("FechaCreacion");
+					this.OnFechaCreacionChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cuenta_Perfil", Storage="_Cuenta", ThisKey="CuentaID", OtherKey="CuentaID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaActualizacion", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaActualizacion
+		{
+			get
+			{
+				return this._FechaActualizacion;
+			}
+			set
+			{
+				if ((this._FechaActualizacion != value))
+				{
+					this.OnFechaActualizacionChanging(value);
+					this.SendPropertyChanging();
+					this._FechaActualizacion = value;
+					this.SendPropertyChanged("FechaActualizacion");
+					this.OnFechaActualizacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cuenta_Perfil", Storage="_Cuenta", ThisKey="CuentaID", OtherKey="CuentaID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Cuenta Cuenta
 		{
 			get
@@ -933,230 +1020,7 @@ namespace capa_datos
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ProveedorExterno")]
-	public partial class ProveedorExterno : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ProveedorExternoID;
-		
-		private int _CuentaID;
-		
-		private string _Proveedor;
-		
-		private string _ProveedorUserID;
-		
-		private string _EmailProveedor;
-		
-		private System.DateTime _FechaVinculacion;
-		
-		private EntityRef<Cuenta> _Cuenta;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnProveedorExternoIDChanging(int value);
-    partial void OnProveedorExternoIDChanged();
-    partial void OnCuentaIDChanging(int value);
-    partial void OnCuentaIDChanged();
-    partial void OnProveedorChanging(string value);
-    partial void OnProveedorChanged();
-    partial void OnProveedorUserIDChanging(string value);
-    partial void OnProveedorUserIDChanged();
-    partial void OnEmailProveedorChanging(string value);
-    partial void OnEmailProveedorChanged();
-    partial void OnFechaVinculacionChanging(System.DateTime value);
-    partial void OnFechaVinculacionChanged();
-    #endregion
-		
-		public ProveedorExterno()
-		{
-			this._Cuenta = default(EntityRef<Cuenta>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProveedorExternoID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ProveedorExternoID
-		{
-			get
-			{
-				return this._ProveedorExternoID;
-			}
-			set
-			{
-				if ((this._ProveedorExternoID != value))
-				{
-					this.OnProveedorExternoIDChanging(value);
-					this.SendPropertyChanging();
-					this._ProveedorExternoID = value;
-					this.SendPropertyChanged("ProveedorExternoID");
-					this.OnProveedorExternoIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CuentaID", DbType="Int NOT NULL")]
-		public int CuentaID
-		{
-			get
-			{
-				return this._CuentaID;
-			}
-			set
-			{
-				if ((this._CuentaID != value))
-				{
-					if (this._Cuenta.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCuentaIDChanging(value);
-					this.SendPropertyChanging();
-					this._CuentaID = value;
-					this.SendPropertyChanged("CuentaID");
-					this.OnCuentaIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proveedor", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string Proveedor
-		{
-			get
-			{
-				return this._Proveedor;
-			}
-			set
-			{
-				if ((this._Proveedor != value))
-				{
-					this.OnProveedorChanging(value);
-					this.SendPropertyChanging();
-					this._Proveedor = value;
-					this.SendPropertyChanged("Proveedor");
-					this.OnProveedorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProveedorUserID", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string ProveedorUserID
-		{
-			get
-			{
-				return this._ProveedorUserID;
-			}
-			set
-			{
-				if ((this._ProveedorUserID != value))
-				{
-					this.OnProveedorUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._ProveedorUserID = value;
-					this.SendPropertyChanged("ProveedorUserID");
-					this.OnProveedorUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailProveedor", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
-		public string EmailProveedor
-		{
-			get
-			{
-				return this._EmailProveedor;
-			}
-			set
-			{
-				if ((this._EmailProveedor != value))
-				{
-					this.OnEmailProveedorChanging(value);
-					this.SendPropertyChanging();
-					this._EmailProveedor = value;
-					this.SendPropertyChanged("EmailProveedor");
-					this.OnEmailProveedorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaVinculacion", DbType="DateTime NOT NULL")]
-		public System.DateTime FechaVinculacion
-		{
-			get
-			{
-				return this._FechaVinculacion;
-			}
-			set
-			{
-				if ((this._FechaVinculacion != value))
-				{
-					this.OnFechaVinculacionChanging(value);
-					this.SendPropertyChanging();
-					this._FechaVinculacion = value;
-					this.SendPropertyChanged("FechaVinculacion");
-					this.OnFechaVinculacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cuenta_ProveedorExterno", Storage="_Cuenta", ThisKey="CuentaID", OtherKey="CuentaID", IsForeignKey=true)]
-		public Cuenta Cuenta
-		{
-			get
-			{
-				return this._Cuenta.Entity;
-			}
-			set
-			{
-				Cuenta previousValue = this._Cuenta.Entity;
-				if (((previousValue != value) 
-							|| (this._Cuenta.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Cuenta.Entity = null;
-						previousValue.ProveedorExterno.Remove(this);
-					}
-					this._Cuenta.Entity = value;
-					if ((value != null))
-					{
-						value.ProveedorExterno.Add(this);
-						this._CuentaID = value.CuentaID;
-					}
-					else
-					{
-						this._CuentaID = default(int);
-					}
-					this.SendPropertyChanged("Cuenta");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	public partial class sp_Cuenta_BuscarResult
+	public partial class SEG_ObtenerDatosResult
 	{
 		
 		private int _CuentaID;
@@ -1167,15 +1031,47 @@ namespace capa_datos
 		
 		private byte _Estado;
 		
+		private string _GoogleID;
+		
+		private int _TieneGoogle;
+		
+		private byte _IntentosFallidos;
+		
+		private System.Nullable<System.DateTime> _BloqueadoHasta;
+		
+		private byte _VecesBloqueo;
+		
+		private System.DateTime _FechaRegistro;
+		
 		private System.Nullable<System.DateTime> _UltimoAcceso;
 		
-		private string _Nombres;
+		private int _PerfilID;
 		
-		private string _Apellidos;
+		private string _PrimerNombre;
+		
+		private string _SegundoNombre;
+		
+		private string _PrimerApellido;
+		
+		private string _SegundoApellido;
+		
+		private string _Cedula;
+		
+		private string _Telefono;
+		
+		private string _Direccion;
+		
+		private System.Nullable<System.DateTime> _FechaNacimiento;
+		
+		private string _Ocupacion;
 		
 		private System.Data.Linq.Binary _FotoPerfil;
 		
-		public sp_Cuenta_BuscarResult()
+		private System.DateTime _FechaCreacion;
+		
+		private System.Nullable<System.DateTime> _FechaActualizacion;
+		
+		public SEG_ObtenerDatosResult()
 		{
 		}
 		
@@ -1243,6 +1139,102 @@ namespace capa_datos
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GoogleID", DbType="VarChar(100)")]
+		public string GoogleID
+		{
+			get
+			{
+				return this._GoogleID;
+			}
+			set
+			{
+				if ((this._GoogleID != value))
+				{
+					this._GoogleID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TieneGoogle", DbType="Int NOT NULL")]
+		public int TieneGoogle
+		{
+			get
+			{
+				return this._TieneGoogle;
+			}
+			set
+			{
+				if ((this._TieneGoogle != value))
+				{
+					this._TieneGoogle = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IntentosFallidos", DbType="TinyInt NOT NULL")]
+		public byte IntentosFallidos
+		{
+			get
+			{
+				return this._IntentosFallidos;
+			}
+			set
+			{
+				if ((this._IntentosFallidos != value))
+				{
+					this._IntentosFallidos = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BloqueadoHasta", DbType="DateTime")]
+		public System.Nullable<System.DateTime> BloqueadoHasta
+		{
+			get
+			{
+				return this._BloqueadoHasta;
+			}
+			set
+			{
+				if ((this._BloqueadoHasta != value))
+				{
+					this._BloqueadoHasta = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VecesBloqueo", DbType="TinyInt NOT NULL")]
+		public byte VecesBloqueo
+		{
+			get
+			{
+				return this._VecesBloqueo;
+			}
+			set
+			{
+				if ((this._VecesBloqueo != value))
+				{
+					this._VecesBloqueo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaRegistro", DbType="DateTime NOT NULL")]
+		public System.DateTime FechaRegistro
+		{
+			get
+			{
+				return this._FechaRegistro;
+			}
+			set
+			{
+				if ((this._FechaRegistro != value))
+				{
+					this._FechaRegistro = value;
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UltimoAcceso", DbType="DateTime")]
 		public System.Nullable<System.DateTime> UltimoAcceso
 		{
@@ -1259,34 +1251,162 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombres", DbType="VarChar(100)")]
-		public string Nombres
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PerfilID", DbType="Int NOT NULL")]
+		public int PerfilID
 		{
 			get
 			{
-				return this._Nombres;
+				return this._PerfilID;
 			}
 			set
 			{
-				if ((this._Nombres != value))
+				if ((this._PerfilID != value))
 				{
-					this._Nombres = value;
+					this._PerfilID = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellidos", DbType="VarChar(100)")]
-		public string Apellidos
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerNombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string PrimerNombre
 		{
 			get
 			{
-				return this._Apellidos;
+				return this._PrimerNombre;
 			}
 			set
 			{
-				if ((this._Apellidos != value))
+				if ((this._PrimerNombre != value))
 				{
-					this._Apellidos = value;
+					this._PrimerNombre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoNombre", DbType="VarChar(50)")]
+		public string SegundoNombre
+		{
+			get
+			{
+				return this._SegundoNombre;
+			}
+			set
+			{
+				if ((this._SegundoNombre != value))
+				{
+					this._SegundoNombre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerApellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string PrimerApellido
+		{
+			get
+			{
+				return this._PrimerApellido;
+			}
+			set
+			{
+				if ((this._PrimerApellido != value))
+				{
+					this._PrimerApellido = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoApellido", DbType="VarChar(50)")]
+		public string SegundoApellido
+		{
+			get
+			{
+				return this._SegundoApellido;
+			}
+			set
+			{
+				if ((this._SegundoApellido != value))
+				{
+					this._SegundoApellido = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="VarChar(10)")]
+		public string Cedula
+		{
+			get
+			{
+				return this._Cedula;
+			}
+			set
+			{
+				if ((this._Cedula != value))
+				{
+					this._Cedula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="VarChar(15)")]
+		public string Telefono
+		{
+			get
+			{
+				return this._Telefono;
+			}
+			set
+			{
+				if ((this._Telefono != value))
+				{
+					this._Telefono = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(255)")]
+		public string Direccion
+		{
+			get
+			{
+				return this._Direccion;
+			}
+			set
+			{
+				if ((this._Direccion != value))
+				{
+					this._Direccion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaNacimiento", DbType="Date")]
+		public System.Nullable<System.DateTime> FechaNacimiento
+		{
+			get
+			{
+				return this._FechaNacimiento;
+			}
+			set
+			{
+				if ((this._FechaNacimiento != value))
+				{
+					this._FechaNacimiento = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ocupacion", DbType="VarChar(100)")]
+		public string Ocupacion
+		{
+			get
+			{
+				return this._Ocupacion;
+			}
+			set
+			{
+				if ((this._Ocupacion != value))
+				{
+					this._Ocupacion = value;
 				}
 			}
 		}
@@ -1303,6 +1423,38 @@ namespace capa_datos
 				if ((this._FotoPerfil != value))
 				{
 					this._FotoPerfil = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaCreacion", DbType="DateTime NOT NULL")]
+		public System.DateTime FechaCreacion
+		{
+			get
+			{
+				return this._FechaCreacion;
+			}
+			set
+			{
+				if ((this._FechaCreacion != value))
+				{
+					this._FechaCreacion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaActualizacion", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaActualizacion
+		{
+			get
+			{
+				return this._FechaActualizacion;
+			}
+			set
+			{
+				if ((this._FechaActualizacion != value))
+				{
+					this._FechaActualizacion = value;
 				}
 			}
 		}

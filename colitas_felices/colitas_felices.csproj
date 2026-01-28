@@ -1,5 +1,4 @@
 ﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -43,6 +42,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>packages\BCrypt.Net-Next.4.0.3\lib\net48\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>packages\BouncyCastle.Cryptography.2.6.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.73.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.1.73.0\lib\net462\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.73.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.1.73.0\lib\net462\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.73.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Core.1.73.0\lib\net462\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Gmail.v1, Version=1.73.0.4029, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Gmail.v1.1.73.0.4029\lib\net462\Google.Apis.Gmail.v1.dll</HintPath>
+    </Reference>
+    <Reference Include="MailKit, Version=4.14.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>packages\MailKit.4.14.1\lib\net48\MailKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=4.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Owin.4.2.3\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -59,15 +85,41 @@
     <Reference Include="Microsoft.Owin.Security.Google, Version=4.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Owin.Security.Google.4.2.3\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
     </Reference>
+    <Reference Include="MimeKit, Version=4.14.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>packages\MimeKit.4.14.0\lib\net48\MimeKit.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="System.Buffers, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.6.0\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Formats.Asn1, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Formats.Asn1.8.0.1\lib\net462\System.Formats.Asn1.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.6.0\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.6.0\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.6.0\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -86,11 +138,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="src\assets\css\style.css" />
     <Content Include="src\assets\images\auth\lockscreen-bg.jpg" />
     <Content Include="src\assets\images\auth\login-bg.jpg" />
@@ -797,25 +845,38 @@
     <Content Include="src\assets\vendors\twbs-pagination\jquery.twbsPagination.min.js" />
     <Content Include="src\assets\vendors\typeahead.js\typeahead.bundle.min.js" />
     <Content Include="src\css\custom-panel-admin-styles.css" />
+    <Content Include="src\css\global.css" />
     <Content Include="src\css\index.css" />
     <Content Include="src\css\loader.css" />
     <Content Include="src\css\login_styles.css" />
     <Content Include="src\css\ad_admin.css" />
+    <Content Include="src\css\registro_style.css" />
+    <Content Include="src\css\start_styles.css" />
+    <Content Include="src\css\verificar_style.css" />
+    <Content Include="src\images\logo_pagina_rosa.jpeg" />
+    <Content Include="src\images\principal.jpg" />
     <Content Include="src\js\js_login.js" />
     <Content Include="src\js\pruebas.js" />
     <Content Include="src\js\loader.js" />
+    <Content Include="src\webform\login\registrar.aspx" />
     <Content Include="src\webform\admin\ad_main.aspx" />
     <Content Include="src\webform\admin\prueba_design.aspx" />
     <Content Include="src\webform\admin\ad_perfiles.aspx" />
+    <Content Include="src\webform\login\verificarCodigo.aspx" />
     <Content Include="src\webform\padrino\pa_main.aspx" />
+    <Content Include="src\webform\frontend\start.aspx" />
     <Content Include="src\webform\volutario\vol_main.aspx" />
-    <Content Include="src\webform\test_session.aspx" />
-    <Content Include="src\webform\registro.aspx" />
+    <Content Include="src\webform\login\registro.aspx" />
+    <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
-    <Content Include="src\webform\main.aspx" />
-    <Content Include="src\GoogleCallback.aspx" />
+    <Content Include="src\webform\login\login.aspx" />
+    <Content Include="src\webform\login\GoogleCallback.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="notificacionesMaster.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -823,16 +884,29 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\index.Master.cs">
+    <Compile Include="Site.Mobile.Master.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.designer.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="src\masterPage\index.Master.cs">
       <DependentUpon>index.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="src\index.Master.designer.cs">
+    <Compile Include="src\masterPage\index.Master.designer.cs">
       <DependentUpon>index.Master</DependentUpon>
+    </Compile>
+    <Compile Include="src\webform\login\registrar.aspx.cs">
+      <DependentUpon>registrar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="src\webform\login\registrar.aspx.designer.cs">
+      <DependentUpon>registrar.aspx</DependentUpon>
     </Compile>
     <Compile Include="src\webform\admin\ad_main.aspx.cs">
       <DependentUpon>ad_main.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="src\webform\admin\ad_main.aspx.designer.cs">
       <DependentUpon>ad_main.aspx</DependentUpon>
@@ -846,17 +920,22 @@
     </Compile>
     <Compile Include="src\webform\admin\ad_perfiles.aspx.cs">
       <DependentUpon>ad_perfiles.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="src\webform\admin\ad_perfiles.aspx.designer.cs">
       <DependentUpon>ad_perfiles.aspx</DependentUpon>
     </Compile>
-    <Compile Include="src\webform\main.aspx.cs">
-      <DependentUpon>main.aspx</DependentUpon>
+    <Compile Include="src\webform\login\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="src\webform\login\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="src\webform\login\verificarCodigo.aspx.cs">
+      <DependentUpon>verificarCodigo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="src\webform\main.aspx.designer.cs">
-      <DependentUpon>main.aspx</DependentUpon>
+    <Compile Include="src\webform\login\verificarCodigo.aspx.designer.cs">
+      <DependentUpon>verificarCodigo.aspx</DependentUpon>
     </Compile>
     <Compile Include="src\webform\padrino\pa_main.aspx.cs">
       <DependentUpon>pa_main.aspx</DependentUpon>
@@ -865,18 +944,24 @@
     <Compile Include="src\webform\padrino\pa_main.aspx.designer.cs">
       <DependentUpon>pa_main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="src\webform\panel.Master.cs">
-      <DependentUpon>panel.Master</DependentUpon>
+    <Compile Include="src\webform\frontend\start.aspx.cs">
+      <DependentUpon>start.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="src\webform\panel.Master.designer.cs">
+    <Compile Include="src\webform\frontend\start.aspx.designer.cs">
+      <DependentUpon>start.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="src\masterPage\panel.Master.cs">
       <DependentUpon>panel.Master</DependentUpon>
     </Compile>
-    <Compile Include="src\webform\panelUsuario.Master.cs">
+    <Compile Include="src\masterPage\panel.Master.designer.cs">
+      <DependentUpon>panel.Master</DependentUpon>
+    </Compile>
+    <Compile Include="src\masterPage\panelUsuario.Master.cs">
       <DependentUpon>panelUsuario.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="src\webform\panelUsuario.Master.designer.cs">
+    <Compile Include="src\masterPage\panelUsuario.Master.designer.cs">
       <DependentUpon>panelUsuario.Master</DependentUpon>
     </Compile>
     <Compile Include="src\webform\volutario\vol_main.aspx.cs">
@@ -886,33 +971,32 @@
     <Compile Include="src\webform\volutario\vol_main.aspx.designer.cs">
       <DependentUpon>vol_main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="src\webform\test_session.aspx.cs">
-      <DependentUpon>test_session.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="src\webform\test_session.aspx.designer.cs">
-      <DependentUpon>test_session.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="src\webform\registro.aspx.cs">
+    <Compile Include="src\webform\login\registro.aspx.cs">
       <DependentUpon>registro.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="src\webform\registro.aspx.designer.cs">
+    <Compile Include="src\webform\login\registro.aspx.designer.cs">
       <DependentUpon>registro.aspx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="src\GoogleCallback.aspx.cs">
+    <Compile Include="src\webform\login\GoogleCallback.aspx.cs">
       <DependentUpon>GoogleCallback.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="src\webform\login\GoogleCallback.aspx.designer.cs">
+      <DependentUpon>GoogleCallback.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="src\GoogleCallback.aspx.designer.cs">
-      <DependentUpon>GoogleCallback.aspx</DependentUpon>
+    <Compile Include="ViewSwitcher.ascx.designer.cs">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="libman.json" />
     <None Include="packages.config" />
-    <Content Include="src\index.Master" />
-    <Content Include="src\webform\panel.Master" />
+    <Content Include="src\masterPage\index.Master" />
+    <Content Include="src\masterPage\panel.Master" />
     <Content Include="src\assets\fonts\rubik\Rubik-Bold.eot" />
     <Content Include="src\assets\fonts\rubik\Rubik-Bold.ttf" />
     <Content Include="src\assets\fonts\rubik\Rubik-Bold.woff" />
@@ -1007,7 +1091,9 @@
     <Content Include="src\assets\vendors\mdi\fonts\materialdesignicons-webfont.woff" />
     <Content Include="src\assets\vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
     <Content Include="src\assets\css\style.css.map" />
-    <Content Include="src\webform\panelUsuario.Master" />
+    <Content Include="src\masterPage\panelUsuario.Master" />
+    <Content Include="Site.Mobile.Master" />
+    <Content Include="src\css\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1060,10 +1146,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
   </Target>
 </Project>

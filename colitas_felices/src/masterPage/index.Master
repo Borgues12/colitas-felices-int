@@ -1,0 +1,229 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="index.Master.cs" Inherits="colitas_felices.index" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <asp:ContentPlaceHolder ID="TituloPlaceHolder" runat="server">
+            Colitas Felices - Refugio de Animales
+        </asp:ContentPlaceHolder>
+    </title>
+     <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet"  href="~/src/css/global.css" />
+    <link rel="stylesheet"  href="~/src/css/loader.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <!-- ========== NAVBAR ========== -->
+        <nav class="navbar">
+            <!-- Logo con forma de etiqueta -->
+            <div class="logo-container">
+                <a href='<%=ResolveUrl("~/principal") %>'>
+                    <img src="/src/images/logo_pagina_rosa.jpeg" alt="Colitas Felices" class="logo-img" />
+                </a>
+            </div>
+            
+            <!-- Menú de navegación -->
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="Inicio.aspx" class="nav-link active">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">
+                        <i class="fas fa-heart"></i> Adopta <i class="fas fa-chevron-down arrow"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="Galeria.aspx">Ver Mascotas</a></li>
+                        <li><a href="ProcesoAdopcion.aspx">Proceso de Adopción</a></li>
+                        <li><a href="Requisitos.aspx">Requisitos</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">
+                        <i class="fas fa-users"></i> Nosotros <i class="fas fa-chevron-down arrow"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="QuienesSomos.aspx">¿Quiénes Somos?</a></li>
+                        <li><a href="Historia.aspx">Nuestra Historia</a></li>
+                        <li><a href="Equipo.aspx">Nuestro Equipo</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">
+                        <i class="fas fa-hand-holding-heart"></i> Ayúdanos <i class="fas fa-chevron-down arrow"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="Donar.aspx">Donar</a></li>
+                        <li><a href="Apadrinar.aspx">Apadrinar</a></li>
+                        <li><a href="Voluntariado.aspx">Voluntariado</a></li>
+                        <li><a href="Tienda.aspx">Tienda Solidaria</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="Contacto.aspx" class="nav-link">
+                        <i class="fas fa-envelope"></i> Contacto
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Botón de sesión -->
+            <div class="nav-auth">
+                <asp:Panel ID="pnlNoLogueado" runat="server">
+                    <a href='<%=ResolveUrl("~/iniciar_sesion") %>' class="btn-login">
+                        <i class="fas fa-user"></i> Iniciar Sesión
+                    </a>
+                </asp:Panel>
+                
+                <asp:Panel ID="pnlLogueado" runat="server" Visible="false" CssClass="user-menu">
+                    <div class="user-dropdown">
+                        <button type="button" class="btn-user">
+                            <asp:Image ID="imgFotoPerfil" runat="server" CssClass="user-avatar" />
+                            <span class="user-name">
+                                <asp:Literal ID="litNombreUsuario" runat="server"></asp:Literal>
+                            </span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <ul class="user-dropdown-menu">
+                            <li><a href="MiPerfil.aspx"><i class="fas fa-user-circle"></i> Mi Perfil</a></li>
+                            <li><a href="MisSolicitudes.aspx"><i class="fas fa-file-alt"></i> Mis Solicitudes</a></li>
+                            <li><a href="MisDonaciones.aspx"><i class="fas fa-heart"></i> Mis Donaciones</a></li>
+                            <li class="divider"></li>
+                            <li>
+                                <asp:LinkButton ID="btnCerrarSesion" runat="server" OnClick="btnCerrarSesion_Click" CssClass="logout-link">
+                                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                                </asp:LinkButton>
+                            </li>
+                        </ul>
+                    </div>
+                </asp:Panel>
+            </div>
+            
+            <!-- Botón hamburguesa (móvil) -->
+            <button class="nav-toggle" id="navToggle" type="button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+
+        <asp:ContentPlaceHolder ID="body" runat="server"></asp:ContentPlaceHolder>
+         
+        <!-- ========== FOOTER ========== -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h4>Colitas Felices</h4>
+                    <p>15 años rescatando y encontrando hogares para animales en Quito.</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="Galeria.aspx">Adoptar</a></li>
+                        <li><a href="Donar.aspx">Donar</a></li>
+                        <li><a href="Voluntariado.aspx">Voluntariado</a></li>
+                        <li><a href="Contacto.aspx">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Calderón, Quito - Ecuador</li>
+                        <li><i class="fas fa-phone"></i> +593 99 XXX XXXX</li>
+                        <li><i class="fas fa-envelope"></i> info@colitasfelices.org</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Horarios</h4>
+                    <ul>
+                        <li>Lunes a Viernes: 9:00 - 17:00</li>
+                        <li>Sábados: 10:00 - 14:00</li>
+                        <li>Domingos: Cerrado</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <%= DateTime.Now.Year %> Colitas Felices. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+
+    </form>
+
+     <!-- JavaScript -->
+    <script>
+        // Toggle menú móvil
+        document.getElementById('navToggle').addEventListener('click', function () {
+            document.querySelector('.nav-menu').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Dropdowns en móvil
+        document.querySelectorAll('.dropdown-toggle').forEach(function (toggle) {
+            toggle.addEventListener('click', function (e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    this.parentElement.classList.toggle('active');
+                }
+            });
+        });
+
+        // User dropdown
+        const userBtn = document.querySelector('.btn-user');
+        if (userBtn) {
+            userBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                this.parentElement.classList.toggle('active');
+            });
+        }
+
+        // Cerrar dropdowns al hacer click fuera
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.user-dropdown')) {
+                document.querySelectorAll('.user-dropdown').forEach(d => d.classList.remove('active'));
+            }
+        });
+    </script>
+
+    <!-- Scripts al final (fuera del head, aquí SÍ funciona ResolveUrl) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src='<%= ResolveUrl("~/src/js/loader.js") %>'></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script>
+        // Inicializar Notyf una sola vez globalmente
+        var notyf = new Notyf({
+            duration: 4000,
+            position: { x: 'right', y: 'top' },
+            dismissible: true,  // Agrega la X para cerrar
+            ripple: true
+        });
+    </script>
+    <script src='<%= ResolveUrl("~/src/js/pruebas.js") %>'></script>
+    <asp:ContentPlaceHolder ID="scripts" runat="server"></asp:ContentPlaceHolder>
+</body>
+</html>

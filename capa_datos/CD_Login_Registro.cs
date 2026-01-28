@@ -1,133 +1,144 @@
 ﻿using capa_dto;
+using capa_dto.DTO;
 using System;
-using System.Collections.Generic;
-using System.Data;
+using System.Data.Linq;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace capa_datos
 {
+    /// Capa de datos para el módulo de Seguridad
+    /// Maneja: Registro, Login, Verificación, Recuperación
     public class CD_Login_Registro
     {
         private ColitasFelicesDataContext cf = new ColitasFelicesDataContext();
 
-        // Método para verificar login
-        public CuentaDTO VerificarLogin(string email, string password)
+        // ============================================================
+        // REGISTRO
+        // ============================================================
+        public RegistroInternoDTO Registrar(string email, string passwordHash, string primerNombre, string primerApellido)
         {
             try
             {
-                bool? loginExitoso = null;
                 int? cuentaID = null;
-                byte? rolUsuario = null;
+                string token = null;
+                bool? exitoso = null;
                 string mensaje = null;
 
-                cf.SP_VerificarLogin(
+                cf.SEG_Registrar(
                     email,
-                    password,
-                    ref loginExitoso,
+                    passwordHash,
+                    primerNombre,
+                    primerApellido,
                     ref cuentaID,
-                    ref rolUsuario,
+                    ref token,
+                    ref exitoso,
                     ref mensaje
                 );
 
-                return new CuentaDTO
+                return new RegistroInternoDTO
                 {
-                    LoginExitoso = loginExitoso ?? false,
+                    Exitoso = exitoso ?? false,
                     CuentaID = cuentaID ?? 0,
-                    Rol = rolUsuario ?? 0,
+                    Token = token,
+                    Email = email,
+                    Nombre = primerNombre,
                     Mensaje = mensaje ?? ""
                 };
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error en VerificarLogin: " + ex.Message);
-                return new CuentaDTO
+                System.Diagnostics.Debug.WriteLine("Error en CD_Seguridad.Registrar: " + ex.Message);
+                return new RegistroInternoDTO
                 {
-                    LoginExitoso = false,
-                    Mensaje = "Error: " + ex.Message
+                    Exitoso = false,
+                    Mensaje = "Error de conexión: " + ex.Message
                 };
-
             }
         }
-        // Método para registrar nuevo usuario
+    
 
-        //Metodo para cargar datos en MASTER PAGE del usuario logueado
-
-        public PerfilDTO CargarDatosUsuario(int cuentaID)
+        public VerificacionDTO VerificarCodigo(string email, string codigo)
         {
             try
             {
-                var datosUsuario = (from c in cf.Cuenta
-                                    join p in cf.Perfil on c.CuentaID equals p.CuentaID into perfiles
-                                    from p in perfiles.DefaultIfEmpty()
-                                    where c.CuentaID == cuentaID
-                                    select new PerfilDTO
-                                    {
-                                        Email = c.Email,
-                                        Rol = c.Rol,
-                                        Nombres = p != null ? p.Nombres : null,
-                                        Apellidos = p != null ? p.Apellidos : null,
-                                        FotoPerfil = p != null && p.FotoPerfil != null ? p.FotoPerfil.ToArray() : null,
-                                    }).FirstOrDefault();
-
-                return datosUsuario;
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Error en CargarDatosUsuario: " + ex.Message);
-                throw new Exception("Error al cargar datos del usuario: " + ex.Message);
-            }
-        }
-
-
-        // Método para verificar login con Google
-        public GoogleLoginDTO LoginGoogle(string googleID, string email, string nombre)
-        {
-            try
-            {
-                int? cuentaID = null;
-                byte? rolUsuario = null;
-                bool? requiereCompletarPerfil = null;
-                bool? esNuevoUsuario = null;
+                string token = null;
                 bool? exitoso = null;
                 string mensaje = null;
 
-                cf.SP_LoginGoogle(
-                    googleID,
+                cf.SEG_VerificarCodigo(
+                    "VERIFICAR",
                     email,
-                    nombre,
-                    ref cuentaID,
-                    ref rolUsuario,
-                    ref requiereCompletarPerfil,
-                    ref esNuevoUsuario,
+                    codigo,
+                    ref token,      // No se usa en verificar
                     ref exitoso,
                     ref mensaje
                 );
 
-                return new GoogleLoginDTO
+                return new VerificacionDTO
                 {
-                    GoogleID = googleID,
-                    Email = email,
-                    Nombre = nombre,
-                    CuentaID = cuentaID ?? 0,
-                    Rol = rolUsuario ?? 0,
-                    RequiereCompletarPerfil = requiereCompletarPerfil ?? true,
-                    EsNuevoUsuario = esNuevoUsuario ?? false,
                     Exitoso = exitoso ?? false,
                     Mensaje = mensaje ?? ""
                 };
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error en LoginGoogle: " + ex.Message);
-                return new GoogleLoginDTO
+                System.Diagnostics.Debug.WriteLine("Error en CD_Login_Registro.VerificarCodigo: " + ex.Message);
+                return new VerificacionDTO
                 {
                     Exitoso = false,
-                    Mensaje = "Error: " + ex.Message
+                    Mensaje = "Error de conexión: " + ex.Message
                 };
             }
         }
+
+        /// Genera y retorna nuevo código de verificación
+        public VerificacionDTO ReenviarCodigo(string email)
+        {
+            try
+            {
+                string token = null;
+                bool? exitoso = null;
+                string mensaje = null;
+
+                cf.SEG_VerificarCodigo(
+                    "REENVIAR",
+                    email,
+                    null,           // No se necesita código para reenviar
+                    ref token,
+                    ref exitoso,
+                    ref mensaje
+                );
+
+                // Obtener nombre del usuario para el email
+                string nombre = "";
+                if (exitoso == true)
+                {
+                    var cuenta = cf.Cuenta.FirstOrDefault(c => c.Email == email);
+                    if (cuenta != null)
+                    {
+                        var persona = cf.Persona.FirstOrDefault(p => p.PersonaID == cuenta.PersonaID);
+                        nombre = persona?.PrimerNombre ?? "";
+                    }
+                }
+
+                return new VerificacionDTO
+                {
+                    Exitoso = exitoso ?? false,
+                    Token = token,
+                    Nombre = nombre,
+                    Mensaje = mensaje ?? ""
+                };
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error en CD_Login_Registro.ReenviarCodigo: " + ex.Message);
+                return new VerificacionDTO
+                {
+                    Exitoso = false,
+                    Mensaje = "Error de conexión: " + ex.Message
+                };
+            }
+        }
+
     }
 }
