@@ -44,5 +44,16 @@ namespace capa_datos.Properties {
                 return ((string)(this["colitas_felices_2ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=sqldatabasecf.database.windows.net;Initial Catalog=colitas_felices_2;" +
+            "User ID=up_colitas_felices;Password=ndx-4.5(2G&1;Encrypt=False")]
+        public string colitas_felices_2ConnectionString1 {
+            get {
+                return ((string)(this["colitas_felices_2ConnectionString1"]));
+            }
+        }
     }
 }

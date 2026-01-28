@@ -1,0 +1,321 @@
+﻿/* ═══════════════════════════════════════════════════════════════════════════════
+   VERIFICAR CÓDIGO - COLITAS FELICES
+   ═══════════════════════════════════════════════════════════════════════════════
+   Solo LAYOUT de la página de verificación.
+   Componentes (botones, mensajes, spinner) están en global.css
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   1. LAYOUT PRINCIPAL
+   ═══════════════════════════════════════════════════════════════════════════════ */
+.verificar-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    padding: 20px;
+}
+
+.verificar-box {
+    background: var(--color-surface);
+    border-radius: var(--radius-2xl);
+    padding: 50px 40px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: var(--shadow-xl);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+    .verificar-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, var(--color-secondary), var(--color-primary), var(--color-warning));
+    }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   2. HEADER / ICONO
+   ═══════════════════════════════════════════════════════════════════════════════ */
+.verificar-icon {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    box-shadow: 0 10px 40px rgba(156, 39, 176, 0.3);
+}
+
+    .verificar-icon iconify-icon {
+        font-size: 45px;
+        color: var(--color-white);
+    }
+
+.verificar-box h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.verificar-subtitle {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.verificar-email {
+    color: var(--color-secondary);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 30px;
+    word-break: break-all;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   3. INPUTS DE CÓDIGO (6 dígitos)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+.codigo-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.codigo-input {
+    width: 50px;
+    height: 60px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    outline: none;
+    transition: var(--transition);
+    color: var(--color-text);
+}
+
+    .codigo-input:focus {
+        border-color: var(--color-secondary);
+        box-shadow: 0 0 0 4px rgba(156, 39, 176, 0.15);
+    }
+
+    .codigo-input.filled {
+        border-color: var(--color-secondary);
+        background: #faf5fc;
+    }
+
+    .codigo-input.error {
+        border-color: var(--color-error);
+        background: var(--color-error-light);
+        animation: shake 0.5s ease;
+    }
+
+.codigo-hidden {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   4. BOTÓN VERIFICAR (sobrescribe estilo global)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+.btn-verificar {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 8px 25px rgba(156, 39, 176, 0.35);
+    margin-bottom: 20px;
+}
+
+    .btn-verificar:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(156, 39, 176, 0.45);
+    }
+
+    .btn-verificar:disabled {
+        background: var(--color-border);
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   5. REENVIAR CÓDIGO
+   ═══════════════════════════════════════════════════════════════════════════════ */
+.reenviar-section {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid var(--color-border-light);
+}
+
+.reenviar-text {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.btn-reenviar {
+    background: transparent;
+    border: 2px solid var(--color-secondary);
+    color: var(--color-secondary);
+    padding: 12px 25px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+    .btn-reenviar:hover:not(:disabled) {
+        background: var(--color-secondary);
+        color: var(--color-white);
+    }
+
+    .btn-reenviar:disabled {
+        border-color: var(--color-border);
+        color: var(--color-text-muted);
+        cursor: not-allowed;
+    }
+
+.countdown {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   6. PANEL DE ÉXITO
+   ═══════════════════════════════════════════════════════════════════════════════ */
+.exito-container {
+    text-align: center;
+}
+
+.exito-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--color-success), #388E3C);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    animation: successPop 0.5s ease;
+}
+
+@keyframes successPop {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.exito-icon iconify-icon {
+    font-size: 50px;
+    color: var(--color-white);
+}
+
+.btn-continuar {
+    display: inline-block;
+    padding: 16px 40px;
+    background: linear-gradient(135deg, var(--color-success), #388E3C);
+    color: var(--color-white);
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    margin-top: 20px;
+    transition: var(--transition);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.35);
+}
+
+    .btn-continuar:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(76, 175, 80, 0.45);
+        color: var(--color-white);
+    }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   7. VOLVER
+   ═══════════════════════════════════════════════════════════════════════════════ */
+.volver-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--color-text-light);
+    text-decoration: none;
+    margin-top: 25px;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+    .volver-link:hover {
+        color: var(--color-secondary);
+    }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   8. RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 500px) {
+    .verificar-box {
+        padding: 40px 25px;
+    }
+
+    .verificar-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+        .verificar-icon iconify-icon {
+            font-size: 35px;
+        }
+
+    .verificar-box h2 {
+        font-size: 1.5rem;
+    }
+
+    .codigo-input {
+        width: 42px;
+        height: 52px;
+        font-size: 1.3rem;
+    }
+
+    .codigo-container {
+        gap: 6px;
+    }
+
+    .exito-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+        .exito-icon iconify-icon {
+            font-size: 40px;
+        }
+}

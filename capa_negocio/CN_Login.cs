@@ -1,65 +1,86 @@
-﻿using capa_datos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BCrypt.Net;
+using capa_datos;
 using capa_dto;
+using capa_dto.DTO;
+using System.Threading.Tasks;
 
 namespace capa_negocio
 {
     public class CN_Login
     {
         private CD_Login_Registro objCD = new CD_Login_Registro();
+        private const int BCRYPT_WORK_FACTOR = 11;
 
-        //Meoto para validar usuario
-        public CuentaDTO ValidarUsuario(string email, string password)
+        /// <summary>
+        /// Registra usuario nuevo y envía email de verificación
+        /// </summary>
+        public async Task<notifyDTO> RegistrarAsync(
+            string email,
+            string password,
+            string confirmarPassword,
+            string primerNombre,
+            string primerApellido)
         {
-            try
+            // ========== VALIDACIONES ==========
+
+            if (string.IsNullOrWhiteSpace(email))
+                return Respuesta(false, "El correo electrónico es obligatorio.");
+
+            if (string.IsNullOrWhiteSpace(password))
+                return Respuesta(false, "La contraseña es obligatoria.");
+
+            if (password != confirmarPassword)
+                return Respuesta(false, "Las contraseñas no coinciden.");
+
+            if (password.Length < 6)
+                return Respuesta(false, "La contraseña debe tener al menos 6 caracteres.");
+
+            if (string.IsNullOrWhiteSpace(primerNombre))
+                return Respuesta(false, "El nombre es obligatorio.");
+
+            if (string.IsNullOrWhiteSpace(primerApellido))
+                return Respuesta(false, "El apellido es obligatorio.");
+
+            // ========== GENERAR HASH ==========
+
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(password, BCRYPT_WORK_FACTOR);
+
+            // ========== LLAMAR CD ==========
+
+            var resultado = objCD.Registrar(
+                email.Trim().ToLower(),
+                passwordHash,
+                primerNombre.Trim(),
+                primerApellido.Trim()
+            );
+
+            // ========== ENVIAR EMAIL DE VERIFICACIÓN ==========
+
+            if (resultado.Exitoso && !string.IsNullOrEmpty(resultado.Token))
             {
-                return objCD.VerificarLogin(email, password);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Error en CN_Login.ValidarUsuario: " + ex.Message);
-                return new CuentaDTO
+                var emailResult = await CN_Email.Verificacion(
+                    resultado.Email,
+                    resultado.Nombre,
+                    resultado.Token
+                );
+
+                // Log si falla el email (registro sigue siendo exitoso)
+                if (!emailResult.Exitoso)
                 {
-                    LoginExitoso = false,
-                    Mensaje = "Error: " + ex.Message
-                };
+                    System.Diagnostics.Debug.WriteLine($"⚠️ Email no enviado: {emailResult.Mensaje}");
+                }
             }
+
+            // ========== RETORNAR ==========
+
+            return Respuesta(resultado.Exitoso, resultado.Mensaje);
         }
 
-        //Cargar datos de la cuenta
-        public PerfilDTO CargarDatosUsuario(int cuentaID)
-        {
-            try
-            {
-                return objCD.CargarDatosUsuario(cuentaID);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Error en CN_Login.CargarDatosUsuario: " + ex.Message);
-                return null;
-            }
-        }
+        // ========== HELPER ==========
 
-        //Metodo para login/registro con google
-        public GoogleLoginDTO LoginGoogle(string googleID, string email, string nombre)
+        private notifyDTO Respuesta(bool exito, string mensaje)
         {
-            try
-            {
-                return objCD.LoginGoogle(googleID, email, nombre);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Error en CN_Login.LoginGoogle: " + ex.Message);
-                return new GoogleLoginDTO
-                {
-                    Exitoso = false,
-                    Mensaje = "Error: " + ex.Message
-                };
-            }
+            return new notifyDTO { resultado = exito, mensajeSalida = mensaje };
         }
     }
 }
