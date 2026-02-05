@@ -16,9 +16,8 @@ namespace colitas_felices
 
             routes.MapPageRoute("Default", "", "~/src/webform/frontend/start.aspx");
             routes.MapPageRoute("Principal", "principal", "~/src/webform/frontend/start.aspx");
-            routes.MapPageRoute("Login", "iniciar_sesion", "~/src/webform/login/login.aspx");
-            routes.MapPageRoute("Registrar", "registrarse", "~/src/webform/login/registrar.aspx");
-            routes.MapPageRoute("VerificarCodigo", "verificar", "~/src/webform/login/verficarCodigo.aspx");
+            routes.MapPageRoute("Login", "iniciar_sesion", "~/src/webform/login/login_registro.aspx");
+            routes.MapPageRoute("VerificarCodigo", "verificar", "~/src/webform/login/verificarCodigo.aspx");
         }
     }
 }

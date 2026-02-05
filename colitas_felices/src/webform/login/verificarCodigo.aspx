@@ -1,214 +1,161 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/src/masterPage/index.Master" AutoEventWireup="true" CodeBehind="verificarCodigo.aspx.cs" Inherits="colitas_felices.src.webform.login.verificarCodigo" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="TituloPlaceHolder" runat="server">
-    Verificar Correo - Colitas Felices
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/src/masterPage/index.Master" AutoEventWireup="true" CodeBehind="verificarCodigo.aspx.cs" Inherits="colitas_felices.src.webform.login.verificarCodigo" Async="true"%>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <title>Verificar Cuenta - Colitas Felices</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href='<%=ResolveUrl("~/src/css/login/verificarCodigo_style.css") %>' />
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-    <link href='<%=ResolveUrl("~/src/css/verificar_style.css") %>' rel="stylesheet" />
-</asp:Content>
-
-<asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
-    <div class="verificar-page">
-        <div class="verificar-box">
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
+    <div class="page-container">
+        <i class="fas fa-paw paw-decoration paw-1"></i>
+        <i class="fas fa-paw paw-decoration paw-2"></i>
+        
+        <div class="verify-card">
+            <div class="verify-icon">
+                <i class="fas fa-envelope-open-text"></i>
+            </div>
             
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                <ContentTemplate>
-
-                    <!-- PANEL DE VERIFICACIÓN -->
-                    <asp:Panel ID="pnlVerificar" runat="server">
-                        
-                        <div class="verificar-icon">
-                            <iconify-icon icon="mdi:email-check"></iconify-icon>
-                        </div>
-                        <h2>Verifica tu correo</h2>
-                        <p class="verificar-subtitle">Ingresa el código de 6 dígitos enviado a:</p>
-                        <p class="verificar-email">
-                            <asp:Literal ID="litEmail" runat="server"></asp:Literal>
-                        </p>
-
-                        <asp:Panel ID="pnlMensaje" runat="server" Visible="false">
-                            <asp:Literal ID="litMensaje" runat="server"></asp:Literal>
-                        </asp:Panel>
-
-                        <div class="codigo-container">
-                            <input type="text" class="codigo-input" maxlength="1" data-index="0" inputmode="numeric" pattern="[0-9]*" />
-                            <input type="text" class="codigo-input" maxlength="1" data-index="1" inputmode="numeric" pattern="[0-9]*" />
-                            <input type="text" class="codigo-input" maxlength="1" data-index="2" inputmode="numeric" pattern="[0-9]*" />
-                            <input type="text" class="codigo-input" maxlength="1" data-index="3" inputmode="numeric" pattern="[0-9]*" />
-                            <input type="text" class="codigo-input" maxlength="1" data-index="4" inputmode="numeric" pattern="[0-9]*" />
-                            <input type="text" class="codigo-input" maxlength="1" data-index="5" inputmode="numeric" pattern="[0-9]*" />
-                        </div>
-
-                        <asp:HiddenField ID="hfCodigo" runat="server" />
-
-                        <asp:Button ID="btnVerificar" runat="server" Text="Verificar código"
-                            CssClass="btn-verificar" OnClick="btnVerificar_Click" />
-
-                        <div class="reenviar-section">
-                            <p class="reenviar-text">¿No recibiste el código?</p>
-                            <asp:Button ID="btnReenviar" runat="server" Text="Reenviar código"
-                                CssClass="btn-reenviar" OnClick="btnReenviar_Click" CausesValidation="false" />
-                            <p class="countdown" id="countdown"></p>
-                        </div>
-
-                    </asp:Panel>
-
-                    <!-- PANEL DE ÉXITO -->
-                    <asp:Panel ID="pnlExito" runat="server" Visible="false">
-                        <div class="exito-container">
-                            <div class="exito-icon">
-                                <iconify-icon icon="mdi:check-bold"></iconify-icon>
-                            </div>
-                            <h2>¡Cuenta verificada!</h2>
-                            <p class="verificar-subtitle">Tu correo ha sido verificado correctamente.<br/>Ya puedes iniciar sesión.</p>
-                            <a href="login.aspx" class="btn-continuar">
-                                <iconify-icon icon="mdi:login" style="vertical-align: middle; margin-right: 8px;"></iconify-icon>
-                                Iniciar sesión
-                            </a>
-                        </div>
-                    </asp:Panel>
-
-                    <!-- PANEL SIN EMAIL -->
-                    <asp:Panel ID="pnlSinEmail" runat="server" Visible="false">
-                        <div class="verificar-icon" style="background: linear-gradient(135deg, var(--color-warning), #F57C00);">
-                            <iconify-icon icon="mdi:alert"></iconify-icon>
-                        </div>
-                        <h2>Enlace inválido</h2>
-                        <p class="verificar-subtitle">No se especificó un correo electrónico para verificar.</p>
-                        <a href="registrar.aspx" class="btn-continuar" style="background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));">
-                            Ir a Registro
-                        </a>
-                    </asp:Panel>
-
-                </ContentTemplate>
-            </asp:UpdatePanel>
-
-            <!-- Loading (usa clases de global.css) -->
-            <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
-                <ProgressTemplate>
-                    <div class="loading-overlay show">
-                        <div class="spinner"></div>
-                        <span class="loading-text">Verificando...</span>
-                    </div>
-                </ProgressTemplate>
-            </asp:UpdateProgress>
-
-            <a href="registrar.aspx" class="volver-link">
-                <iconify-icon icon="mdi:arrow-left"></iconify-icon>
-                Volver al registro
+            <h2>Verifica tu cuenta</h2>
+            <p class="subtitle">Ingresa el código de 6 dígitos que enviamos a:</p>
+            
+            <div class="email-display">
+                <i class="fas fa-envelope"></i>&nbsp;
+                <asp:Label ID="lblEmail" runat="server"></asp:Label>
+            </div>
+            
+            <!-- Inputs visuales del código -->
+            <div class="code-inputs">
+                <input type="text" maxlength="1" class="code-digit" data-index="0" inputmode="numeric" />
+                <input type="text" maxlength="1" class="code-digit" data-index="1" inputmode="numeric" />
+                <input type="text" maxlength="1" class="code-digit" data-index="2" inputmode="numeric" />
+                <input type="text" maxlength="1" class="code-digit" data-index="3" inputmode="numeric" />
+                <input type="text" maxlength="1" class="code-digit" data-index="4" inputmode="numeric" />
+                <input type="text" maxlength="1" class="code-digit" data-index="5" inputmode="numeric" />
+            </div>
+            
+            <!-- Campo oculto con el código completo -->
+            <asp:TextBox ID="txtCodigo" runat="server" CssClass="hidden-code" MaxLength="6" />
+            
+            <asp:Button ID="btnVerificar" runat="server" Text="VERIFICAR CUENTA" 
+                CssClass="btn-verify" OnClick="btnVerificar_Click" />
+            
+            <!-- Opciones -->
+            <div class="options" id="divOpciones">
+                <p>¿No recibiste el código?</p>
+                <div class="option-links">
+                    <asp:Button ID="btnReenviar" runat="server" Text="📧 Reenviar código" 
+                        OnClick="btnReenviar_Click" CausesValidation="false" />
+                    <button type="button" id="btnMostrarCambio" onclick="mostrarCambioEmail()">
+                        ✏️ Cambiar correo electrónico
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Panel cambiar email -->
+            <asp:Panel ID="pnlCambiarEmail" runat="server" CssClass="change-email-panel" Visible="false">
+                <h3>Cambiar correo electrónico</h3>
+                <asp:TextBox ID="txtNuevoEmail" runat="server" placeholder="Nuevo correo electrónico" 
+                    TextMode="Email" MaxLength="150" />
+                <div class="btn-group">
+                    <asp:Button ID="btnCancelarCambio" runat="server" Text="Cancelar" 
+                        CssClass="btn-secondary" OnClick="btnCancelarCambio_Click" CausesValidation="false" />
+                    <asp:Button ID="btnConfirmarCambio" runat="server" Text="Cambiar y enviar" 
+                        CssClass="btn-primary" OnClick="btnConfirmarCambio_Click" />
+                </div>
+            </asp:Panel>
+            
+            <a href="/registrarse" class="back-link">
+                <i class="fas fa-arrow-left"></i> Volver al registro
             </a>
-
         </div>
     </div>
 </asp:Content>
 
-<asp:Content ID="Content4" ContentPlaceHolderID="scripts" runat="server">
+<asp:Content ID="Content3" ContentPlaceHolderID="scripts" runat="server">
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            initCodigoInputs();
-            initCountdown();
-        });
+        // Manejo de inputs del código
+        const codeDigits = document.querySelectorAll('.code-digit');
+        const hiddenInput = document.getElementById('<%= txtCodigo.ClientID %>');
 
-        var prm = Sys.WebForms.PageRequestManager.getInstance();
-        prm.add_endRequest(function () {
-            initCodigoInputs();
-        });
+        codeDigits.forEach((input, index) => {
+            // Al escribir
+            input.addEventListener('input', (e) => {
+                const value = e.target.value;
 
-        function initCodigoInputs() {
-            const inputs = document.querySelectorAll('.codigo-input');
-            const hiddenField = document.getElementById('<%= hfCodigo.ClientID %>');
-
-            if (!inputs.length) return;
-
-            inputs.forEach((input, index) => {
-                input.addEventListener('input', function(e) {
-                    this.value = this.value.replace(/[^0-9]/g, '');
-                    
-                    if (this.value.length === 1) {
-                        this.classList.add('filled');
-                        if (index < inputs.length - 1) {
-                            inputs[index + 1].focus();
-                        }
-                    } else {
-                        this.classList.remove('filled');
-                    }
-
-                    updateHiddenField();
-                    this.classList.remove('error');
-                });
-
-                input.addEventListener('keydown', function(e) {
-                    if (e.key === 'Backspace' && this.value === '' && index > 0) {
-                        inputs[index - 1].focus();
-                    }
-                });
-
-                input.addEventListener('paste', function(e) {
-                    e.preventDefault();
-                    const pasteData = e.clipboardData.getData('text').replace(/[^0-9]/g, '');
-                    
-                    for (let i = 0; i < Math.min(pasteData.length, inputs.length); i++) {
-                        inputs[i].value = pasteData[i];
-                        inputs[i].classList.add('filled');
-                    }
-                    
-                    const lastIndex = Math.min(pasteData.length, inputs.length) - 1;
-                    if (lastIndex < inputs.length - 1) {
-                        inputs[lastIndex + 1].focus();
-                    } else {
-                        inputs[lastIndex].focus();
-                    }
-                    
-                    updateHiddenField();
-                });
-            });
-
-            function updateHiddenField() {
-                let codigo = '';
-                inputs.forEach(input => { codigo += input.value; });
-                hiddenField.value = codigo;
-            }
-
-            inputs[0].focus();
-        }
-
-        function initCountdown() {
-            const btnReenviar = document.getElementById('<%= btnReenviar.ClientID %>');
-            const countdownEl = document.getElementById('countdown');
-            
-            if (!btnReenviar || !countdownEl) return;
-
-            const savedTime = sessionStorage.getItem('reenviarCountdown');
-            if (savedTime) {
-                const remaining = Math.floor((parseInt(savedTime) - Date.now()) / 1000);
-                if (remaining > 0) startCountdown(remaining);
-            }
-        }
-
-        function startCountdown(seconds) {
-            const btnReenviar = document.getElementById('<%= btnReenviar.ClientID %>');
-            const countdownEl = document.getElementById('countdown');
-
-            btnReenviar.disabled = true;
-            sessionStorage.setItem('reenviarCountdown', Date.now() + (seconds * 1000));
-
-            const interval = setInterval(function () {
-                countdownEl.textContent = 'Puedes reenviar en ' + seconds + ' segundos';
-                seconds--;
-
-                if (seconds < 0) {
-                    clearInterval(interval);
-                    btnReenviar.disabled = false;
-                    countdownEl.textContent = '';
-                    sessionStorage.removeItem('reenviarCountdown');
+                // Solo números
+                if (!/^\d*$/.test(value)) {
+                    e.target.value = '';
+                    return;
                 }
-            }, 1000);
+
+                // Mover al siguiente
+                if (value && index < 5) {
+                    codeDigits[index + 1].focus();
+                }
+
+                updateHiddenInput();
+            });
+
+            // Al pegar
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pasteData = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
+
+                pasteData.split('').forEach((char, i) => {
+                    if (codeDigits[i]) {
+                        codeDigits[i].value = char;
+                    }
+                });
+
+                updateHiddenInput();
+
+                if (pasteData.length > 0) {
+                    const focusIndex = Math.min(pasteData.length, 5);
+                    codeDigits[focusIndex].focus();
+                }
+            });
+
+            // Backspace
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    codeDigits[index - 1].focus();
+                }
+
+                // Enter para verificar
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    document.getElementById('<%= btnVerificar.ClientID %>').click();
+                }
+            });
+
+            // Focus - seleccionar todo
+            input.addEventListener('focus', () => {
+                input.select();
+            });
+        });
+
+        function updateHiddenInput() {
+            let code = '';
+            codeDigits.forEach(input => {
+                code += input.value;
+            });
+            hiddenInput.value = code;
         }
 
-        function marcarError() {
-            document.querySelectorAll('.codigo-input').forEach(input => {
-                input.classList.add('error');
-            });
+        // Mostrar panel cambiar email
+        function mostrarCambioEmail() {
+            document.getElementById('<%= pnlCambiarEmail.ClientID %>').style.display = 'block';
+            document.getElementById('divOpciones').style.display = 'none';
+            document.getElementById('<%= txtNuevoEmail.ClientID %>').focus();
         }
+
+        // Focus en primer input al cargar
+        window.addEventListener('load', () => {
+            codeDigits[0].focus();
+        });
     </script>
 </asp:Content>

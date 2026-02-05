@@ -1,0 +1,501 @@
+﻿/* ===========================================
+   REGISTRO / LOGIN - Colitas Felices
+   Diseño pantalla completa con slide
+   =========================================== */
+
+/* ===== RESET ===== */
+.page-container *,
+.page-container *::before,
+.page-container *::after {
+    box-sizing: border-box;
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.page-container {
+    min-height: calc(100vh - 80px);
+    margin-top: 0px;
+    display: flex;
+    align-items: stretch;
+    background: #1a1a1a;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===== CARD PANTALLA COMPLETA ===== */
+.card {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    background: transparent;
+    overflow: hidden;
+}
+
+/* ===== PANEL DESLIZANTE ROSA ===== */
+.card-bg {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    background: linear-gradient(160deg, #e31d62 0%, #c91a57 40%, #a3154a 100%);
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+    transform: translateX(0);
+}
+
+    /* Círculos decorativos */
+    .card-bg::before {
+        content: '';
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 50%;
+        bottom: -80px;
+        left: -80px;
+    }
+
+    .card-bg::after {
+        content: '';
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        top: 10%;
+        right: -50px;
+    }
+
+    .card-bg.login {
+        transform: translateX(100%);
+    }
+
+/* ===== SECCIONES HERO Y FORM ===== */
+.hero,
+.form-section {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Estados de visibilidad */
+.hero,
+.form-section {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+    .hero.active,
+    .form-section.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    /* ===== POSICIONES REGISTER ===== */
+    .hero.register {
+        left: 0;
+        transform: translateX(-30%);
+    }
+
+        .hero.register.active {
+            transform: translateX(0);
+        }
+
+    .form-section.register {
+        left: 50%;
+        transform: translateX(30%);
+    }
+
+        .form-section.register.active {
+            transform: translateX(0);
+        }
+
+    /* ===== POSICIONES LOGIN ===== */
+    .hero.login {
+        left: 50%;
+        transform: translateX(30%);
+    }
+
+        .hero.login.active {
+            transform: translateX(0);
+        }
+
+    .form-section.login {
+        left: 0;
+        transform: translateX(-30%);
+    }
+
+        .form-section.login.active {
+            transform: translateX(0);
+        }
+
+/* ===== ESTILOS HERO ===== */
+.hero {
+    z-index: 3;
+    color: white;
+    text-align: center;
+    padding: var(--spacing-2xl);
+}
+
+    .hero h2 {
+        margin: 0 0 var(--spacing-sm);
+        font-weight: 600;
+        font-size: 2rem;
+    }
+
+    .hero p {
+        margin: 0 0 var(--spacing-xl);
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.7;
+        font-size: 1rem;
+        max-width: 320px;
+    }
+
+    .hero .btn-hero {
+        padding: var(--spacing-md) var(--spacing-2xl);
+        border-radius: var(--radius-md);
+        letter-spacing: 1px;
+        font-family: inherit;
+        font-weight: 600;
+        font-size: 0.875rem;
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .hero .btn-hero:hover {
+            color: #e31d62;
+            background: white;
+            border-color: white;
+            transform: scale(1.02);
+        }
+
+/* ===== ESTILOS FORM SECTION ===== */
+.form-section {
+    z-index: 1;
+    background: #1a1a1a;
+    padding: var(--spacing-2xl);
+}
+
+    .form-section h2 {
+        margin: 0 0 var(--spacing-lg);
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #ffffff;
+        text-align: center;
+    }
+
+/* ===== SSO BUTTONS ===== */
+.sso {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+}
+
+    .sso .btn-google {
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-md);
+        border: 2px solid #333;
+        font-size: 1.125rem;
+        color: #888;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+        .sso .btn-google:hover {
+            border-color: #e31d62;
+            color: #e31d62;
+            background: rgba(227, 29, 98, 0.05);
+        }
+
+/* ===== TEXTO MUTED ===== */
+.form-section .text-muted {
+    margin: 0 0 var(--spacing-md);
+    text-align: center;
+    color: #666;
+    font-size: 0.813rem;
+}
+
+/* ===== FORM INNER ===== */
+.form-inner {
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+    .form-inner input[type="text"],
+    .form-inner input[type="email"],
+    .form-inner input[type="password"],
+    .form-inner input[type="tel"] {
+        font-family: inherit;
+        border-radius: var(--radius-md);
+        border: 1px solid #333;
+        background: #242424;
+        padding: 14px 16px;
+        color: #ffffff;
+        width: 100%;
+        font-size: 0.938rem;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    .form-inner input:focus {
+        border-color: #e31d62;
+        box-shadow: 0 0 0 3px rgba(227, 29, 98, 0.12);
+    }
+
+    .form-inner input::placeholder {
+        color: #555;
+    }
+
+/* ===== BOTONES ===== */
+.btn-submit,
+.btn-next,
+.btn-back {
+    border: 0;
+    padding: 14px 0;
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+    color: white;
+    width: 150px;
+    background: #e31d62;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-back {
+    background: transparent;
+    border: 2px solid #444;
+    color: #888;
+}
+
+.btn-submit:hover,
+.btn-next:hover {
+    background: #c91a57;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(227, 29, 98, 0.25);
+}
+
+.btn-back:hover {
+    border-color: #666;
+    color: #ccc;
+}
+
+/* ===== GRUPO DE BOTONES ===== */
+.btn-group {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xs);
+}
+
+/* ===== CHECKBOX GROUP ===== */
+.check-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 0.813rem;
+    color: #666;
+}
+
+    .check-group input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: #e31d62;
+        cursor: pointer;
+    }
+
+    .check-group a {
+        color: #e31d62;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+        .check-group a:hover {
+            color: #ff4081;
+        }
+
+/* ===== INDICADOR DE PASO ===== */
+.step-indicator {
+    font-size: 0.75rem;
+    color: #999;
+    background: rgba(227, 29, 98, 0.08);
+    padding: 8px 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(227, 29, 98, 0.15);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* ===== LINK OLVIDÉ CONTRASEÑA ===== */
+.link-forgot {
+    font-size: 0.875rem;
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+    .link-forgot:hover {
+        color: #e31d62;
+    }
+
+/* ===== PANELES DE PASOS ===== */
+.panel {
+    display: none;
+    width: 100%;
+}
+
+    .panel.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-md);
+        animation: fadeIn 0.4s ease;
+    }
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .page-container {
+        min-height: calc(100vh - 70px);
+    }
+
+    .card {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .card-bg {
+        width: 100%;
+        height: 280px;
+    }
+
+        .card-bg.login {
+            transform: translateY(calc(100vh - 350px));
+        }
+
+        .card-bg::before {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            left: -50px;
+        }
+
+        .card-bg::after {
+            width: 150px;
+            height: 150px;
+            top: -30px;
+            right: -30px;
+        }
+
+    .hero,
+    .form-section {
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: 280px;
+        left: auto !important;
+        transform: none !important;
+    }
+
+    .hero {
+        padding: var(--spacing-xl);
+    }
+
+        .hero h2 {
+            font-size: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 0.875rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+    .form-section {
+        padding: var(--spacing-xl);
+        min-height: calc(100vh - 350px);
+    }
+
+    /* Register mobile */
+    .hero.register {
+        position: absolute;
+        top: 0;
+        height: 280px;
+    }
+
+    .form-section.register {
+        margin-top: 280px;
+    }
+
+    /* Login mobile - invertir orden */
+    .hero.login {
+        position: absolute;
+        bottom: 0;
+        height: 280px;
+    }
+
+    .form-section.login {
+        margin-bottom: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-container {
+        min-height: calc(100vh - 60px);
+    }
+
+    .form-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-inner {
+        max-width: 100%;
+    }
+
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-submit,
+    .btn-next,
+    .btn-back {
+        width: 100%;
+    }
+
+    .hero h2 {
+        font-size: 1.375rem;
+    }
+}

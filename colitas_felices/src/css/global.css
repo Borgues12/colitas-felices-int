@@ -898,11 +898,6 @@ strong {
     transition: var(--transition);
 }
 
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-lg);
-    }
-
 .card-image {
     width: 100%;
     height: 200px;
