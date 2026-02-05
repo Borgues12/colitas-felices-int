@@ -41,29 +41,45 @@ namespace colitas_felices
             }
         }
 
+  
         // MÉTODOS PARA MENSAJES
 
         protected void MostrarMensaje(string mensaje, string tipo)// recibe el mensaje y el tipo: success, warning, error
         {
-            string script = "";
+            mensaje = mensaje.Replace("'", "\\'").Replace("\n", "\\n").Replace("\r", "");
 
-            switch (tipo)
+            string notyfCall;
+            switch (tipo.ToLower())
             {
                 //construye el script JS según el tipo de mensaje, utiliza $ para interpolación de cadenas
                 case "success":
-                    script = $"notyf.success('{EscaparJS(mensaje)}');";
+                    notyfCall = $"notyf.success('{EscaparJS(mensaje)}');";
                     break;
                 case "warning":
-                    script = $"notyf.open({{ type: 'warning', message: '{EscaparJS(mensaje)}' }});";
+                    notyfCall = $"notyf.open({{ type: 'warning', message: '{EscaparJS(mensaje)}' }});";
                     break;
                 case "error":
                 default:
-                    script = $"notyf.error('{EscaparJS(mensaje)}');";
+                    notyfCall = $"notyf.error('{EscaparJS(mensaje)}');";
                     break;
             }
+            // Verificar que notyf exista antes de usar
+            string script = $@"
+                if (typeof notyf !== 'undefined') {{
+                    {notyfCall}
+                }} else {{
+                    window.addEventListener('load', function() {{
+                        {notyfCall}
+                    }});
+                }}";
 
-            // Registra y ejecuta el script en la página
-            ScriptManager.RegisterStartupScript(this, GetType(), "mensaje", script, true);
+            ScriptManager.RegisterStartupScript(
+                this,
+                this.GetType(),
+                "NotyfMessage_" + Guid.NewGuid().ToString("N"),
+                script,
+                true
+            );
         }
 
         // Escapa caracteres especiales en el texto para evitar errores en JavaScript

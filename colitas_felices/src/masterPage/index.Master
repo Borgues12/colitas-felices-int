@@ -24,7 +24,6 @@
 </head>
 <body>
     <form id="form" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <!-- ========== NAVBAR ========== -->
         <nav class="navbar">
             <!-- Logo con forma de etiqueta -->
@@ -172,6 +171,8 @@
                 <p>&copy; <%= DateTime.Now.Year %> Colitas Felices. Todos los derechos reservados.</p>
             </div>
         </footer>
+
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     </form>
 

@@ -848,6 +848,8 @@
     <Content Include="src\css\global.css" />
     <Content Include="src\css\index.css" />
     <Content Include="src\css\loader.css" />
+    <Content Include="src\css\login\login_registro_style.css" />
+    <Content Include="src\css\login\verificarCodigo_style.css" />
     <Content Include="src\css\login_styles.css" />
     <Content Include="src\css\ad_admin.css" />
     <Content Include="src\css\registro_style.css" />
@@ -858,7 +860,7 @@
     <Content Include="src\js\js_login.js" />
     <Content Include="src\js\pruebas.js" />
     <Content Include="src\js\loader.js" />
-    <Content Include="src\webform\login\registrar.aspx" />
+    <Content Include="src\webform\login\login_registro.aspx" />
     <Content Include="src\webform\admin\ad_main.aspx" />
     <Content Include="src\webform\admin\prueba_design.aspx" />
     <Content Include="src\webform\admin\ad_perfiles.aspx" />
@@ -866,7 +868,6 @@
     <Content Include="src\webform\padrino\pa_main.aspx" />
     <Content Include="src\webform\frontend\start.aspx" />
     <Content Include="src\webform\volutario\vol_main.aspx" />
-    <Content Include="src\webform\login\registro.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="src\webform\login\login.aspx" />
@@ -877,10 +878,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="notificacionesMaster.cs">
+    <Compile Include="Helpers\SessionRegistrarHelper.cs" />
+    <Compile Include="Helpers\notificacionesMaster.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="notificaciones.cs">
+    <Compile Include="Helpers\notificaciones.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -898,12 +900,12 @@
     <Compile Include="src\masterPage\index.Master.designer.cs">
       <DependentUpon>index.Master</DependentUpon>
     </Compile>
-    <Compile Include="src\webform\login\registrar.aspx.cs">
-      <DependentUpon>registrar.aspx</DependentUpon>
+    <Compile Include="src\webform\login\login_registro.aspx.cs">
+      <DependentUpon>login_registro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="src\webform\login\registrar.aspx.designer.cs">
-      <DependentUpon>registrar.aspx</DependentUpon>
+    <Compile Include="src\webform\login\login_registro.aspx.designer.cs">
+      <DependentUpon>login_registro.aspx</DependentUpon>
     </Compile>
     <Compile Include="src\webform\admin\ad_main.aspx.cs">
       <DependentUpon>ad_main.aspx</DependentUpon>
@@ -971,13 +973,7 @@
     <Compile Include="src\webform\volutario\vol_main.aspx.designer.cs">
       <DependentUpon>vol_main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="src\webform\login\registro.aspx.cs">
-      <DependentUpon>registro.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="src\webform\login\registro.aspx.designer.cs">
-      <DependentUpon>registro.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Startup.cs" />
+    <Compile Include="Helpers\Startup.cs" />
     <Compile Include="src\webform\login\GoogleCallback.aspx.cs">
       <DependentUpon>GoogleCallback.aspx</DependentUpon>
     </Compile>

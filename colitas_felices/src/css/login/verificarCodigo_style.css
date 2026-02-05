@@ -1,0 +1,461 @@
+﻿/* ===========================================
+   VERIFICAR CÓDIGO - Diseño moderno
+   Colitas Felices
+   =========================================== */
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.page-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+    background: radial-gradient(circle at 20% 20%, rgba(236, 64, 122, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(244, 143, 177, 0.1) 0%, transparent 50%), linear-gradient(180deg, #fefefe 0%, #fdf2f5 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===== DECORACIÓN PATITAS ===== */
+.paw-decoration {
+    position: fixed;
+    color: var(--color-primary);
+    opacity: 0.04;
+    font-size: 180px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.paw-1 {
+    top: -30px;
+    left: -40px;
+    transform: rotate(-25deg);
+}
+
+.paw-2 {
+    bottom: -30px;
+    right: -40px;
+    transform: rotate(25deg);
+}
+
+/* ===== CARD PRINCIPAL ===== */
+.verify-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 20px 40px -10px rgba(236, 64, 122, 0.12);
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* ===== ICONO VERIFICACIÓN ===== */
+.verify-icon {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(145deg, var(--color-primary), #f06292);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-lg);
+    box-shadow: 0 8px 20px rgba(236, 64, 122, 0.35), inset 0 -2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+    .verify-icon::after {
+        content: '';
+        position: absolute;
+        width: 88px;
+        height: 88px;
+        border: 2px dashed rgba(236, 64, 122, 0.25);
+        border-radius: 50%;
+        animation: spin 20s linear infinite;
+    }
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.verify-icon i {
+    font-size: 28px;
+    color: white;
+}
+
+/* ===== TÍTULO Y SUBTÍTULO ===== */
+.verify-card h2 {
+    font-size: 1.625rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin: 0 0 var(--spacing-xs);
+}
+
+.verify-card .subtitle {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0 0 var(--spacing-lg);
+    line-height: 1.5;
+}
+
+/* ===== DISPLAY EMAIL ===== */
+.email-display {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: linear-gradient(135deg, #fff5f7, #fce4ec);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-xl);
+    border: 1px solid rgba(236, 64, 122, 0.15);
+}
+
+    .email-display i {
+        color: var(--color-primary);
+        font-size: 0.875rem;
+    }
+
+    .email-display span,
+    .email-display label {
+        color: var(--color-primary);
+        font-weight: 500;
+        font-size: 0.875rem;
+    }
+
+/* ===== INPUTS DEL CÓDIGO ===== */
+.code-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: var(--spacing-xl);
+}
+
+.code-digit {
+    width: 52px;
+    height: 60px;
+    border: 2px solid #e8e8e8;
+    border-radius: var(--radius-lg);
+    background: #fafafa;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--color-text-dark);
+    text-align: center;
+    outline: none;
+    transition: all 0.2s ease;
+    caret-color: var(--color-primary);
+}
+
+    .code-digit:focus {
+        border-color: var(--color-primary);
+        background: white;
+        box-shadow: 0 0 0 4px rgba(236, 64, 122, 0.1), 0 4px 12px rgba(236, 64, 122, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .code-digit:not(:placeholder-shown) {
+        border-color: var(--color-primary);
+        background: white;
+    }
+
+    .code-digit::placeholder {
+        color: #d0d0d0;
+    }
+
+/* Campo oculto */
+.hidden-code {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+}
+
+/* ===== BOTÓN VERIFICAR ===== */
+.btn-verify {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: linear-gradient(135deg, var(--color-primary), #f06292);
+    color: white;
+    font-size: 0.938rem;
+    font-weight: 600;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(236, 64, 122, 0.3);
+    margin-bottom: var(--spacing-xl);
+}
+
+    .btn-verify:hover {
+        background: linear-gradient(135deg, #d81b60, var(--color-primary));
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(236, 64, 122, 0.4);
+    }
+
+    .btn-verify:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 10px rgba(236, 64, 122, 0.3);
+    }
+
+/* ===== SECCIÓN OPCIONES ===== */
+.options {
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid #f0f0f0;
+}
+
+    .options > p {
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+        margin: 0 0 var(--spacing-md);
+    }
+
+.option-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+    .option-links button,
+    .option-links input[type="submit"] {
+        width: 100%;
+        padding: var(--spacing-md);
+        background: transparent;
+        border: 1.5px solid #e0e0e0;
+        border-radius: var(--radius-lg);
+        font-size: 0.875rem;
+        font-family: inherit;
+        color: var(--color-text-dark);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-xs);
+    }
+
+        .option-links button:hover,
+        .option-links input[type="submit"]:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: rgba(236, 64, 122, 0.04);
+        }
+
+/* ===== PANEL CAMBIAR EMAIL ===== */
+.change-email-panel {
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid #f0f0f0;
+    margin-top: var(--spacing-lg);
+    animation: fadeIn 0.3s ease;
+}
+
+    .change-email-panel h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--color-text-dark);
+        margin: 0 0 var(--spacing-md);
+    }
+
+    .change-email-panel input[type="text"],
+    .change-email-panel input[type="email"] {
+        width: 100%;
+        padding: var(--spacing-md);
+        border: 2px solid #e8e8e8;
+        border-radius: var(--radius-lg);
+        background: #fafafa;
+        font-size: 0.875rem;
+        font-family: inherit;
+        color: var(--color-text-dark);
+        margin-bottom: var(--spacing-md);
+        box-sizing: border-box;
+        outline: none;
+        transition: all 0.2s ease;
+    }
+
+    .change-email-panel input:focus {
+        border-color: var(--color-primary);
+        background: white;
+        box-shadow: 0 0 0 4px rgba(236, 64, 122, 0.1);
+    }
+
+    .change-email-panel input::placeholder {
+        color: #aaa;
+    }
+
+/* Grupo de botones */
+.btn-group {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.btn-secondary {
+    flex: 1;
+    padding: var(--spacing-md);
+    background: white;
+    border: 1.5px solid #e0e0e0;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-family: inherit;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .btn-secondary:hover {
+        border-color: #bbb;
+        color: var(--color-text-dark);
+    }
+
+.btn-primary {
+    flex: 1;
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, var(--color-primary), #f06292);
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-family: inherit;
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(236, 64, 122, 0.25);
+}
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #d81b60, var(--color-primary));
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(236, 64, 122, 0.3);
+    }
+
+/* ===== LINK VOLVER ===== */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+}
+
+    .back-link:hover {
+        color: var(--color-primary);
+        background: rgba(236, 64, 122, 0.05);
+    }
+
+    .back-link i {
+        font-size: 0.75rem;
+        transition: transform 0.2s ease;
+    }
+
+    .back-link:hover i {
+        transform: translateX(-4px);
+    }
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+    .page-container {
+        padding: var(--spacing-md);
+    }
+
+    .verify-card {
+        padding: var(--spacing-xl) var(--spacing-lg);
+        border-radius: var(--radius-xl);
+    }
+
+    .verify-icon {
+        width: 64px;
+        height: 64px;
+    }
+
+        .verify-icon::after {
+            width: 80px;
+            height: 80px;
+        }
+
+        .verify-icon i {
+            font-size: 24px;
+        }
+
+    .verify-card h2 {
+        font-size: 1.375rem;
+    }
+
+    .code-inputs {
+        gap: 8px;
+    }
+
+    .code-digit {
+        width: 44px;
+        height: 52px;
+        font-size: 1.25rem;
+        border-radius: var(--radius-md);
+    }
+
+    .paw-decoration {
+        font-size: 120px;
+    }
+
+    .email-display {
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .code-inputs {
+        gap: 6px;
+    }
+
+    .code-digit {
+        width: 40px;
+        height: 48px;
+        font-size: 1.125rem;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .btn-secondary,
+    .btn-primary {
+        width: 100%;
+    }
+}
