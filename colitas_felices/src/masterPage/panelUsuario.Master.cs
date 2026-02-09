@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace colitas_felices.src.webform
 {
-    public partial class panleUsuario : notificacionesMaster
+    public partial class panleUsuario
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -15,7 +15,7 @@ namespace colitas_felices.src.webform
         }
         protected void Logout_Click(object sender, EventArgs e)
         {
-            CerrarSesion();
+            Sessions.CerrarSesion();
         }
     }
 }

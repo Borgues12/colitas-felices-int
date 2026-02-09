@@ -1,85 +1,80 @@
-﻿using System;
+﻿using capa_dto;
+using capa_negocio;
+using capa_negocio.capa_negocio;
+using System;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 using System.Web.UI;
-using capa_negocio;
-using capa_dto;
+using static Google.Apis.Requests.BatchRequest;
 
 namespace colitas_felices.src
 {
-    public partial class login_registro : notificaciones
+    public partial class login_registro : NotifyLogic
     {
-        private notifyRegisterDTO _resultado;
-        private CN_Registrar objRegistrar = new CN_Registrar();
+        private notifyVarDTO _resultado;
+        private CN_Registro objRegistro = new CN_Registro();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["CuentaID"] != null)
+            // Validar si ya está logueado y redirigir según rol
+            Navigation.RedirigirSiYaLogueado();
+
+            if (!IsPostBack)
             {
-                Response.Redirect("~/src/webform/main.aspx", false);
-                Context.ApplicationInstance.CompleteRequest();
+                string vista = Request.QueryString["v"];
+                //Se analiza que campo esta en el hidden field para cargar la pagina
+                hdnVistaActual.Value = (vista == "registro") ? "registro" : "login";
             }
         }
 
         // ==================== REGISTRO ====================
 
-        protected void btnSiguiente_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtNombre.Text))
-            {
-                MostrarMensaje("El nombre es obligatorio.", "error");
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtApellido.Text))
-            {
-                MostrarMensaje("El apellido es obligatorio.", "error");
-                return;
-            }
-
-            ViewState["PrimerNombre"] = txtNombre.Text.Trim();
-            ViewState["PrimerApellido"] = txtApellido.Text.Trim();
-            ViewState["Cedula"] = txtCedula.Text.Trim();
-            ViewState["Telefono"] = txtTelefono.Text.Trim();
-
-            pnlPaso1.CssClass = "panel";
-            pnlPaso2.CssClass = "panel active";
-        }
-
-        protected void btnAtras_Click(object sender, EventArgs e)
-        {
-            pnlPaso1.CssClass = "panel active";
-            pnlPaso2.CssClass = "panel";
-        }
-
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
+            //se coloca para que se mantenga en el registro
+            hdnVistaActual.Value = "registro";
+
             if (!chkTerminos.Checked)
             {
                 MostrarMensaje("Debes aceptar los términos y condiciones.", "error");
                 return;
             }
 
-            RegisterAsyncTask(new PageAsyncTask(RegistrarUsuarioAsync));
+            RegisterAsyncTask(new PageAsyncTask(IniciarRegistroAsync));
         }
 
-        private async Task RegistrarUsuarioAsync()
+        private async Task IniciarRegistroAsync()
         {
-            _resultado = await objRegistrar.RegistrarAsync(
-                txtEmail.Text.Trim(),
-                txtPassword.Text,
-                txtConfirmar.Text,
-                ViewState["PrimerNombre"]?.ToString(),
-                ViewState["PrimerApellido"]?.ToString(),
-                ViewState["Cedula"]?.ToString(),
-                ViewState["Telefono"]?.ToString()
-            );
-
-            if (_resultado.Exitoso)
+            var request = new RegistroRequestDTO
             {
-                SessionRegistrarHelper.GuardarRegistroTemporal(
-                    _resultado.CuentaID,
-                    _resultado.Email
-                );
+                Email = txtEmail.Text.Trim(),
+                Password = txtPassword.Text,
+                ConfirmarPassword = txtConfirmar.Text,
+                PrimerNombre = txtPrimerNombre.Text.Trim(),
+                SegundoNombre = string.IsNullOrWhiteSpace(txtSegundoNombre.Text)
+                   ? null
+                   : txtSegundoNombre.Text.Trim(),
+                PrimerApellido = txtPrimerApellido.Text.Trim(),
+                SegundoApellido = string.IsNullOrWhiteSpace(txtSegundoApellido.Text)
+                   ? null
+                   : txtSegundoApellido.Text.Trim(),
+                Telefono = string.IsNullOrWhiteSpace(txtTelefono.Text)
+                   ? null
+                   : txtTelefono.Text.Trim()
+            };
+
+            _resultado = await objRegistro.IniciarRegistro(request);
+
+            if (_resultado.resultado)
+            {
+                // Guardar RegistroID en sesión
+                Sessions.GuardarRegistroTemporal(txtEmail.Text);
+            }
+            else if (_resultado.codigo == 1)
+            {
+                notifyVarDTO datos = (notifyVarDTO)_resultado.datos;
+                // Ya existe registro pendiente
+                Sessions.GuardarRegistroTemporal(txtEmail.Text);
             }
         }
 
@@ -89,20 +84,29 @@ namespace colitas_felices.src
 
             if (_resultado == null) return;
 
-            MostrarMensaje(_resultado.Mensaje, _resultado.Exitoso ? "success" : "error");
+            MostrarMensaje(_resultado.mensajeSalida, _resultado.resultado ? "success" : "error");
 
-            if (_resultado.Exitoso)
+            if (_resultado.resultado)
             {
-                string script = "setTimeout(function(){ window.location.href = '/verificar'; }, 3000);";
+                // Redirigir a verificación usando Navigation
+                string script = "setTimeout(function(){ window.location.href = '" +
+                    ResolveUrl(Navigation.RUTA_VERIFICAR) + "'; }, 2000);";
+                ClientScript.RegisterStartupScript(this.GetType(), "redirect", script, true);
+            }
+            else if (_resultado.codigo == 1)
+            {
+                // Si ya hay registro pendiente, también redirigir a verificación
+                string script = "setTimeout(function(){ window.location.href = '" +
+                    ResolveUrl(Navigation.RUTA_VERIFICAR) + "'; }, 2000);";
                 ClientScript.RegisterStartupScript(this.GetType(), "redirect", script, true);
             }
         }
 
-        // ==================== LOGIN (implementar después) ====================
+        // ==================== LOGIN ====================
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            // TODO: Implementar login
+            // TODO: Implementar login con CN_Login
             MostrarMensaje("Login en desarrollo.", "info");
         }
 

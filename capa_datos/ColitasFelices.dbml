@@ -1,192 +1,162 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="colitas_felices_2" Class="ColitasFelicesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=sqldatabasecf.database.windows.net;Initial Catalog=colitas_felices_2;User ID=up_colitas_felices;Encrypt=False" SettingsObjectName="capa_datos.Properties.Settings" SettingsPropertyName="colitas_felices_2ConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Cuenta" Member="Cuenta">
-    <Type Name="Cuenta">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB_ColitasFelices" Class="ColitasFelicesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DB_ColitasFelices;Integrated Security=True;Encrypt=False" SettingsObjectName="capa_datos.Properties.Settings" SettingsPropertyName="DB_ColitasFelicesConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.cuenta" Member="cuenta">
+    <Type Name="cuenta">
       <Column Name="CuentaID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="Password" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="GoogleID" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Rol" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="RolID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="Estado" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Column Name="TokenVerificacion" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
-      <Column Name="TokenExpiracion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="IntentosFallidos" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="BloqueadoHasta" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="VecesBloqueo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="FechaRegistro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="UltimoAcceso" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Cuenta_Perfil" Member="Perfil" ThisKey="CuentaID" OtherKey="CuentaID" Type="Perfil" />
+      <Association Name="cuenta_cuenta_permiso" Member="cuenta_permiso" ThisKey="CuentaID" OtherKey="AsignadoPor" Type="cuenta_permiso" />
+      <Association Name="cuenta_cuenta_permiso1" Member="cuenta_permiso1" ThisKey="CuentaID" OtherKey="CuentaID" Type="cuenta_permiso" />
+      <Association Name="cuenta_recuperacion_password" Member="recuperacion_password" ThisKey="CuentaID" OtherKey="CuentaID" Type="recuperacion_password" />
+      <Association Name="cuenta_rel_perfil_documento" Member="rel_perfil_documento" ThisKey="CuentaID" OtherKey="RevisadoPor" Type="rel_perfil_documento" />
+      <Association Name="cuenta_perfil" Member="perfil" ThisKey="CuentaID" OtherKey="CuentaID" Type="perfil" />
+      <Association Name="rol_cuenta" Member="rol" ThisKey="RolID" OtherKey="RolID" Type="rol" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Perfil" Member="Perfil">
-    <Type Name="Perfil">
+  <Table Name="dbo.cuenta_permiso" Member="cuenta_permiso">
+    <Type Name="cuenta_permiso">
+      <Column Name="CuentaID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PermisoID" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FechaAsignacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="AsignadoPor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="cuenta_cuenta_permiso" Member="cuenta" ThisKey="AsignadoPor" OtherKey="CuentaID" Type="cuenta" IsForeignKey="true" />
+      <Association Name="cuenta_cuenta_permiso1" Member="cuenta1" ThisKey="CuentaID" OtherKey="CuentaID" Type="cuenta" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="permiso_cuenta_permiso" Member="permiso" ThisKey="PermisoID" OtherKey="PermisoID" Type="permiso" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.documento_perfil" Member="documento_perfil">
+    <Type Name="documento_perfil">
+      <Column Name="DocumentoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TipoDocumentoID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="NombreArchivo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="BlobUrl" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="ContentType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TamanoBytes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FechaSubida" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="documento_perfil_rel_perfil_documento" Member="rel_perfil_documento" ThisKey="DocumentoID" OtherKey="DocumentoID" Type="rel_perfil_documento" />
+      <Association Name="tipo_documento_documento_perfil" Member="tipo_documento" ThisKey="TipoDocumentoID" OtherKey="TipoDocumentoID" Type="tipo_documento" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.permiso" Member="permiso">
+    <Type Name="permiso">
+      <Column Name="PermisoID" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Codigo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(80) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Modulo" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="permiso_cuenta_permiso" Member="cuenta_permiso" ThisKey="PermisoID" OtherKey="PermisoID" Type="cuenta_permiso" />
+    </Type>
+  </Table>
+  <Table Name="dbo.recuperacion_password" Member="recuperacion_password">
+    <Type Name="recuperacion_password">
+      <Column Name="RecuperacionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CuentaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Token" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="TokenExpiracion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Usado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FechaUso" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IP" Type="System.String" DbType="VarChar(45)" CanBeNull="true" />
+      <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="cuenta_recuperacion_password" Member="cuenta" ThisKey="CuentaID" OtherKey="CuentaID" Type="cuenta" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.registro_temporal" Member="registro_temporal">
+    <Type Name="registro_temporal">
+      <Column Name="RegistroID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PrimerNombre" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="SegundoNombre" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="PrimerApellido" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="SegundoApellido" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="CodigoVerificacion" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="CodigoExpiracion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Verificado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Intentos" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Reenvios" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="UltimoReenvio" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.rel_perfil_documento" Member="rel_perfil_documento">
+    <Type Name="rel_perfil_documento">
+      <Column Name="PerfilID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DocumentoID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="MotivoRechazo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="FechaRevision" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RevisadoPor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="documento_perfil_rel_perfil_documento" Member="documento_perfil" ThisKey="DocumentoID" OtherKey="DocumentoID" Type="documento_perfil" IsForeignKey="true" />
+      <Association Name="cuenta_rel_perfil_documento" Member="cuenta" ThisKey="RevisadoPor" OtherKey="CuentaID" Type="cuenta" IsForeignKey="true" />
+      <Association Name="perfil_rel_perfil_documento" Member="perfil" ThisKey="PerfilID" OtherKey="PerfilID" Type="perfil" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.rol" Member="rol">
+    <Type Name="rol">
+      <Column Name="RolID" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="rol_cuenta" Member="cuenta" ThisKey="RolID" OtherKey="RolID" Type="cuenta" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tipo_documento" Member="tipo_documento">
+    <Type Name="tipo_documento">
+      <Column Name="TipoDocumentoID" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Requerido" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="tipo_documento_documento_perfil" Member="documento_perfil" ThisKey="TipoDocumentoID" OtherKey="TipoDocumentoID" Type="documento_perfil" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tipo_identificacion" Member="tipo_identificacion">
+    <Type Name="tipo_identificacion">
+      <Column Name="TipoIdentificacionID" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Formato" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LongitudMin" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="LongitudMax" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="tipo_identificacion_perfil" Member="perfil" ThisKey="TipoIdentificacionID" OtherKey="TipoIdentificacionID" Type="perfil" />
+    </Type>
+  </Table>
+  <Table Name="dbo.perfil" Member="perfil">
+    <Type Name="perfil">
       <Column Name="PerfilID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CuentaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="PrimerNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="SegundoNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="PrimerApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="SegundoApellido" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cedula" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="Telefono" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="Direccion" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="PrimerNombre" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="SegundoNombre" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="PrimerApellido" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="SegundoApellido" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="TipoIdentificacionID" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="NumeroIdentificacion" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Genero" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
       <Column Name="FechaNacimiento" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Ocupacion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="FotoPerfil" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TelefonoPrincipal" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="TelefonoAlternativo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Foto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FechaRegistro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="FechaActualizacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Cuenta_Perfil" Member="Cuenta" ThisKey="CuentaID" OtherKey="CuentaID" Type="Cuenta" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="perfil_rel_perfil_documento" Member="rel_perfil_documento" ThisKey="PerfilID" OtherKey="PerfilID" Type="rel_perfil_documento" />
+      <Association Name="cuenta_perfil" Member="cuenta" ThisKey="CuentaID" OtherKey="CuentaID" Type="cuenta" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="tipo_identificacion_perfil" Member="tipo_identificacion" ThisKey="TipoIdentificacionID" OtherKey="TipoIdentificacionID" Type="tipo_identificacion" IsForeignKey="true" />
     </Type>
   </Table>
-  <Function Name="dbo.SEG_AdminCuenta" Method="SEG_AdminCuenta">
-    <Parameter Name="CuentaIDAdmin" Parameter="cuentaIDAdmin" Type="System.Int32" DbType="Int" />
-    <Parameter Name="CuentaIDObjetivo" Parameter="cuentaIDObjetivo" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(20)" />
-    <Parameter Name="NuevoRol" Parameter="nuevoRol" Type="System.Byte" DbType="TinyInt" />
-    <Parameter Name="NuevoEstado" Parameter="nuevoEstado" Type="System.Byte" DbType="TinyInt" />
-    <Parameter Name="Motivo" Parameter="motivo" Type="System.String" DbType="NVarChar(255)" />
-    <Parameter Name="Exitoso" Parameter="exitoso" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Parameter Name="Mensaje" Parameter="mensaje" Type="System.String" DbType="NVarChar(300)" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.SEG_Login" Method="SEG_Login">
-    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(150)" />
-    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="PasswordCorrecto" Parameter="passwordCorrecto" Type="System.Boolean" DbType="Bit" />
+  <Function Name="dbo.SEG_ConfirmarRegistro" Method="SEG_ConfirmarRegistro">
+    <Parameter Name="RegistroID" Parameter="registroID" Type="System.Int32" DbType="Int" />
     <Parameter Name="CuentaID" Parameter="cuentaID" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="PasswordHash" Parameter="passwordHash" Type="System.String" DbType="NVarChar(255)" Direction="InOut" />
-    <Parameter Name="Rol" Parameter="rol" Type="System.Byte" DbType="TinyInt" Direction="InOut" />
-    <Parameter Name="PrimerNombre" Parameter="primerNombre" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
-    <Parameter Name="PrimerApellido" Parameter="primerApellido" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
-    <Parameter Name="FotoPerfil" Parameter="fotoPerfil" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" Direction="InOut" />
-    <Parameter Name="Exitoso" Parameter="exitoso" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Parameter Name="Mensaje" Parameter="mensaje" Type="System.String" DbType="NVarChar(300)" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.SEG_LoginExterno" Method="SEG_LoginExterno">
-    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(150)" />
-    <Parameter Name="ProveedorID" Parameter="proveedorID" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="Proveedor" Parameter="proveedor" Type="System.String" DbType="VarChar(20)" />
-    <Parameter Name="PrimerNombre" Parameter="primerNombre" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="PrimerApellido" Parameter="primerApellido" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="FotoUrl" Parameter="fotoUrl" Type="System.String" DbType="VarChar(500)" />
-    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="CuentaID" Parameter="cuentaID" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="Rol" Parameter="rol" Type="System.Byte" DbType="TinyInt" Direction="InOut" />
-    <Parameter Name="NombreSalida" Parameter="nombreSalida" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
-    <Parameter Name="ApellidoSalida" Parameter="apellidoSalida" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
-    <Parameter Name="FotoPerfil" Parameter="fotoPerfil" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" Direction="InOut" />
-    <Parameter Name="EsNuevo" Parameter="esNuevo" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Parameter Name="Exitoso" Parameter="exitoso" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Parameter Name="Mensaje" Parameter="mensaje" Type="System.String" DbType="NVarChar(300)" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.SEG_LoginResultado" Method="SEG_LoginResultado">
-    <Parameter Name="CuentaID" Parameter="cuentaID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="LoginExitoso" Parameter="loginExitoso" Type="System.Boolean" DbType="Bit" />
-    <Parameter Name="Exitoso" Parameter="exitoso" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Parameter Name="Mensaje" Parameter="mensaje" Type="System.String" DbType="NVarChar(300)" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.SEG_ObtenerDatos" Method="SEG_ObtenerDatos">
-    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(15)" />
-    <Parameter Name="CuentaID" Parameter="cuentaID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(150)" />
-    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="Rol" Parameter="rol" Type="System.Byte" DbType="TinyInt" />
-    <Parameter Name="Estado" Parameter="estado" Type="System.Byte" DbType="TinyInt" />
-    <Parameter Name="Pagina" Parameter="pagina" Type="System.Int32" DbType="Int" />
-    <Parameter Name="PorPagina" Parameter="porPagina" Type="System.Int32" DbType="Int" />
-    <Parameter Name="TotalRegistros" Parameter="totalRegistros" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="TotalPaginas" Parameter="totalPaginas" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="Exitoso" Parameter="exitoso" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Parameter Name="Mensaje" Parameter="mensaje" Type="System.String" DbType="NVarChar(300)" Direction="InOut" />
-    <ElementType Name="SEG_ObtenerDatosResult">
-      <Column Name="CuentaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="Rol" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Column Name="Estado" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Column Name="GoogleID" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="TieneGoogle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IntentosFallidos" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Column Name="BloqueadoHasta" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="VecesBloqueo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Column Name="FechaRegistro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="UltimoAcceso" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="PerfilID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="PrimerNombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="SegundoNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="PrimerApellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="SegundoApellido" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cedula" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="Telefono" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="Direccion" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="FechaNacimiento" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Ocupacion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="FotoPerfil" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" />
-      <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="FechaActualizacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.SEG_Perfil" Method="SEG_Perfil">
-    <Parameter Name="CuentaID" Parameter="cuentaID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(15)" />
-    <Parameter Name="PrimerNombre" Parameter="primerNombre" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="SegundoNombre" Parameter="segundoNombre" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="PrimerApellido" Parameter="primerApellido" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="SegundoApellido" Parameter="segundoApellido" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Cedula" Parameter="cedula" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="Telefono" Parameter="telefono" Type="System.String" DbType="VarChar(15)" />
-    <Parameter Name="Direccion" Parameter="direccion" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="FechaNacimiento" Parameter="fechaNacimiento" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="Ocupacion" Parameter="ocupacion" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="FotoPerfil" Parameter="fotoPerfil" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" />
-    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(150)" Direction="InOut" />
-    <Parameter Name="Rol" Parameter="rol" Type="System.Byte" DbType="TinyInt" Direction="InOut" />
-    <Parameter Name="PrimerNombreOut" Parameter="primerNombreOut" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
-    <Parameter Name="SegundoNombreOut" Parameter="segundoNombreOut" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
-    <Parameter Name="PrimerApellidoOut" Parameter="primerApellidoOut" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
-    <Parameter Name="SegundoApellidoOut" Parameter="segundoApellidoOut" Type="System.String" DbType="VarChar(50)" Direction="InOut" />
-    <Parameter Name="CedulaOut" Parameter="cedulaOut" Type="System.String" DbType="VarChar(10)" Direction="InOut" />
-    <Parameter Name="TelefonoOut" Parameter="telefonoOut" Type="System.String" DbType="VarChar(15)" Direction="InOut" />
-    <Parameter Name="DireccionOut" Parameter="direccionOut" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
-    <Parameter Name="FechaNacimientoOut" Parameter="fechaNacimientoOut" Type="System.DateTime" DbType="Date" Direction="InOut" />
-    <Parameter Name="OcupacionOut" Parameter="ocupacionOut" Type="System.String" DbType="VarChar(100)" Direction="InOut" />
-    <Parameter Name="FotoPerfilOut" Parameter="fotoPerfilOut" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" Direction="InOut" />
-    <Parameter Name="TieneGoogle" Parameter="tieneGoogle" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Parameter Name="FechaRegistro" Parameter="fechaRegistro" Type="System.DateTime" DbType="DateTime" Direction="InOut" />
-    <Parameter Name="Exitoso" Parameter="exitoso" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Parameter Name="Mensaje" Parameter="mensaje" Type="System.String" DbType="NVarChar(300)" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.SEG_RecuperarPassword" Method="SEG_RecuperarPassword">
-    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(150)" />
-    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="Codigo" Parameter="codigo" Type="System.String" DbType="VarChar(6)" />
-    <Parameter Name="NuevoPasswordHash" Parameter="nuevoPasswordHash" Type="System.String" DbType="NVarChar(255)" />
-    <Parameter Name="CuentaID" Parameter="cuentaID" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="Token" Parameter="token" Type="System.String" DbType="VarChar(6)" Direction="InOut" />
-    <Parameter Name="Exitoso" Parameter="exitoso" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Parameter Name="Mensaje" Parameter="mensaje" Type="System.String" DbType="NVarChar(300)" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.SEG_Registrar" Method="SEG_Registrar">
-    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(150)" />
-    <Parameter Name="PasswordHash" Parameter="passwordHash" Type="System.String" DbType="NVarChar(255)" />
-    <Parameter Name="PrimerNombre" Parameter="primerNombre" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="PrimerApellido" Parameter="primerApellido" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="CuentaID" Parameter="cuentaID" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="Token" Parameter="token" Type="System.String" DbType="VarChar(6)" Direction="InOut" />
-    <Parameter Name="Exitoso" Parameter="exitoso" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Parameter Name="Mensaje" Parameter="mensaje" Type="System.String" DbType="NVarChar(300)" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.SEG_VerificarCodigo" Method="SEG_VerificarCodigo">
-    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(150)" />
-    <Parameter Name="Codigo" Parameter="codigo" Type="System.String" DbType="VarChar(6)" />
-    <Parameter Name="Token" Parameter="token" Type="System.String" DbType="VarChar(6)" Direction="InOut" />
-    <Parameter Name="Exitoso" Parameter="exitoso" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Parameter Name="Mensaje" Parameter="mensaje" Type="System.String" DbType="NVarChar(300)" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
 </Database>

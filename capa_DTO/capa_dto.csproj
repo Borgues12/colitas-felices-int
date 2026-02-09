@@ -41,11 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\DTO_notify.cs" />
+    <Compile Include="DTO\notifyDTO.cs" />
     <Compile Include="DTO\DTO_Login.cs" />
     <Compile Include="DTO\DTO_Cuenta.cs" />
     <Compile Include="DTO\DTO_Perfil.cs" />
     <Compile Include="DTO\DTO_Seguridad.cs" />
+    <Compile Include="DTO\Seguridad\RegistroDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

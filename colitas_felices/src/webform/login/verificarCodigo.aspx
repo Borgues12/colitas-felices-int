@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/src/masterPage/index.Master" AutoEventWireup="true" CodeBehind="verificarCodigo.aspx.cs" Inherits="colitas_felices.src.webform.login.verificarCodigo" Async="true"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/src/masterPage/index.Master" AutoEventWireup="true" CodeBehind="verificarCodigo.aspx.cs" Inherits="colitas_felices.src.webform.login.verificarCodigo" Async="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Verificar Cuenta - Colitas Felices</title>
@@ -13,20 +13,21 @@
     <div class="page-container">
         <i class="fas fa-paw paw-decoration paw-1"></i>
         <i class="fas fa-paw paw-decoration paw-2"></i>
-        
+
         <div class="verify-card">
             <div class="verify-icon">
                 <i class="fas fa-envelope-open-text"></i>
             </div>
-            
+
             <h2>Verifica tu cuenta</h2>
             <p class="subtitle">Ingresa el código de 6 dígitos que enviamos a:</p>
-            
+
             <div class="email-display">
                 <i class="fas fa-envelope"></i>&nbsp;
+               
                 <asp:Label ID="lblEmail" runat="server"></asp:Label>
             </div>
-            
+
             <!-- Inputs visuales del código -->
             <div class="code-inputs">
                 <input type="text" maxlength="1" class="code-digit" data-index="0" inputmode="numeric" />
@@ -36,40 +37,41 @@
                 <input type="text" maxlength="1" class="code-digit" data-index="4" inputmode="numeric" />
                 <input type="text" maxlength="1" class="code-digit" data-index="5" inputmode="numeric" />
             </div>
-            
+
             <!-- Campo oculto con el código completo -->
             <asp:TextBox ID="txtCodigo" runat="server" CssClass="hidden-code" MaxLength="6" />
-            
-            <asp:Button ID="btnVerificar" runat="server" Text="VERIFICAR CUENTA" 
+
+            <asp:Button ID="btnVerificar" runat="server" Text="VERIFICAR CUENTA"
                 CssClass="btn-verify" OnClick="btnVerificar_Click" />
-            
+
             <!-- Opciones -->
             <div class="options" id="divOpciones">
                 <p>¿No recibiste el código?</p>
                 <div class="option-links">
-                    <asp:Button ID="btnReenviar" runat="server" Text="📧 Reenviar código" 
+                    <asp:Button ID="btnReenviar" runat="server" Text="📧 Reenviar código"
                         OnClick="btnReenviar_Click" CausesValidation="false" />
                     <button type="button" id="btnMostrarCambio" onclick="mostrarCambioEmail()">
                         ✏️ Cambiar correo electrónico
+                   
                     </button>
                 </div>
             </div>
-            
+
             <!-- Panel cambiar email -->
-            <asp:Panel ID="pnlCambiarEmail" runat="server" CssClass="change-email-panel" Visible="false">
+            <asp:Panel ID="pnlCambiarEmail" runat="server" CssClass="change-email-panel" Style="display: none;">
                 <h3>Cambiar correo electrónico</h3>
-                <asp:TextBox ID="txtNuevoEmail" runat="server" placeholder="Nuevo correo electrónico" 
+                <asp:TextBox ID="txtNuevoEmail" runat="server" placeholder="Nuevo correo electrónico"
                     TextMode="Email" MaxLength="150" />
                 <div class="btn-group">
-                    <asp:Button ID="btnCancelarCambio" runat="server" Text="Cancelar" 
+                    <asp:Button ID="btnCancelarCambio" runat="server" Text="Cancelar"
                         CssClass="btn-secondary" OnClick="btnCancelarCambio_Click" CausesValidation="false" />
-                    <asp:Button ID="btnConfirmarCambio" runat="server" Text="Cambiar y enviar" 
+                    <asp:Button ID="btnConfirmarCambio" runat="server" Text="Cambiar y enviar"
                         CssClass="btn-primary" OnClick="btnConfirmarCambio_Click" />
                 </div>
             </asp:Panel>
-            
-            <a href="/registrarse" class="back-link">
-                <i class="fas fa-arrow-left"></i> Volver al registro
+
+            <a href="/iniciar_sesion" class="back-link">
+                <i class="fas fa-arrow-left"></i>Volver al registro
             </a>
         </div>
     </div>
@@ -148,8 +150,12 @@
 
         // Mostrar panel cambiar email
         function mostrarCambioEmail() {
-            document.getElementById('<%= pnlCambiarEmail.ClientID %>').style.display = 'block';
-            document.getElementById('divOpciones').style.display = 'none';
+            var panel = document.getElementById('<%= pnlCambiarEmail.ClientID %>');
+            var opciones = document.getElementById('divOpciones');
+
+            if (panel) panel.style.display = 'block';
+            if (opciones) opciones.style.display = 'none';
+
             document.getElementById('<%= txtNuevoEmail.ClientID %>').focus();
         }
 

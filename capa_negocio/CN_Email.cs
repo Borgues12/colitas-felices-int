@@ -108,15 +108,19 @@ namespace capa_negocio
         public static async Task<EmailResultado> Verificacion(string email, string nombre, string codigo)
         {
             string contenido = $@"
-                <p>Hola <strong>{nombre}</strong>,</p>
-                <p>Gracias por registrarte en Colitas Felices. Tu código de verificación es:</p>
-                <div style='background: #6f42c1; color: white; padding: 20px; border-radius: 8px; text-align: center; font-size: 32px; letter-spacing: 5px; margin: 20px 0;'>
-                    {codigo}
-                </div>
-                <p>Este código expira en <strong>15 minutos</strong>.</p>
-                <p style='color: #666; font-size: 14px;'>Si no solicitaste esta verificación, ignora este mensaje.</p>";
+        <p style='margin:0 0 16px 0;'>Hola <strong>{nombre}</strong>,</p>
+        <p style='margin:0 0 24px 0;'>Tu código de verificación es:</p>
+        <div style='background:#6f42c1; color:#ffffff; padding:20px; border-radius:12px; text-align:center; margin:0 0 24px 0;'>
+            <span style='font-size:32px; font-weight:700; letter-spacing:8px;'>{codigo}</span>
+        </div>
+        <p style='margin:0 0 8px 0; color:#666; font-size:14px;'>
+            ⏱️ Este código expira en <strong>15 minutos</strong>.
+        </p>
+        <p style='margin:0; color:#999; font-size:13px;'>
+            Si no solicitaste este código, ignora este mensaje.
+        </p>";
 
-            return await Enviar(email, nombre, "Verifica tu cuenta - Colitas Felices", "Verifica tu cuenta", contenido, TipoEmail.Autenticacion);
+            return await Enviar(email, nombre, "Código de verificación", "Verifica tu cuenta", contenido, TipoEmail.Autenticacion);
         }
 
         public static async Task<EmailResultado> Recuperacion(string email, string nombre, string codigo)
@@ -255,23 +259,47 @@ namespace capa_negocio
             return $@"
 <!DOCTYPE html>
 <html>
-<head><meta charset='UTF-8'></head>
-<body style='margin:0;padding:0;font-family:Arial,sans-serif;background:#f4f4f4;'>
-<table width='100%' cellpadding='0' cellspacing='0' style='background:#f4f4f4;padding:20px 0;'>
-<tr><td align='center'>
-<table width='500' cellpadding='0' cellspacing='0' style='background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.1);'>
-<tr><td style='background:linear-gradient(135deg,#6f42c1 0%,#8969d3 100%);padding:30px;text-align:center;'>
-<div style='font-size:40px;'>{emoji}</div>
-<h1 style='color:white;margin:10px 0 0 0;font-size:24px;'>{titulo}</h1>
-</td></tr>
-<tr><td style='padding:30px;text-align:center;color:#333;line-height:1.6;'>{contenido}</td></tr>
-<tr><td style='background:#f8f9fa;padding:20px;text-align:center;border-top:1px solid #eee;'>
-<p style='margin:0;color:#6f42c1;font-weight:bold;'>🐾 Colitas Felices</p>
-<p style='margin:5px 0 0 0;color:#999;font-size:12px;'>Refugio de Diana Cevallos • Calderón, Quito 🇪🇨</p>
-</td></tr>
-</table>
-</td></tr>
-</table>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+</head>
+<body style='margin:0; padding:0; font-family:Segoe UI, Arial, sans-serif; background:#f5f5f5;'>
+    <table width='100%' cellpadding='0' cellspacing='0' style='padding:30px 15px;'>
+        <tr>
+            <td align='center'>
+                <table width='100%' style='max-width:480px; background:#ffffff; border-radius:16px; overflow:hidden;'>
+                    
+                    <!-- Header -->
+                    <tr>
+                        <td style='background:#6f42c1; padding:32px 24px; text-align:center;'>
+                            <div style='font-size:36px; margin-bottom:8px;'>{emoji}</div>
+                            <h1 style='color:#ffffff; margin:0; font-size:22px; font-weight:600;'>{titulo}</h1>
+                        </td>
+                    </tr>
+                    
+                    <!-- Contenido -->
+                    <tr>
+                        <td style='padding:32px 24px; color:#333333; font-size:15px; line-height:1.6;'>
+                            {contenido}
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style='background:#f8f9fa; padding:20px 24px; text-align:center; border-top:1px solid #eee;'>
+                            <p style='margin:0 0 4px 0; color:#6f42c1; font-weight:600; font-size:14px;'>
+                                🐾 Colitas Felices
+                            </p>
+                            <p style='margin:0; color:#999; font-size:12px;'>
+                                Refugio de animales • Calderón, Quito
+                            </p>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>";
         }
