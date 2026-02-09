@@ -55,5 +55,16 @@ namespace capa_datos.Properties {
                 return ((string)(this["colitas_felices_2ConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DB_ColitasFelices;Integrated S" +
+            "ecurity=True;Encrypt=False")]
+        public string DB_ColitasFelicesConnectionString {
+            get {
+                return ((string)(this["DB_ColitasFelicesConnectionString"]));
+            }
+        }
     }
 }

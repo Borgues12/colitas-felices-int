@@ -22,7 +22,7 @@ namespace capa_datos
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="colitas_felices_2")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DB_ColitasFelices")]
 	public partial class ColitasFelicesDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -30,16 +30,43 @@ namespace capa_datos
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnCreated();
-    partial void InsertCuenta(Cuenta instance);
-    partial void UpdateCuenta(Cuenta instance);
-    partial void DeleteCuenta(Cuenta instance);
-    partial void InsertPerfil(Perfil instance);
-    partial void UpdatePerfil(Perfil instance);
-    partial void DeletePerfil(Perfil instance);
+    partial void Insertcuenta(cuenta instance);
+    partial void Updatecuenta(cuenta instance);
+    partial void Deletecuenta(cuenta instance);
+    partial void Insertcuenta_permiso(cuenta_permiso instance);
+    partial void Updatecuenta_permiso(cuenta_permiso instance);
+    partial void Deletecuenta_permiso(cuenta_permiso instance);
+    partial void Insertdocumento_perfil(documento_perfil instance);
+    partial void Updatedocumento_perfil(documento_perfil instance);
+    partial void Deletedocumento_perfil(documento_perfil instance);
+    partial void Insertpermiso(permiso instance);
+    partial void Updatepermiso(permiso instance);
+    partial void Deletepermiso(permiso instance);
+    partial void Insertrecuperacion_password(recuperacion_password instance);
+    partial void Updaterecuperacion_password(recuperacion_password instance);
+    partial void Deleterecuperacion_password(recuperacion_password instance);
+    partial void Insertregistro_temporal(registro_temporal instance);
+    partial void Updateregistro_temporal(registro_temporal instance);
+    partial void Deleteregistro_temporal(registro_temporal instance);
+    partial void Insertrel_perfil_documento(rel_perfil_documento instance);
+    partial void Updaterel_perfil_documento(rel_perfil_documento instance);
+    partial void Deleterel_perfil_documento(rel_perfil_documento instance);
+    partial void Insertrol(rol instance);
+    partial void Updaterol(rol instance);
+    partial void Deleterol(rol instance);
+    partial void Inserttipo_documento(tipo_documento instance);
+    partial void Updatetipo_documento(tipo_documento instance);
+    partial void Deletetipo_documento(tipo_documento instance);
+    partial void Inserttipo_identificacion(tipo_identificacion instance);
+    partial void Updatetipo_identificacion(tipo_identificacion instance);
+    partial void Deletetipo_identificacion(tipo_identificacion instance);
+    partial void Insertperfil(perfil instance);
+    partial void Updateperfil(perfil instance);
+    partial void Deleteperfil(perfil instance);
     #endregion
 		
 		public ColitasFelicesDataContext() : 
-				base(global::capa_datos.Properties.Settings.Default.colitas_felices_2ConnectionString1, mappingSource)
+				base(global::capa_datos.Properties.Settings.Default.DB_ColitasFelicesConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -68,167 +95,105 @@ namespace capa_datos
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Cuenta> Cuenta
+		public System.Data.Linq.Table<cuenta> cuenta
 		{
 			get
 			{
-				return this.GetTable<Cuenta>();
+				return this.GetTable<cuenta>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Perfil> Perfil
+		public System.Data.Linq.Table<cuenta_permiso> cuenta_permiso
 		{
 			get
 			{
-				return this.GetTable<Perfil>();
+				return this.GetTable<cuenta_permiso>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_AdminCuenta")]
-		public int SEG_AdminCuenta([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaIDAdmin", DbType="Int")] System.Nullable<int> cuentaIDAdmin, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaIDObjetivo", DbType="Int")] System.Nullable<int> cuentaIDObjetivo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(20)")] string accion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevoRol", DbType="TinyInt")] System.Nullable<byte> nuevoRol, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevoEstado", DbType="TinyInt")] System.Nullable<byte> nuevoEstado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Motivo", DbType="NVarChar(255)")] string motivo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		public System.Data.Linq.Table<documento_perfil> documento_perfil
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cuentaIDAdmin, cuentaIDObjetivo, accion, nuevoRol, nuevoEstado, motivo, exitoso, mensaje);
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(6)));
-			mensaje = ((string)(result.GetParameterValue(7)));
-			return ((int)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<documento_perfil>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_Login")]
-		public int SEG_Login([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(10)")] string accion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PasswordCorrecto", DbType="Bit")] System.Nullable<bool> passwordCorrecto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] ref System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PasswordHash", DbType="NVarChar(255)")] ref string passwordHash, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Rol", DbType="TinyInt")] ref System.Nullable<byte> rol, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerNombre", DbType="VarChar(50)")] ref string primerNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerApellido", DbType="VarChar(50)")] ref string primerApellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoPerfil", DbType="VarBinary(MAX)")] ref System.Data.Linq.Binary fotoPerfil, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		public System.Data.Linq.Table<permiso> permiso
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, accion, passwordCorrecto, cuentaID, passwordHash, rol, primerNombre, primerApellido, fotoPerfil, exitoso, mensaje);
-			cuentaID = ((System.Nullable<int>)(result.GetParameterValue(3)));
-			passwordHash = ((string)(result.GetParameterValue(4)));
-			rol = ((System.Nullable<byte>)(result.GetParameterValue(5)));
-			primerNombre = ((string)(result.GetParameterValue(6)));
-			primerApellido = ((string)(result.GetParameterValue(7)));
-			fotoPerfil = ((System.Data.Linq.Binary)(result.GetParameterValue(8)));
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(9)));
-			mensaje = ((string)(result.GetParameterValue(10)));
-			return ((int)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<permiso>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_LoginExterno")]
-		public int SEG_LoginExterno([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ProveedorID", DbType="VarChar(100)")] string proveedorID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Proveedor", DbType="VarChar(20)")] string proveedor, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerNombre", DbType="VarChar(50)")] string primerNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerApellido", DbType="VarChar(50)")] string primerApellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoUrl", DbType="VarChar(500)")] string fotoUrl, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(10)")] string accion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] ref System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Rol", DbType="TinyInt")] ref System.Nullable<byte> rol, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NombreSalida", DbType="VarChar(50)")] ref string nombreSalida, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ApellidoSalida", DbType="VarChar(50)")] ref string apellidoSalida, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoPerfil", DbType="VarBinary(MAX)")] ref System.Data.Linq.Binary fotoPerfil, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EsNuevo", DbType="Bit")] ref System.Nullable<bool> esNuevo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		public System.Data.Linq.Table<recuperacion_password> recuperacion_password
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, proveedorID, proveedor, primerNombre, primerApellido, fotoUrl, accion, cuentaID, rol, nombreSalida, apellidoSalida, fotoPerfil, esNuevo, exitoso, mensaje);
-			cuentaID = ((System.Nullable<int>)(result.GetParameterValue(7)));
-			rol = ((System.Nullable<byte>)(result.GetParameterValue(8)));
-			nombreSalida = ((string)(result.GetParameterValue(9)));
-			apellidoSalida = ((string)(result.GetParameterValue(10)));
-			fotoPerfil = ((System.Data.Linq.Binary)(result.GetParameterValue(11)));
-			esNuevo = ((System.Nullable<bool>)(result.GetParameterValue(12)));
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(13)));
-			mensaje = ((string)(result.GetParameterValue(14)));
-			return ((int)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<recuperacion_password>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_LoginResultado")]
-		public int SEG_LoginResultado([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LoginExitoso", DbType="Bit")] System.Nullable<bool> loginExitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		public System.Data.Linq.Table<registro_temporal> registro_temporal
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cuentaID, loginExitoso, exitoso, mensaje);
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(2)));
-			mensaje = ((string)(result.GetParameterValue(3)));
-			return ((int)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<registro_temporal>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_ObtenerDatos")]
-		public ISingleResult<SEG_ObtenerDatosResult> SEG_ObtenerDatos([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(15)")] string accion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(100)")] string nombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Rol", DbType="TinyInt")] System.Nullable<byte> rol, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Estado", DbType="TinyInt")] System.Nullable<byte> estado, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Pagina", DbType="Int")] System.Nullable<int> pagina, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PorPagina", DbType="Int")] System.Nullable<int> porPagina, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalRegistros", DbType="Int")] ref System.Nullable<int> totalRegistros, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalPaginas", DbType="Int")] ref System.Nullable<int> totalPaginas, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		public System.Data.Linq.Table<rel_perfil_documento> rel_perfil_documento
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), accion, cuentaID, email, nombre, rol, estado, pagina, porPagina, totalRegistros, totalPaginas, exitoso, mensaje);
-			totalRegistros = ((System.Nullable<int>)(result.GetParameterValue(8)));
-			totalPaginas = ((System.Nullable<int>)(result.GetParameterValue(9)));
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(10)));
-			mensaje = ((string)(result.GetParameterValue(11)));
-			return ((ISingleResult<SEG_ObtenerDatosResult>)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<rel_perfil_documento>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_Perfil")]
-		public int SEG_Perfil(
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] System.Nullable<int> cuentaID, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(15)")] string accion, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerNombre", DbType="VarChar(50)")] string primerNombre, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SegundoNombre", DbType="VarChar(50)")] string segundoNombre, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerApellido", DbType="VarChar(50)")] string primerApellido, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SegundoApellido", DbType="VarChar(50)")] string segundoApellido, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cedula", DbType="VarChar(10)")] string cedula, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Telefono", DbType="VarChar(15)")] string telefono, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Direccion", DbType="VarChar(255)")] string direccion, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FechaNacimiento", DbType="Date")] System.Nullable<System.DateTime> fechaNacimiento, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Ocupacion", DbType="VarChar(100)")] string ocupacion, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoPerfil", DbType="VarBinary(MAX)")] System.Data.Linq.Binary fotoPerfil, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] ref string email, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Rol", DbType="TinyInt")] ref System.Nullable<byte> rol, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerNombreOut", DbType="VarChar(50)")] ref string primerNombreOut, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SegundoNombreOut", DbType="VarChar(50)")] ref string segundoNombreOut, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerApellidoOut", DbType="VarChar(50)")] ref string primerApellidoOut, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SegundoApellidoOut", DbType="VarChar(50)")] ref string segundoApellidoOut, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CedulaOut", DbType="VarChar(10)")] ref string cedulaOut, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="TelefonoOut", DbType="VarChar(15)")] ref string telefonoOut, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="DireccionOut", DbType="VarChar(255)")] ref string direccionOut, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FechaNacimientoOut", DbType="Date")] ref System.Nullable<System.DateTime> fechaNacimientoOut, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="OcupacionOut", DbType="VarChar(100)")] ref string ocupacionOut, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoPerfilOut", DbType="VarBinary(MAX)")] ref System.Data.Linq.Binary fotoPerfilOut, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="TieneGoogle", DbType="Bit")] ref System.Nullable<bool> tieneGoogle, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FechaRegistro", DbType="DateTime")] ref System.Nullable<System.DateTime> fechaRegistro, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		public System.Data.Linq.Table<rol> rol
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cuentaID, accion, primerNombre, segundoNombre, primerApellido, segundoApellido, cedula, telefono, direccion, fechaNacimiento, ocupacion, fotoPerfil, email, rol, primerNombreOut, segundoNombreOut, primerApellidoOut, segundoApellidoOut, cedulaOut, telefonoOut, direccionOut, fechaNacimientoOut, ocupacionOut, fotoPerfilOut, tieneGoogle, fechaRegistro, exitoso, mensaje);
-			email = ((string)(result.GetParameterValue(12)));
-			rol = ((System.Nullable<byte>)(result.GetParameterValue(13)));
-			primerNombreOut = ((string)(result.GetParameterValue(14)));
-			segundoNombreOut = ((string)(result.GetParameterValue(15)));
-			primerApellidoOut = ((string)(result.GetParameterValue(16)));
-			segundoApellidoOut = ((string)(result.GetParameterValue(17)));
-			cedulaOut = ((string)(result.GetParameterValue(18)));
-			telefonoOut = ((string)(result.GetParameterValue(19)));
-			direccionOut = ((string)(result.GetParameterValue(20)));
-			fechaNacimientoOut = ((System.Nullable<System.DateTime>)(result.GetParameterValue(21)));
-			ocupacionOut = ((string)(result.GetParameterValue(22)));
-			fotoPerfilOut = ((System.Data.Linq.Binary)(result.GetParameterValue(23)));
-			tieneGoogle = ((System.Nullable<bool>)(result.GetParameterValue(24)));
-			fechaRegistro = ((System.Nullable<System.DateTime>)(result.GetParameterValue(25)));
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(26)));
-			mensaje = ((string)(result.GetParameterValue(27)));
-			return ((int)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<rol>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_RecuperarPassword")]
-		public int SEG_RecuperarPassword([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(10)")] string accion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Codigo", DbType="VarChar(6)")] string codigo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevoPasswordHash", DbType="NVarChar(255)")] string nuevoPasswordHash, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] ref System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Token", DbType="VarChar(6)")] ref string token, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		public System.Data.Linq.Table<tipo_documento> tipo_documento
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, accion, codigo, nuevoPasswordHash, cuentaID, token, exitoso, mensaje);
-			cuentaID = ((System.Nullable<int>)(result.GetParameterValue(4)));
-			token = ((string)(result.GetParameterValue(5)));
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(6)));
-			mensaje = ((string)(result.GetParameterValue(7)));
-			return ((int)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<tipo_documento>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_Registrar")]
-		public int SEG_Registrar([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PasswordHash", DbType="NVarChar(255)")] string passwordHash, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerNombre", DbType="VarChar(50)")] string primerNombre, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PrimerApellido", DbType="VarChar(50)")] string primerApellido, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] ref System.Nullable<int> cuentaID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Token", DbType="VarChar(6)")] ref string token, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		public System.Data.Linq.Table<tipo_identificacion> tipo_identificacion
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, passwordHash, primerNombre, primerApellido, cuentaID, token, exitoso, mensaje);
-			cuentaID = ((System.Nullable<int>)(result.GetParameterValue(4)));
-			token = ((string)(result.GetParameterValue(5)));
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(6)));
-			mensaje = ((string)(result.GetParameterValue(7)));
-			return ((int)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<tipo_identificacion>();
+			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_VerificarCodigo")]
-		public int SEG_VerificarCodigo([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(10)")] string accion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(150)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Codigo", DbType="VarChar(6)")] string codigo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Token", DbType="VarChar(6)")] ref string token, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Exitoso", DbType="Bit")] ref System.Nullable<bool> exitoso, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Mensaje", DbType="NVarChar(300)")] ref string mensaje)
+		public System.Data.Linq.Table<perfil> perfil
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), accion, email, codigo, token, exitoso, mensaje);
-			token = ((string)(result.GetParameterValue(3)));
-			exitoso = ((System.Nullable<bool>)(result.GetParameterValue(4)));
-			mensaje = ((string)(result.GetParameterValue(5)));
+			get
+			{
+				return this.GetTable<perfil>();
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.SEG_ConfirmarRegistro")]
+		public int SEG_ConfirmarRegistro([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RegistroID", DbType="Int")] System.Nullable<int> registroID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CuentaID", DbType="Int")] ref System.Nullable<int> cuentaID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), registroID, cuentaID);
+			cuentaID = ((System.Nullable<int>)(result.GetParameterValue(1)));
 			return ((int)(result.ReturnValue));
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Cuenta")]
-	public partial class Cuenta : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.cuenta")]
+	public partial class cuenta : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -237,17 +202,13 @@ namespace capa_datos
 		
 		private string _Email;
 		
-		private string _Password;
+		private string _PasswordHash;
 		
 		private string _GoogleID;
 		
-		private byte _Rol;
+		private byte _RolID;
 		
 		private byte _Estado;
-		
-		private string _TokenVerificacion;
-		
-		private System.Nullable<System.DateTime> _TokenExpiracion;
 		
 		private byte _IntentosFallidos;
 		
@@ -259,7 +220,17 @@ namespace capa_datos
 		
 		private System.Nullable<System.DateTime> _UltimoAcceso;
 		
-		private EntitySet<Perfil> _Perfil;
+		private EntitySet<cuenta_permiso> _cuenta_permiso;
+		
+		private EntitySet<cuenta_permiso> _cuenta_permiso1;
+		
+		private EntitySet<recuperacion_password> _recuperacion_password;
+		
+		private EntitySet<rel_perfil_documento> _rel_perfil_documento;
+		
+		private EntitySet<perfil> _perfil;
+		
+		private EntityRef<rol> _rol;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -269,18 +240,14 @@ namespace capa_datos
     partial void OnCuentaIDChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
+    partial void OnPasswordHashChanging(string value);
+    partial void OnPasswordHashChanged();
     partial void OnGoogleIDChanging(string value);
     partial void OnGoogleIDChanged();
-    partial void OnRolChanging(byte value);
-    partial void OnRolChanged();
+    partial void OnRolIDChanging(byte value);
+    partial void OnRolIDChanged();
     partial void OnEstadoChanging(byte value);
     partial void OnEstadoChanged();
-    partial void OnTokenVerificacionChanging(string value);
-    partial void OnTokenVerificacionChanged();
-    partial void OnTokenExpiracionChanging(System.Nullable<System.DateTime> value);
-    partial void OnTokenExpiracionChanged();
     partial void OnIntentosFallidosChanging(byte value);
     partial void OnIntentosFallidosChanged();
     partial void OnBloqueadoHastaChanging(System.Nullable<System.DateTime> value);
@@ -293,9 +260,14 @@ namespace capa_datos
     partial void OnUltimoAccesoChanged();
     #endregion
 		
-		public Cuenta()
+		public cuenta()
 		{
-			this._Perfil = new EntitySet<Perfil>(new Action<Perfil>(this.attach_Perfil), new Action<Perfil>(this.detach_Perfil));
+			this._cuenta_permiso = new EntitySet<cuenta_permiso>(new Action<cuenta_permiso>(this.attach_cuenta_permiso), new Action<cuenta_permiso>(this.detach_cuenta_permiso));
+			this._cuenta_permiso1 = new EntitySet<cuenta_permiso>(new Action<cuenta_permiso>(this.attach_cuenta_permiso1), new Action<cuenta_permiso>(this.detach_cuenta_permiso1));
+			this._recuperacion_password = new EntitySet<recuperacion_password>(new Action<recuperacion_password>(this.attach_recuperacion_password), new Action<recuperacion_password>(this.detach_recuperacion_password));
+			this._rel_perfil_documento = new EntitySet<rel_perfil_documento>(new Action<rel_perfil_documento>(this.attach_rel_perfil_documento), new Action<rel_perfil_documento>(this.detach_rel_perfil_documento));
+			this._perfil = new EntitySet<perfil>(new Action<perfil>(this.attach_perfil), new Action<perfil>(this.detach_perfil));
+			this._rol = default(EntityRef<rol>);
 			OnCreated();
 		}
 		
@@ -339,22 +311,22 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(255)")]
-		public string Password
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordHash", DbType="NVarChar(255)")]
+		public string PasswordHash
 		{
 			get
 			{
-				return this._Password;
+				return this._PasswordHash;
 			}
 			set
 			{
-				if ((this._Password != value))
+				if ((this._PasswordHash != value))
 				{
-					this.OnPasswordChanging(value);
+					this.OnPasswordHashChanging(value);
 					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
+					this._PasswordHash = value;
+					this.SendPropertyChanged("PasswordHash");
+					this.OnPasswordHashChanged();
 				}
 			}
 		}
@@ -379,22 +351,26 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rol", DbType="TinyInt NOT NULL")]
-		public byte Rol
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RolID", DbType="TinyInt NOT NULL")]
+		public byte RolID
 		{
 			get
 			{
-				return this._Rol;
+				return this._RolID;
 			}
 			set
 			{
-				if ((this._Rol != value))
+				if ((this._RolID != value))
 				{
-					this.OnRolChanging(value);
+					if (this._rol.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRolIDChanging(value);
 					this.SendPropertyChanging();
-					this._Rol = value;
-					this.SendPropertyChanged("Rol");
-					this.OnRolChanged();
+					this._RolID = value;
+					this.SendPropertyChanged("RolID");
+					this.OnRolIDChanged();
 				}
 			}
 		}
@@ -415,46 +391,6 @@ namespace capa_datos
 					this._Estado = value;
 					this.SendPropertyChanged("Estado");
 					this.OnEstadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TokenVerificacion", DbType="VarChar(6)")]
-		public string TokenVerificacion
-		{
-			get
-			{
-				return this._TokenVerificacion;
-			}
-			set
-			{
-				if ((this._TokenVerificacion != value))
-				{
-					this.OnTokenVerificacionChanging(value);
-					this.SendPropertyChanging();
-					this._TokenVerificacion = value;
-					this.SendPropertyChanged("TokenVerificacion");
-					this.OnTokenVerificacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TokenExpiracion", DbType="DateTime")]
-		public System.Nullable<System.DateTime> TokenExpiracion
-		{
-			get
-			{
-				return this._TokenExpiracion;
-			}
-			set
-			{
-				if ((this._TokenExpiracion != value))
-				{
-					this.OnTokenExpiracionChanging(value);
-					this.SendPropertyChanging();
-					this._TokenExpiracion = value;
-					this.SendPropertyChanged("TokenExpiracion");
-					this.OnTokenExpiracionChanged();
 				}
 			}
 		}
@@ -559,16 +495,102 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cuenta_Perfil", Storage="_Perfil", ThisKey="CuentaID", OtherKey="CuentaID")]
-		public EntitySet<Perfil> Perfil
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="cuenta_cuenta_permiso", Storage="_cuenta_permiso", ThisKey="CuentaID", OtherKey="AsignadoPor")]
+		public EntitySet<cuenta_permiso> cuenta_permiso
 		{
 			get
 			{
-				return this._Perfil;
+				return this._cuenta_permiso;
 			}
 			set
 			{
-				this._Perfil.Assign(value);
+				this._cuenta_permiso.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="cuenta_cuenta_permiso1", Storage="_cuenta_permiso1", ThisKey="CuentaID", OtherKey="CuentaID")]
+		public EntitySet<cuenta_permiso> cuenta_permiso1
+		{
+			get
+			{
+				return this._cuenta_permiso1;
+			}
+			set
+			{
+				this._cuenta_permiso1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="cuenta_recuperacion_password", Storage="_recuperacion_password", ThisKey="CuentaID", OtherKey="CuentaID")]
+		public EntitySet<recuperacion_password> recuperacion_password
+		{
+			get
+			{
+				return this._recuperacion_password;
+			}
+			set
+			{
+				this._recuperacion_password.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="cuenta_rel_perfil_documento", Storage="_rel_perfil_documento", ThisKey="CuentaID", OtherKey="RevisadoPor")]
+		public EntitySet<rel_perfil_documento> rel_perfil_documento
+		{
+			get
+			{
+				return this._rel_perfil_documento;
+			}
+			set
+			{
+				this._rel_perfil_documento.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="cuenta_perfil", Storage="_perfil", ThisKey="CuentaID", OtherKey="CuentaID")]
+		public EntitySet<perfil> perfil
+		{
+			get
+			{
+				return this._perfil;
+			}
+			set
+			{
+				this._perfil.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="rol_cuenta", Storage="_rol", ThisKey="RolID", OtherKey="RolID", IsForeignKey=true)]
+		public rol rol
+		{
+			get
+			{
+				return this._rol.Entity;
+			}
+			set
+			{
+				rol previousValue = this._rol.Entity;
+				if (((previousValue != value) 
+							|| (this._rol.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._rol.Entity = null;
+						previousValue.cuenta.Remove(this);
+					}
+					this._rol.Entity = value;
+					if ((value != null))
+					{
+						value.cuenta.Add(this);
+						this._RolID = value.RolID;
+					}
+					else
+					{
+						this._RolID = default(byte);
+					}
+					this.SendPropertyChanged("rol");
+				}
 			}
 		}
 		
@@ -592,21 +614,2367 @@ namespace capa_datos
 			}
 		}
 		
-		private void attach_Perfil(Perfil entity)
+		private void attach_cuenta_permiso(cuenta_permiso entity)
 		{
 			this.SendPropertyChanging();
-			entity.Cuenta = this;
+			entity.cuenta = this;
 		}
 		
-		private void detach_Perfil(Perfil entity)
+		private void detach_cuenta_permiso(cuenta_permiso entity)
 		{
 			this.SendPropertyChanging();
-			entity.Cuenta = null;
+			entity.cuenta = null;
+		}
+		
+		private void attach_cuenta_permiso1(cuenta_permiso entity)
+		{
+			this.SendPropertyChanging();
+			entity.cuenta1 = this;
+		}
+		
+		private void detach_cuenta_permiso1(cuenta_permiso entity)
+		{
+			this.SendPropertyChanging();
+			entity.cuenta1 = null;
+		}
+		
+		private void attach_recuperacion_password(recuperacion_password entity)
+		{
+			this.SendPropertyChanging();
+			entity.cuenta = this;
+		}
+		
+		private void detach_recuperacion_password(recuperacion_password entity)
+		{
+			this.SendPropertyChanging();
+			entity.cuenta = null;
+		}
+		
+		private void attach_rel_perfil_documento(rel_perfil_documento entity)
+		{
+			this.SendPropertyChanging();
+			entity.cuenta = this;
+		}
+		
+		private void detach_rel_perfil_documento(rel_perfil_documento entity)
+		{
+			this.SendPropertyChanging();
+			entity.cuenta = null;
+		}
+		
+		private void attach_perfil(perfil entity)
+		{
+			this.SendPropertyChanging();
+			entity.cuenta = this;
+		}
+		
+		private void detach_perfil(perfil entity)
+		{
+			this.SendPropertyChanging();
+			entity.cuenta = null;
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Perfil")]
-	public partial class Perfil : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.cuenta_permiso")]
+	public partial class cuenta_permiso : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CuentaID;
+		
+		private short _PermisoID;
+		
+		private System.DateTime _FechaAsignacion;
+		
+		private System.Nullable<int> _AsignadoPor;
+		
+		private bool _Activo;
+		
+		private EntityRef<cuenta> _cuenta;
+		
+		private EntityRef<cuenta> _cuenta1;
+		
+		private EntityRef<permiso> _permiso;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCuentaIDChanging(int value);
+    partial void OnCuentaIDChanged();
+    partial void OnPermisoIDChanging(short value);
+    partial void OnPermisoIDChanged();
+    partial void OnFechaAsignacionChanging(System.DateTime value);
+    partial void OnFechaAsignacionChanged();
+    partial void OnAsignadoPorChanging(System.Nullable<int> value);
+    partial void OnAsignadoPorChanged();
+    partial void OnActivoChanging(bool value);
+    partial void OnActivoChanged();
+    #endregion
+		
+		public cuenta_permiso()
+		{
+			this._cuenta = default(EntityRef<cuenta>);
+			this._cuenta1 = default(EntityRef<cuenta>);
+			this._permiso = default(EntityRef<permiso>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CuentaID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int CuentaID
+		{
+			get
+			{
+				return this._CuentaID;
+			}
+			set
+			{
+				if ((this._CuentaID != value))
+				{
+					if (this._cuenta1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCuentaIDChanging(value);
+					this.SendPropertyChanging();
+					this._CuentaID = value;
+					this.SendPropertyChanged("CuentaID");
+					this.OnCuentaIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PermisoID", DbType="SmallInt NOT NULL", IsPrimaryKey=true)]
+		public short PermisoID
+		{
+			get
+			{
+				return this._PermisoID;
+			}
+			set
+			{
+				if ((this._PermisoID != value))
+				{
+					if (this._permiso.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPermisoIDChanging(value);
+					this.SendPropertyChanging();
+					this._PermisoID = value;
+					this.SendPropertyChanged("PermisoID");
+					this.OnPermisoIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaAsignacion", DbType="DateTime NOT NULL")]
+		public System.DateTime FechaAsignacion
+		{
+			get
+			{
+				return this._FechaAsignacion;
+			}
+			set
+			{
+				if ((this._FechaAsignacion != value))
+				{
+					this.OnFechaAsignacionChanging(value);
+					this.SendPropertyChanging();
+					this._FechaAsignacion = value;
+					this.SendPropertyChanged("FechaAsignacion");
+					this.OnFechaAsignacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AsignadoPor", DbType="Int")]
+		public System.Nullable<int> AsignadoPor
+		{
+			get
+			{
+				return this._AsignadoPor;
+			}
+			set
+			{
+				if ((this._AsignadoPor != value))
+				{
+					if (this._cuenta.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAsignadoPorChanging(value);
+					this.SendPropertyChanging();
+					this._AsignadoPor = value;
+					this.SendPropertyChanged("AsignadoPor");
+					this.OnAsignadoPorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Activo", DbType="Bit NOT NULL")]
+		public bool Activo
+		{
+			get
+			{
+				return this._Activo;
+			}
+			set
+			{
+				if ((this._Activo != value))
+				{
+					this.OnActivoChanging(value);
+					this.SendPropertyChanging();
+					this._Activo = value;
+					this.SendPropertyChanged("Activo");
+					this.OnActivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="cuenta_cuenta_permiso", Storage="_cuenta", ThisKey="AsignadoPor", OtherKey="CuentaID", IsForeignKey=true)]
+		public cuenta cuenta
+		{
+			get
+			{
+				return this._cuenta.Entity;
+			}
+			set
+			{
+				cuenta previousValue = this._cuenta.Entity;
+				if (((previousValue != value) 
+							|| (this._cuenta.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._cuenta.Entity = null;
+						previousValue.cuenta_permiso.Remove(this);
+					}
+					this._cuenta.Entity = value;
+					if ((value != null))
+					{
+						value.cuenta_permiso.Add(this);
+						this._AsignadoPor = value.CuentaID;
+					}
+					else
+					{
+						this._AsignadoPor = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("cuenta");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="cuenta_cuenta_permiso1", Storage="_cuenta1", ThisKey="CuentaID", OtherKey="CuentaID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public cuenta cuenta1
+		{
+			get
+			{
+				return this._cuenta1.Entity;
+			}
+			set
+			{
+				cuenta previousValue = this._cuenta1.Entity;
+				if (((previousValue != value) 
+							|| (this._cuenta1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._cuenta1.Entity = null;
+						previousValue.cuenta_permiso1.Remove(this);
+					}
+					this._cuenta1.Entity = value;
+					if ((value != null))
+					{
+						value.cuenta_permiso1.Add(this);
+						this._CuentaID = value.CuentaID;
+					}
+					else
+					{
+						this._CuentaID = default(int);
+					}
+					this.SendPropertyChanged("cuenta1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="permiso_cuenta_permiso", Storage="_permiso", ThisKey="PermisoID", OtherKey="PermisoID", IsForeignKey=true)]
+		public permiso permiso
+		{
+			get
+			{
+				return this._permiso.Entity;
+			}
+			set
+			{
+				permiso previousValue = this._permiso.Entity;
+				if (((previousValue != value) 
+							|| (this._permiso.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._permiso.Entity = null;
+						previousValue.cuenta_permiso.Remove(this);
+					}
+					this._permiso.Entity = value;
+					if ((value != null))
+					{
+						value.cuenta_permiso.Add(this);
+						this._PermisoID = value.PermisoID;
+					}
+					else
+					{
+						this._PermisoID = default(short);
+					}
+					this.SendPropertyChanged("permiso");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.documento_perfil")]
+	public partial class documento_perfil : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _DocumentoID;
+		
+		private byte _TipoDocumentoID;
+		
+		private string _NombreArchivo;
+		
+		private string _BlobUrl;
+		
+		private string _ContentType;
+		
+		private System.Nullable<int> _TamanoBytes;
+		
+		private System.DateTime _FechaSubida;
+		
+		private EntitySet<rel_perfil_documento> _rel_perfil_documento;
+		
+		private EntityRef<tipo_documento> _tipo_documento;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDocumentoIDChanging(int value);
+    partial void OnDocumentoIDChanged();
+    partial void OnTipoDocumentoIDChanging(byte value);
+    partial void OnTipoDocumentoIDChanged();
+    partial void OnNombreArchivoChanging(string value);
+    partial void OnNombreArchivoChanged();
+    partial void OnBlobUrlChanging(string value);
+    partial void OnBlobUrlChanged();
+    partial void OnContentTypeChanging(string value);
+    partial void OnContentTypeChanged();
+    partial void OnTamanoBytesChanging(System.Nullable<int> value);
+    partial void OnTamanoBytesChanged();
+    partial void OnFechaSubidaChanging(System.DateTime value);
+    partial void OnFechaSubidaChanged();
+    #endregion
+		
+		public documento_perfil()
+		{
+			this._rel_perfil_documento = new EntitySet<rel_perfil_documento>(new Action<rel_perfil_documento>(this.attach_rel_perfil_documento), new Action<rel_perfil_documento>(this.detach_rel_perfil_documento));
+			this._tipo_documento = default(EntityRef<tipo_documento>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocumentoID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int DocumentoID
+		{
+			get
+			{
+				return this._DocumentoID;
+			}
+			set
+			{
+				if ((this._DocumentoID != value))
+				{
+					this.OnDocumentoIDChanging(value);
+					this.SendPropertyChanging();
+					this._DocumentoID = value;
+					this.SendPropertyChanged("DocumentoID");
+					this.OnDocumentoIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoDocumentoID", DbType="TinyInt NOT NULL")]
+		public byte TipoDocumentoID
+		{
+			get
+			{
+				return this._TipoDocumentoID;
+			}
+			set
+			{
+				if ((this._TipoDocumentoID != value))
+				{
+					if (this._tipo_documento.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTipoDocumentoIDChanging(value);
+					this.SendPropertyChanging();
+					this._TipoDocumentoID = value;
+					this.SendPropertyChanged("TipoDocumentoID");
+					this.OnTipoDocumentoIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreArchivo", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string NombreArchivo
+		{
+			get
+			{
+				return this._NombreArchivo;
+			}
+			set
+			{
+				if ((this._NombreArchivo != value))
+				{
+					this.OnNombreArchivoChanging(value);
+					this.SendPropertyChanging();
+					this._NombreArchivo = value;
+					this.SendPropertyChanged("NombreArchivo");
+					this.OnNombreArchivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BlobUrl", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string BlobUrl
+		{
+			get
+			{
+				return this._BlobUrl;
+			}
+			set
+			{
+				if ((this._BlobUrl != value))
+				{
+					this.OnBlobUrlChanging(value);
+					this.SendPropertyChanging();
+					this._BlobUrl = value;
+					this.SendPropertyChanged("BlobUrl");
+					this.OnBlobUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContentType", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string ContentType
+		{
+			get
+			{
+				return this._ContentType;
+			}
+			set
+			{
+				if ((this._ContentType != value))
+				{
+					this.OnContentTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ContentType = value;
+					this.SendPropertyChanged("ContentType");
+					this.OnContentTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TamanoBytes", DbType="Int")]
+		public System.Nullable<int> TamanoBytes
+		{
+			get
+			{
+				return this._TamanoBytes;
+			}
+			set
+			{
+				if ((this._TamanoBytes != value))
+				{
+					this.OnTamanoBytesChanging(value);
+					this.SendPropertyChanging();
+					this._TamanoBytes = value;
+					this.SendPropertyChanged("TamanoBytes");
+					this.OnTamanoBytesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaSubida", DbType="DateTime NOT NULL")]
+		public System.DateTime FechaSubida
+		{
+			get
+			{
+				return this._FechaSubida;
+			}
+			set
+			{
+				if ((this._FechaSubida != value))
+				{
+					this.OnFechaSubidaChanging(value);
+					this.SendPropertyChanging();
+					this._FechaSubida = value;
+					this.SendPropertyChanged("FechaSubida");
+					this.OnFechaSubidaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="documento_perfil_rel_perfil_documento", Storage="_rel_perfil_documento", ThisKey="DocumentoID", OtherKey="DocumentoID")]
+		public EntitySet<rel_perfil_documento> rel_perfil_documento
+		{
+			get
+			{
+				return this._rel_perfil_documento;
+			}
+			set
+			{
+				this._rel_perfil_documento.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tipo_documento_documento_perfil", Storage="_tipo_documento", ThisKey="TipoDocumentoID", OtherKey="TipoDocumentoID", IsForeignKey=true)]
+		public tipo_documento tipo_documento
+		{
+			get
+			{
+				return this._tipo_documento.Entity;
+			}
+			set
+			{
+				tipo_documento previousValue = this._tipo_documento.Entity;
+				if (((previousValue != value) 
+							|| (this._tipo_documento.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tipo_documento.Entity = null;
+						previousValue.documento_perfil.Remove(this);
+					}
+					this._tipo_documento.Entity = value;
+					if ((value != null))
+					{
+						value.documento_perfil.Add(this);
+						this._TipoDocumentoID = value.TipoDocumentoID;
+					}
+					else
+					{
+						this._TipoDocumentoID = default(byte);
+					}
+					this.SendPropertyChanged("tipo_documento");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_rel_perfil_documento(rel_perfil_documento entity)
+		{
+			this.SendPropertyChanging();
+			entity.documento_perfil = this;
+		}
+		
+		private void detach_rel_perfil_documento(rel_perfil_documento entity)
+		{
+			this.SendPropertyChanging();
+			entity.documento_perfil = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.permiso")]
+	public partial class permiso : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private short _PermisoID;
+		
+		private string _Codigo;
+		
+		private string _Nombre;
+		
+		private string _Descripcion;
+		
+		private string _Modulo;
+		
+		private bool _Activo;
+		
+		private EntitySet<cuenta_permiso> _cuenta_permiso;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPermisoIDChanging(short value);
+    partial void OnPermisoIDChanged();
+    partial void OnCodigoChanging(string value);
+    partial void OnCodigoChanged();
+    partial void OnNombreChanging(string value);
+    partial void OnNombreChanged();
+    partial void OnDescripcionChanging(string value);
+    partial void OnDescripcionChanged();
+    partial void OnModuloChanging(string value);
+    partial void OnModuloChanged();
+    partial void OnActivoChanging(bool value);
+    partial void OnActivoChanged();
+    #endregion
+		
+		public permiso()
+		{
+			this._cuenta_permiso = new EntitySet<cuenta_permiso>(new Action<cuenta_permiso>(this.attach_cuenta_permiso), new Action<cuenta_permiso>(this.detach_cuenta_permiso));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PermisoID", DbType="SmallInt NOT NULL", IsPrimaryKey=true)]
+		public short PermisoID
+		{
+			get
+			{
+				return this._PermisoID;
+			}
+			set
+			{
+				if ((this._PermisoID != value))
+				{
+					this.OnPermisoIDChanging(value);
+					this.SendPropertyChanging();
+					this._PermisoID = value;
+					this.SendPropertyChanged("PermisoID");
+					this.OnPermisoIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Codigo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Codigo
+		{
+			get
+			{
+				return this._Codigo;
+			}
+			set
+			{
+				if ((this._Codigo != value))
+				{
+					this.OnCodigoChanging(value);
+					this.SendPropertyChanging();
+					this._Codigo = value;
+					this.SendPropertyChanged("Codigo");
+					this.OnCodigoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(80) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this.OnNombreChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre = value;
+					this.SendPropertyChanged("Nombre");
+					this.OnNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(200)")]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this.OnDescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._Descripcion = value;
+					this.SendPropertyChanged("Descripcion");
+					this.OnDescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Modulo", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string Modulo
+		{
+			get
+			{
+				return this._Modulo;
+			}
+			set
+			{
+				if ((this._Modulo != value))
+				{
+					this.OnModuloChanging(value);
+					this.SendPropertyChanging();
+					this._Modulo = value;
+					this.SendPropertyChanged("Modulo");
+					this.OnModuloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Activo", DbType="Bit NOT NULL")]
+		public bool Activo
+		{
+			get
+			{
+				return this._Activo;
+			}
+			set
+			{
+				if ((this._Activo != value))
+				{
+					this.OnActivoChanging(value);
+					this.SendPropertyChanging();
+					this._Activo = value;
+					this.SendPropertyChanged("Activo");
+					this.OnActivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="permiso_cuenta_permiso", Storage="_cuenta_permiso", ThisKey="PermisoID", OtherKey="PermisoID")]
+		public EntitySet<cuenta_permiso> cuenta_permiso
+		{
+			get
+			{
+				return this._cuenta_permiso;
+			}
+			set
+			{
+				this._cuenta_permiso.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_cuenta_permiso(cuenta_permiso entity)
+		{
+			this.SendPropertyChanging();
+			entity.permiso = this;
+		}
+		
+		private void detach_cuenta_permiso(cuenta_permiso entity)
+		{
+			this.SendPropertyChanging();
+			entity.permiso = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.recuperacion_password")]
+	public partial class recuperacion_password : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RecuperacionID;
+		
+		private int _CuentaID;
+		
+		private string _Token;
+		
+		private System.DateTime _TokenExpiracion;
+		
+		private bool _Usado;
+		
+		private System.Nullable<System.DateTime> _FechaUso;
+		
+		private string _IP;
+		
+		private System.DateTime _FechaCreacion;
+		
+		private EntityRef<cuenta> _cuenta;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRecuperacionIDChanging(int value);
+    partial void OnRecuperacionIDChanged();
+    partial void OnCuentaIDChanging(int value);
+    partial void OnCuentaIDChanged();
+    partial void OnTokenChanging(string value);
+    partial void OnTokenChanged();
+    partial void OnTokenExpiracionChanging(System.DateTime value);
+    partial void OnTokenExpiracionChanged();
+    partial void OnUsadoChanging(bool value);
+    partial void OnUsadoChanged();
+    partial void OnFechaUsoChanging(System.Nullable<System.DateTime> value);
+    partial void OnFechaUsoChanged();
+    partial void OnIPChanging(string value);
+    partial void OnIPChanged();
+    partial void OnFechaCreacionChanging(System.DateTime value);
+    partial void OnFechaCreacionChanged();
+    #endregion
+		
+		public recuperacion_password()
+		{
+			this._cuenta = default(EntityRef<cuenta>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecuperacionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int RecuperacionID
+		{
+			get
+			{
+				return this._RecuperacionID;
+			}
+			set
+			{
+				if ((this._RecuperacionID != value))
+				{
+					this.OnRecuperacionIDChanging(value);
+					this.SendPropertyChanging();
+					this._RecuperacionID = value;
+					this.SendPropertyChanged("RecuperacionID");
+					this.OnRecuperacionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CuentaID", DbType="Int NOT NULL")]
+		public int CuentaID
+		{
+			get
+			{
+				return this._CuentaID;
+			}
+			set
+			{
+				if ((this._CuentaID != value))
+				{
+					if (this._cuenta.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCuentaIDChanging(value);
+					this.SendPropertyChanging();
+					this._CuentaID = value;
+					this.SendPropertyChanged("CuentaID");
+					this.OnCuentaIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Token", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Token
+		{
+			get
+			{
+				return this._Token;
+			}
+			set
+			{
+				if ((this._Token != value))
+				{
+					this.OnTokenChanging(value);
+					this.SendPropertyChanging();
+					this._Token = value;
+					this.SendPropertyChanged("Token");
+					this.OnTokenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TokenExpiracion", DbType="DateTime NOT NULL")]
+		public System.DateTime TokenExpiracion
+		{
+			get
+			{
+				return this._TokenExpiracion;
+			}
+			set
+			{
+				if ((this._TokenExpiracion != value))
+				{
+					this.OnTokenExpiracionChanging(value);
+					this.SendPropertyChanging();
+					this._TokenExpiracion = value;
+					this.SendPropertyChanged("TokenExpiracion");
+					this.OnTokenExpiracionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usado", DbType="Bit NOT NULL")]
+		public bool Usado
+		{
+			get
+			{
+				return this._Usado;
+			}
+			set
+			{
+				if ((this._Usado != value))
+				{
+					this.OnUsadoChanging(value);
+					this.SendPropertyChanging();
+					this._Usado = value;
+					this.SendPropertyChanged("Usado");
+					this.OnUsadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaUso", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaUso
+		{
+			get
+			{
+				return this._FechaUso;
+			}
+			set
+			{
+				if ((this._FechaUso != value))
+				{
+					this.OnFechaUsoChanging(value);
+					this.SendPropertyChanging();
+					this._FechaUso = value;
+					this.SendPropertyChanged("FechaUso");
+					this.OnFechaUsoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IP", DbType="VarChar(45)")]
+		public string IP
+		{
+			get
+			{
+				return this._IP;
+			}
+			set
+			{
+				if ((this._IP != value))
+				{
+					this.OnIPChanging(value);
+					this.SendPropertyChanging();
+					this._IP = value;
+					this.SendPropertyChanged("IP");
+					this.OnIPChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaCreacion", DbType="DateTime NOT NULL")]
+		public System.DateTime FechaCreacion
+		{
+			get
+			{
+				return this._FechaCreacion;
+			}
+			set
+			{
+				if ((this._FechaCreacion != value))
+				{
+					this.OnFechaCreacionChanging(value);
+					this.SendPropertyChanging();
+					this._FechaCreacion = value;
+					this.SendPropertyChanged("FechaCreacion");
+					this.OnFechaCreacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="cuenta_recuperacion_password", Storage="_cuenta", ThisKey="CuentaID", OtherKey="CuentaID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public cuenta cuenta
+		{
+			get
+			{
+				return this._cuenta.Entity;
+			}
+			set
+			{
+				cuenta previousValue = this._cuenta.Entity;
+				if (((previousValue != value) 
+							|| (this._cuenta.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._cuenta.Entity = null;
+						previousValue.recuperacion_password.Remove(this);
+					}
+					this._cuenta.Entity = value;
+					if ((value != null))
+					{
+						value.recuperacion_password.Add(this);
+						this._CuentaID = value.CuentaID;
+					}
+					else
+					{
+						this._CuentaID = default(int);
+					}
+					this.SendPropertyChanged("cuenta");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.registro_temporal")]
+	public partial class registro_temporal : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RegistroID;
+		
+		private string _Email;
+		
+		private string _PasswordHash;
+		
+		private string _PrimerNombre;
+		
+		private string _SegundoNombre;
+		
+		private string _PrimerApellido;
+		
+		private string _SegundoApellido;
+		
+		private string _Telefono;
+		
+		private string _CodigoVerificacion;
+		
+		private System.DateTime _CodigoExpiracion;
+		
+		private bool _Verificado;
+		
+		private byte _Intentos;
+		
+		private byte _Reenvios;
+		
+		private System.Nullable<System.DateTime> _UltimoReenvio;
+		
+		private System.DateTime _FechaCreacion;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRegistroIDChanging(int value);
+    partial void OnRegistroIDChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnPasswordHashChanging(string value);
+    partial void OnPasswordHashChanged();
+    partial void OnPrimerNombreChanging(string value);
+    partial void OnPrimerNombreChanged();
+    partial void OnSegundoNombreChanging(string value);
+    partial void OnSegundoNombreChanged();
+    partial void OnPrimerApellidoChanging(string value);
+    partial void OnPrimerApellidoChanged();
+    partial void OnSegundoApellidoChanging(string value);
+    partial void OnSegundoApellidoChanged();
+    partial void OnTelefonoChanging(string value);
+    partial void OnTelefonoChanged();
+    partial void OnCodigoVerificacionChanging(string value);
+    partial void OnCodigoVerificacionChanged();
+    partial void OnCodigoExpiracionChanging(System.DateTime value);
+    partial void OnCodigoExpiracionChanged();
+    partial void OnVerificadoChanging(bool value);
+    partial void OnVerificadoChanged();
+    partial void OnIntentosChanging(byte value);
+    partial void OnIntentosChanged();
+    partial void OnReenviosChanging(byte value);
+    partial void OnReenviosChanged();
+    partial void OnUltimoReenvioChanging(System.Nullable<System.DateTime> value);
+    partial void OnUltimoReenvioChanged();
+    partial void OnFechaCreacionChanging(System.DateTime value);
+    partial void OnFechaCreacionChanged();
+    #endregion
+		
+		public registro_temporal()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegistroID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int RegistroID
+		{
+			get
+			{
+				return this._RegistroID;
+			}
+			set
+			{
+				if ((this._RegistroID != value))
+				{
+					this.OnRegistroIDChanging(value);
+					this.SendPropertyChanging();
+					this._RegistroID = value;
+					this.SendPropertyChanged("RegistroID");
+					this.OnRegistroIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordHash", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string PasswordHash
+		{
+			get
+			{
+				return this._PasswordHash;
+			}
+			set
+			{
+				if ((this._PasswordHash != value))
+				{
+					this.OnPasswordHashChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordHash = value;
+					this.SendPropertyChanged("PasswordHash");
+					this.OnPasswordHashChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerNombre", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
+		public string PrimerNombre
+		{
+			get
+			{
+				return this._PrimerNombre;
+			}
+			set
+			{
+				if ((this._PrimerNombre != value))
+				{
+					this.OnPrimerNombreChanging(value);
+					this.SendPropertyChanging();
+					this._PrimerNombre = value;
+					this.SendPropertyChanged("PrimerNombre");
+					this.OnPrimerNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoNombre", DbType="VarChar(40)")]
+		public string SegundoNombre
+		{
+			get
+			{
+				return this._SegundoNombre;
+			}
+			set
+			{
+				if ((this._SegundoNombre != value))
+				{
+					this.OnSegundoNombreChanging(value);
+					this.SendPropertyChanging();
+					this._SegundoNombre = value;
+					this.SendPropertyChanged("SegundoNombre");
+					this.OnSegundoNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerApellido", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
+		public string PrimerApellido
+		{
+			get
+			{
+				return this._PrimerApellido;
+			}
+			set
+			{
+				if ((this._PrimerApellido != value))
+				{
+					this.OnPrimerApellidoChanging(value);
+					this.SendPropertyChanging();
+					this._PrimerApellido = value;
+					this.SendPropertyChanged("PrimerApellido");
+					this.OnPrimerApellidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoApellido", DbType="VarChar(40)")]
+		public string SegundoApellido
+		{
+			get
+			{
+				return this._SegundoApellido;
+			}
+			set
+			{
+				if ((this._SegundoApellido != value))
+				{
+					this.OnSegundoApellidoChanging(value);
+					this.SendPropertyChanging();
+					this._SegundoApellido = value;
+					this.SendPropertyChanged("SegundoApellido");
+					this.OnSegundoApellidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="VarChar(15)")]
+		public string Telefono
+		{
+			get
+			{
+				return this._Telefono;
+			}
+			set
+			{
+				if ((this._Telefono != value))
+				{
+					this.OnTelefonoChanging(value);
+					this.SendPropertyChanging();
+					this._Telefono = value;
+					this.SendPropertyChanged("Telefono");
+					this.OnTelefonoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoVerificacion", DbType="VarChar(6) NOT NULL", CanBeNull=false)]
+		public string CodigoVerificacion
+		{
+			get
+			{
+				return this._CodigoVerificacion;
+			}
+			set
+			{
+				if ((this._CodigoVerificacion != value))
+				{
+					this.OnCodigoVerificacionChanging(value);
+					this.SendPropertyChanging();
+					this._CodigoVerificacion = value;
+					this.SendPropertyChanged("CodigoVerificacion");
+					this.OnCodigoVerificacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoExpiracion", DbType="DateTime NOT NULL")]
+		public System.DateTime CodigoExpiracion
+		{
+			get
+			{
+				return this._CodigoExpiracion;
+			}
+			set
+			{
+				if ((this._CodigoExpiracion != value))
+				{
+					this.OnCodigoExpiracionChanging(value);
+					this.SendPropertyChanging();
+					this._CodigoExpiracion = value;
+					this.SendPropertyChanged("CodigoExpiracion");
+					this.OnCodigoExpiracionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Verificado", DbType="Bit NOT NULL")]
+		public bool Verificado
+		{
+			get
+			{
+				return this._Verificado;
+			}
+			set
+			{
+				if ((this._Verificado != value))
+				{
+					this.OnVerificadoChanging(value);
+					this.SendPropertyChanging();
+					this._Verificado = value;
+					this.SendPropertyChanged("Verificado");
+					this.OnVerificadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Intentos", DbType="TinyInt NOT NULL")]
+		public byte Intentos
+		{
+			get
+			{
+				return this._Intentos;
+			}
+			set
+			{
+				if ((this._Intentos != value))
+				{
+					this.OnIntentosChanging(value);
+					this.SendPropertyChanging();
+					this._Intentos = value;
+					this.SendPropertyChanged("Intentos");
+					this.OnIntentosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Reenvios", DbType="TinyInt NOT NULL")]
+		public byte Reenvios
+		{
+			get
+			{
+				return this._Reenvios;
+			}
+			set
+			{
+				if ((this._Reenvios != value))
+				{
+					this.OnReenviosChanging(value);
+					this.SendPropertyChanging();
+					this._Reenvios = value;
+					this.SendPropertyChanged("Reenvios");
+					this.OnReenviosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UltimoReenvio", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UltimoReenvio
+		{
+			get
+			{
+				return this._UltimoReenvio;
+			}
+			set
+			{
+				if ((this._UltimoReenvio != value))
+				{
+					this.OnUltimoReenvioChanging(value);
+					this.SendPropertyChanging();
+					this._UltimoReenvio = value;
+					this.SendPropertyChanged("UltimoReenvio");
+					this.OnUltimoReenvioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaCreacion", DbType= "DateTime NOT NULL")]
+		public System.DateTime FechaCreacion
+		{
+			get
+			{
+				return this._FechaCreacion;
+			}
+			set
+			{
+				if ((this._FechaCreacion != value))
+				{
+					this.OnFechaCreacionChanging(value);
+					this.SendPropertyChanging();
+					this._FechaCreacion = value;
+					this.SendPropertyChanged("FechaCreacion");
+					this.OnFechaCreacionChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.rel_perfil_documento")]
+	public partial class rel_perfil_documento : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _PerfilID;
+		
+		private int _DocumentoID;
+		
+		private byte _Estado;
+		
+		private string _MotivoRechazo;
+		
+		private System.Nullable<System.DateTime> _FechaRevision;
+		
+		private System.Nullable<int> _RevisadoPor;
+		
+		private EntityRef<documento_perfil> _documento_perfil;
+		
+		private EntityRef<cuenta> _cuenta;
+		
+		private EntityRef<perfil> _perfil;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPerfilIDChanging(int value);
+    partial void OnPerfilIDChanged();
+    partial void OnDocumentoIDChanging(int value);
+    partial void OnDocumentoIDChanged();
+    partial void OnEstadoChanging(byte value);
+    partial void OnEstadoChanged();
+    partial void OnMotivoRechazoChanging(string value);
+    partial void OnMotivoRechazoChanged();
+    partial void OnFechaRevisionChanging(System.Nullable<System.DateTime> value);
+    partial void OnFechaRevisionChanged();
+    partial void OnRevisadoPorChanging(System.Nullable<int> value);
+    partial void OnRevisadoPorChanged();
+    #endregion
+		
+		public rel_perfil_documento()
+		{
+			this._documento_perfil = default(EntityRef<documento_perfil>);
+			this._cuenta = default(EntityRef<cuenta>);
+			this._perfil = default(EntityRef<perfil>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PerfilID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int PerfilID
+		{
+			get
+			{
+				return this._PerfilID;
+			}
+			set
+			{
+				if ((this._PerfilID != value))
+				{
+					if (this._perfil.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPerfilIDChanging(value);
+					this.SendPropertyChanging();
+					this._PerfilID = value;
+					this.SendPropertyChanged("PerfilID");
+					this.OnPerfilIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocumentoID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int DocumentoID
+		{
+			get
+			{
+				return this._DocumentoID;
+			}
+			set
+			{
+				if ((this._DocumentoID != value))
+				{
+					if (this._documento_perfil.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDocumentoIDChanging(value);
+					this.SendPropertyChanging();
+					this._DocumentoID = value;
+					this.SendPropertyChanged("DocumentoID");
+					this.OnDocumentoIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="TinyInt NOT NULL")]
+		public byte Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this.OnEstadoChanging(value);
+					this.SendPropertyChanging();
+					this._Estado = value;
+					this.SendPropertyChanged("Estado");
+					this.OnEstadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MotivoRechazo", DbType="VarChar(255)")]
+		public string MotivoRechazo
+		{
+			get
+			{
+				return this._MotivoRechazo;
+			}
+			set
+			{
+				if ((this._MotivoRechazo != value))
+				{
+					this.OnMotivoRechazoChanging(value);
+					this.SendPropertyChanging();
+					this._MotivoRechazo = value;
+					this.SendPropertyChanged("MotivoRechazo");
+					this.OnMotivoRechazoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaRevision", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaRevision
+		{
+			get
+			{
+				return this._FechaRevision;
+			}
+			set
+			{
+				if ((this._FechaRevision != value))
+				{
+					this.OnFechaRevisionChanging(value);
+					this.SendPropertyChanging();
+					this._FechaRevision = value;
+					this.SendPropertyChanged("FechaRevision");
+					this.OnFechaRevisionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RevisadoPor", DbType="Int")]
+		public System.Nullable<int> RevisadoPor
+		{
+			get
+			{
+				return this._RevisadoPor;
+			}
+			set
+			{
+				if ((this._RevisadoPor != value))
+				{
+					if (this._cuenta.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRevisadoPorChanging(value);
+					this.SendPropertyChanging();
+					this._RevisadoPor = value;
+					this.SendPropertyChanged("RevisadoPor");
+					this.OnRevisadoPorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="documento_perfil_rel_perfil_documento", Storage="_documento_perfil", ThisKey="DocumentoID", OtherKey="DocumentoID", IsForeignKey=true)]
+		public documento_perfil documento_perfil
+		{
+			get
+			{
+				return this._documento_perfil.Entity;
+			}
+			set
+			{
+				documento_perfil previousValue = this._documento_perfil.Entity;
+				if (((previousValue != value) 
+							|| (this._documento_perfil.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._documento_perfil.Entity = null;
+						previousValue.rel_perfil_documento.Remove(this);
+					}
+					this._documento_perfil.Entity = value;
+					if ((value != null))
+					{
+						value.rel_perfil_documento.Add(this);
+						this._DocumentoID = value.DocumentoID;
+					}
+					else
+					{
+						this._DocumentoID = default(int);
+					}
+					this.SendPropertyChanged("documento_perfil");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="cuenta_rel_perfil_documento", Storage="_cuenta", ThisKey="RevisadoPor", OtherKey="CuentaID", IsForeignKey=true)]
+		public cuenta cuenta
+		{
+			get
+			{
+				return this._cuenta.Entity;
+			}
+			set
+			{
+				cuenta previousValue = this._cuenta.Entity;
+				if (((previousValue != value) 
+							|| (this._cuenta.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._cuenta.Entity = null;
+						previousValue.rel_perfil_documento.Remove(this);
+					}
+					this._cuenta.Entity = value;
+					if ((value != null))
+					{
+						value.rel_perfil_documento.Add(this);
+						this._RevisadoPor = value.CuentaID;
+					}
+					else
+					{
+						this._RevisadoPor = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("cuenta");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="perfil_rel_perfil_documento", Storage="_perfil", ThisKey="PerfilID", OtherKey="PerfilID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public perfil perfil
+		{
+			get
+			{
+				return this._perfil.Entity;
+			}
+			set
+			{
+				perfil previousValue = this._perfil.Entity;
+				if (((previousValue != value) 
+							|| (this._perfil.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._perfil.Entity = null;
+						previousValue.rel_perfil_documento.Remove(this);
+					}
+					this._perfil.Entity = value;
+					if ((value != null))
+					{
+						value.rel_perfil_documento.Add(this);
+						this._PerfilID = value.PerfilID;
+					}
+					else
+					{
+						this._PerfilID = default(int);
+					}
+					this.SendPropertyChanged("perfil");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.rol")]
+	public partial class rol : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private byte _RolID;
+		
+		private string _Nombre;
+		
+		private string _Descripcion;
+		
+		private bool _Activo;
+		
+		private EntitySet<cuenta> _cuenta;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRolIDChanging(byte value);
+    partial void OnRolIDChanged();
+    partial void OnNombreChanging(string value);
+    partial void OnNombreChanged();
+    partial void OnDescripcionChanging(string value);
+    partial void OnDescripcionChanged();
+    partial void OnActivoChanging(bool value);
+    partial void OnActivoChanged();
+    #endregion
+		
+		public rol()
+		{
+			this._cuenta = new EntitySet<cuenta>(new Action<cuenta>(this.attach_cuenta), new Action<cuenta>(this.detach_cuenta));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RolID", DbType="TinyInt NOT NULL", IsPrimaryKey=true)]
+		public byte RolID
+		{
+			get
+			{
+				return this._RolID;
+			}
+			set
+			{
+				if ((this._RolID != value))
+				{
+					this.OnRolIDChanging(value);
+					this.SendPropertyChanging();
+					this._RolID = value;
+					this.SendPropertyChanged("RolID");
+					this.OnRolIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this.OnNombreChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre = value;
+					this.SendPropertyChanged("Nombre");
+					this.OnNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(100)")]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this.OnDescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._Descripcion = value;
+					this.SendPropertyChanged("Descripcion");
+					this.OnDescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Activo", DbType="Bit NOT NULL")]
+		public bool Activo
+		{
+			get
+			{
+				return this._Activo;
+			}
+			set
+			{
+				if ((this._Activo != value))
+				{
+					this.OnActivoChanging(value);
+					this.SendPropertyChanging();
+					this._Activo = value;
+					this.SendPropertyChanged("Activo");
+					this.OnActivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="rol_cuenta", Storage="_cuenta", ThisKey="RolID", OtherKey="RolID")]
+		public EntitySet<cuenta> cuenta
+		{
+			get
+			{
+				return this._cuenta;
+			}
+			set
+			{
+				this._cuenta.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_cuenta(cuenta entity)
+		{
+			this.SendPropertyChanging();
+			entity.rol = this;
+		}
+		
+		private void detach_cuenta(cuenta entity)
+		{
+			this.SendPropertyChanging();
+			entity.rol = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tipo_documento")]
+	public partial class tipo_documento : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private byte _TipoDocumentoID;
+		
+		private string _Nombre;
+		
+		private string _Descripcion;
+		
+		private bool _Requerido;
+		
+		private bool _Activo;
+		
+		private EntitySet<documento_perfil> _documento_perfil;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTipoDocumentoIDChanging(byte value);
+    partial void OnTipoDocumentoIDChanged();
+    partial void OnNombreChanging(string value);
+    partial void OnNombreChanged();
+    partial void OnDescripcionChanging(string value);
+    partial void OnDescripcionChanged();
+    partial void OnRequeridoChanging(bool value);
+    partial void OnRequeridoChanged();
+    partial void OnActivoChanging(bool value);
+    partial void OnActivoChanged();
+    #endregion
+		
+		public tipo_documento()
+		{
+			this._documento_perfil = new EntitySet<documento_perfil>(new Action<documento_perfil>(this.attach_documento_perfil), new Action<documento_perfil>(this.detach_documento_perfil));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoDocumentoID", DbType="TinyInt NOT NULL", IsPrimaryKey=true)]
+		public byte TipoDocumentoID
+		{
+			get
+			{
+				return this._TipoDocumentoID;
+			}
+			set
+			{
+				if ((this._TipoDocumentoID != value))
+				{
+					this.OnTipoDocumentoIDChanging(value);
+					this.SendPropertyChanging();
+					this._TipoDocumentoID = value;
+					this.SendPropertyChanged("TipoDocumentoID");
+					this.OnTipoDocumentoIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this.OnNombreChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre = value;
+					this.SendPropertyChanged("Nombre");
+					this.OnNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripcion", DbType="VarChar(100)")]
+		public string Descripcion
+		{
+			get
+			{
+				return this._Descripcion;
+			}
+			set
+			{
+				if ((this._Descripcion != value))
+				{
+					this.OnDescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._Descripcion = value;
+					this.SendPropertyChanged("Descripcion");
+					this.OnDescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Requerido", DbType="Bit NOT NULL")]
+		public bool Requerido
+		{
+			get
+			{
+				return this._Requerido;
+			}
+			set
+			{
+				if ((this._Requerido != value))
+				{
+					this.OnRequeridoChanging(value);
+					this.SendPropertyChanging();
+					this._Requerido = value;
+					this.SendPropertyChanged("Requerido");
+					this.OnRequeridoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Activo", DbType="Bit NOT NULL")]
+		public bool Activo
+		{
+			get
+			{
+				return this._Activo;
+			}
+			set
+			{
+				if ((this._Activo != value))
+				{
+					this.OnActivoChanging(value);
+					this.SendPropertyChanging();
+					this._Activo = value;
+					this.SendPropertyChanged("Activo");
+					this.OnActivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tipo_documento_documento_perfil", Storage="_documento_perfil", ThisKey="TipoDocumentoID", OtherKey="TipoDocumentoID")]
+		public EntitySet<documento_perfil> documento_perfil
+		{
+			get
+			{
+				return this._documento_perfil;
+			}
+			set
+			{
+				this._documento_perfil.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_documento_perfil(documento_perfil entity)
+		{
+			this.SendPropertyChanging();
+			entity.tipo_documento = this;
+		}
+		
+		private void detach_documento_perfil(documento_perfil entity)
+		{
+			this.SendPropertyChanging();
+			entity.tipo_documento = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tipo_identificacion")]
+	public partial class tipo_identificacion : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private byte _TipoIdentificacionID;
+		
+		private string _Nombre;
+		
+		private string _Formato;
+		
+		private System.Nullable<byte> _LongitudMin;
+		
+		private System.Nullable<byte> _LongitudMax;
+		
+		private bool _Activo;
+		
+		private EntitySet<perfil> _perfil;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTipoIdentificacionIDChanging(byte value);
+    partial void OnTipoIdentificacionIDChanged();
+    partial void OnNombreChanging(string value);
+    partial void OnNombreChanged();
+    partial void OnFormatoChanging(string value);
+    partial void OnFormatoChanged();
+    partial void OnLongitudMinChanging(System.Nullable<byte> value);
+    partial void OnLongitudMinChanged();
+    partial void OnLongitudMaxChanging(System.Nullable<byte> value);
+    partial void OnLongitudMaxChanged();
+    partial void OnActivoChanging(bool value);
+    partial void OnActivoChanged();
+    #endregion
+		
+		public tipo_identificacion()
+		{
+			this._perfil = new EntitySet<perfil>(new Action<perfil>(this.attach_perfil), new Action<perfil>(this.detach_perfil));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoIdentificacionID", DbType="TinyInt NOT NULL", IsPrimaryKey=true)]
+		public byte TipoIdentificacionID
+		{
+			get
+			{
+				return this._TipoIdentificacionID;
+			}
+			set
+			{
+				if ((this._TipoIdentificacionID != value))
+				{
+					this.OnTipoIdentificacionIDChanging(value);
+					this.SendPropertyChanging();
+					this._TipoIdentificacionID = value;
+					this.SendPropertyChanged("TipoIdentificacionID");
+					this.OnTipoIdentificacionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this.OnNombreChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre = value;
+					this.SendPropertyChanged("Nombre");
+					this.OnNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Formato", DbType="VarChar(50)")]
+		public string Formato
+		{
+			get
+			{
+				return this._Formato;
+			}
+			set
+			{
+				if ((this._Formato != value))
+				{
+					this.OnFormatoChanging(value);
+					this.SendPropertyChanging();
+					this._Formato = value;
+					this.SendPropertyChanged("Formato");
+					this.OnFormatoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LongitudMin", DbType="TinyInt")]
+		public System.Nullable<byte> LongitudMin
+		{
+			get
+			{
+				return this._LongitudMin;
+			}
+			set
+			{
+				if ((this._LongitudMin != value))
+				{
+					this.OnLongitudMinChanging(value);
+					this.SendPropertyChanging();
+					this._LongitudMin = value;
+					this.SendPropertyChanged("LongitudMin");
+					this.OnLongitudMinChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LongitudMax", DbType="TinyInt")]
+		public System.Nullable<byte> LongitudMax
+		{
+			get
+			{
+				return this._LongitudMax;
+			}
+			set
+			{
+				if ((this._LongitudMax != value))
+				{
+					this.OnLongitudMaxChanging(value);
+					this.SendPropertyChanging();
+					this._LongitudMax = value;
+					this.SendPropertyChanged("LongitudMax");
+					this.OnLongitudMaxChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Activo", DbType="Bit NOT NULL")]
+		public bool Activo
+		{
+			get
+			{
+				return this._Activo;
+			}
+			set
+			{
+				if ((this._Activo != value))
+				{
+					this.OnActivoChanging(value);
+					this.SendPropertyChanging();
+					this._Activo = value;
+					this.SendPropertyChanged("Activo");
+					this.OnActivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tipo_identificacion_perfil", Storage="_perfil", ThisKey="TipoIdentificacionID", OtherKey="TipoIdentificacionID")]
+		public EntitySet<perfil> perfil
+		{
+			get
+			{
+				return this._perfil;
+			}
+			set
+			{
+				this._perfil.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_perfil(perfil entity)
+		{
+			this.SendPropertyChanging();
+			entity.tipo_identificacion = this;
+		}
+		
+		private void detach_perfil(perfil entity)
+		{
+			this.SendPropertyChanging();
+			entity.tipo_identificacion = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.perfil")]
+	public partial class perfil : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -623,23 +2991,29 @@ namespace capa_datos
 		
 		private string _SegundoApellido;
 		
-		private string _Cedula;
+		private System.Nullable<byte> _TipoIdentificacionID;
 		
-		private string _Telefono;
+		private string _NumeroIdentificacion;
 		
-		private string _Direccion;
+		private System.Nullable<char> _Genero;
 		
 		private System.Nullable<System.DateTime> _FechaNacimiento;
 		
-		private string _Ocupacion;
+		private string _TelefonoPrincipal;
 		
-		private System.Data.Linq.Binary _FotoPerfil;
+		private string _TelefonoAlternativo;
 		
-		private System.DateTime _FechaCreacion;
+		private System.Data.Linq.Binary _Foto;
+		
+		private System.DateTime _FechaRegistro;
 		
 		private System.Nullable<System.DateTime> _FechaActualizacion;
 		
-		private EntityRef<Cuenta> _Cuenta;
+		private EntitySet<rel_perfil_documento> _rel_perfil_documento;
+		
+		private EntityRef<cuenta> _cuenta;
+		
+		private EntityRef<tipo_identificacion> _tipo_identificacion;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -657,27 +3031,31 @@ namespace capa_datos
     partial void OnPrimerApellidoChanged();
     partial void OnSegundoApellidoChanging(string value);
     partial void OnSegundoApellidoChanged();
-    partial void OnCedulaChanging(string value);
-    partial void OnCedulaChanged();
-    partial void OnTelefonoChanging(string value);
-    partial void OnTelefonoChanged();
-    partial void OnDireccionChanging(string value);
-    partial void OnDireccionChanged();
+    partial void OnTipoIdentificacionIDChanging(System.Nullable<byte> value);
+    partial void OnTipoIdentificacionIDChanged();
+    partial void OnNumeroIdentificacionChanging(string value);
+    partial void OnNumeroIdentificacionChanged();
+    partial void OnGeneroChanging(System.Nullable<char> value);
+    partial void OnGeneroChanged();
     partial void OnFechaNacimientoChanging(System.Nullable<System.DateTime> value);
     partial void OnFechaNacimientoChanged();
-    partial void OnOcupacionChanging(string value);
-    partial void OnOcupacionChanged();
-    partial void OnFotoPerfilChanging(System.Data.Linq.Binary value);
-    partial void OnFotoPerfilChanged();
-    partial void OnFechaCreacionChanging(System.DateTime value);
-    partial void OnFechaCreacionChanged();
+    partial void OnTelefonoPrincipalChanging(string value);
+    partial void OnTelefonoPrincipalChanged();
+    partial void OnTelefonoAlternativoChanging(string value);
+    partial void OnTelefonoAlternativoChanged();
+    partial void OnFotoChanging(System.Data.Linq.Binary value);
+    partial void OnFotoChanged();
+    partial void OnFechaRegistroChanging(System.DateTime value);
+    partial void OnFechaRegistroChanged();
     partial void OnFechaActualizacionChanging(System.Nullable<System.DateTime> value);
     partial void OnFechaActualizacionChanged();
     #endregion
 		
-		public Perfil()
+		public perfil()
 		{
-			this._Cuenta = default(EntityRef<Cuenta>);
+			this._rel_perfil_documento = new EntitySet<rel_perfil_documento>(new Action<rel_perfil_documento>(this.attach_rel_perfil_documento), new Action<rel_perfil_documento>(this.detach_rel_perfil_documento));
+			this._cuenta = default(EntityRef<cuenta>);
+			this._tipo_identificacion = default(EntityRef<tipo_identificacion>);
 			OnCreated();
 		}
 		
@@ -712,7 +3090,7 @@ namespace capa_datos
 			{
 				if ((this._CuentaID != value))
 				{
-					if (this._Cuenta.HasLoadedOrAssignedValue)
+					if (this._cuenta.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -725,7 +3103,7 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerNombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerNombre", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
 		public string PrimerNombre
 		{
 			get
@@ -745,7 +3123,7 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoNombre", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoNombre", DbType="VarChar(40)")]
 		public string SegundoNombre
 		{
 			get
@@ -765,7 +3143,7 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerApellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerApellido", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
 		public string PrimerApellido
 		{
 			get
@@ -785,7 +3163,7 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoApellido", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoApellido", DbType="VarChar(40)")]
 		public string SegundoApellido
 		{
 			get
@@ -805,62 +3183,66 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="VarChar(10)")]
-		public string Cedula
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoIdentificacionID", DbType="TinyInt")]
+		public System.Nullable<byte> TipoIdentificacionID
 		{
 			get
 			{
-				return this._Cedula;
+				return this._TipoIdentificacionID;
 			}
 			set
 			{
-				if ((this._Cedula != value))
+				if ((this._TipoIdentificacionID != value))
 				{
-					this.OnCedulaChanging(value);
+					if (this._tipo_identificacion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTipoIdentificacionIDChanging(value);
 					this.SendPropertyChanging();
-					this._Cedula = value;
-					this.SendPropertyChanged("Cedula");
-					this.OnCedulaChanged();
+					this._TipoIdentificacionID = value;
+					this.SendPropertyChanged("TipoIdentificacionID");
+					this.OnTipoIdentificacionIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="VarChar(15)")]
-		public string Telefono
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeroIdentificacion", DbType="VarChar(20)")]
+		public string NumeroIdentificacion
 		{
 			get
 			{
-				return this._Telefono;
+				return this._NumeroIdentificacion;
 			}
 			set
 			{
-				if ((this._Telefono != value))
+				if ((this._NumeroIdentificacion != value))
 				{
-					this.OnTelefonoChanging(value);
+					this.OnNumeroIdentificacionChanging(value);
 					this.SendPropertyChanging();
-					this._Telefono = value;
-					this.SendPropertyChanged("Telefono");
-					this.OnTelefonoChanged();
+					this._NumeroIdentificacion = value;
+					this.SendPropertyChanged("NumeroIdentificacion");
+					this.OnNumeroIdentificacionChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(255)")]
-		public string Direccion
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Genero", DbType="Char(1)")]
+		public System.Nullable<char> Genero
 		{
 			get
 			{
-				return this._Direccion;
+				return this._Genero;
 			}
 			set
 			{
-				if ((this._Direccion != value))
+				if ((this._Genero != value))
 				{
-					this.OnDireccionChanging(value);
+					this.OnGeneroChanging(value);
 					this.SendPropertyChanging();
-					this._Direccion = value;
-					this.SendPropertyChanged("Direccion");
-					this.OnDireccionChanged();
+					this._Genero = value;
+					this.SendPropertyChanged("Genero");
+					this.OnGeneroChanged();
 				}
 			}
 		}
@@ -885,62 +3267,82 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ocupacion", DbType="VarChar(100)")]
-		public string Ocupacion
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TelefonoPrincipal", DbType="VarChar(15)")]
+		public string TelefonoPrincipal
 		{
 			get
 			{
-				return this._Ocupacion;
+				return this._TelefonoPrincipal;
 			}
 			set
 			{
-				if ((this._Ocupacion != value))
+				if ((this._TelefonoPrincipal != value))
 				{
-					this.OnOcupacionChanging(value);
+					this.OnTelefonoPrincipalChanging(value);
 					this.SendPropertyChanging();
-					this._Ocupacion = value;
-					this.SendPropertyChanged("Ocupacion");
-					this.OnOcupacionChanged();
+					this._TelefonoPrincipal = value;
+					this.SendPropertyChanged("TelefonoPrincipal");
+					this.OnTelefonoPrincipalChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FotoPerfil", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary FotoPerfil
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TelefonoAlternativo", DbType="VarChar(15)")]
+		public string TelefonoAlternativo
 		{
 			get
 			{
-				return this._FotoPerfil;
+				return this._TelefonoAlternativo;
 			}
 			set
 			{
-				if ((this._FotoPerfil != value))
+				if ((this._TelefonoAlternativo != value))
 				{
-					this.OnFotoPerfilChanging(value);
+					this.OnTelefonoAlternativoChanging(value);
 					this.SendPropertyChanging();
-					this._FotoPerfil = value;
-					this.SendPropertyChanged("FotoPerfil");
-					this.OnFotoPerfilChanged();
+					this._TelefonoAlternativo = value;
+					this.SendPropertyChanged("TelefonoAlternativo");
+					this.OnTelefonoAlternativoChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaCreacion", DbType="DateTime NOT NULL")]
-		public System.DateTime FechaCreacion
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Foto", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Foto
 		{
 			get
 			{
-				return this._FechaCreacion;
+				return this._Foto;
 			}
 			set
 			{
-				if ((this._FechaCreacion != value))
+				if ((this._Foto != value))
 				{
-					this.OnFechaCreacionChanging(value);
+					this.OnFotoChanging(value);
 					this.SendPropertyChanging();
-					this._FechaCreacion = value;
-					this.SendPropertyChanged("FechaCreacion");
-					this.OnFechaCreacionChanged();
+					this._Foto = value;
+					this.SendPropertyChanged("Foto");
+					this.OnFotoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaRegistro", DbType="DateTime NOT NULL")]
+		public System.DateTime FechaRegistro
+		{
+			get
+			{
+				return this._FechaRegistro;
+			}
+			set
+			{
+				if ((this._FechaRegistro != value))
+				{
+					this.OnFechaRegistroChanging(value);
+					this.SendPropertyChanging();
+					this._FechaRegistro = value;
+					this.SendPropertyChanged("FechaRegistro");
+					this.OnFechaRegistroChanged();
 				}
 			}
 		}
@@ -965,36 +3367,83 @@ namespace capa_datos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cuenta_Perfil", Storage="_Cuenta", ThisKey="CuentaID", OtherKey="CuentaID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Cuenta Cuenta
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="perfil_rel_perfil_documento", Storage="_rel_perfil_documento", ThisKey="PerfilID", OtherKey="PerfilID")]
+		public EntitySet<rel_perfil_documento> rel_perfil_documento
 		{
 			get
 			{
-				return this._Cuenta.Entity;
+				return this._rel_perfil_documento;
 			}
 			set
 			{
-				Cuenta previousValue = this._Cuenta.Entity;
+				this._rel_perfil_documento.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="cuenta_perfil", Storage="_cuenta", ThisKey="CuentaID", OtherKey="CuentaID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public cuenta cuenta
+		{
+			get
+			{
+				return this._cuenta.Entity;
+			}
+			set
+			{
+				cuenta previousValue = this._cuenta.Entity;
 				if (((previousValue != value) 
-							|| (this._Cuenta.HasLoadedOrAssignedValue == false)))
+							|| (this._cuenta.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Cuenta.Entity = null;
-						previousValue.Perfil.Remove(this);
+						this._cuenta.Entity = null;
+						previousValue.perfil.Remove(this);
 					}
-					this._Cuenta.Entity = value;
+					this._cuenta.Entity = value;
 					if ((value != null))
 					{
-						value.Perfil.Add(this);
+						value.perfil.Add(this);
 						this._CuentaID = value.CuentaID;
 					}
 					else
 					{
 						this._CuentaID = default(int);
 					}
-					this.SendPropertyChanged("Cuenta");
+					this.SendPropertyChanged("cuenta");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tipo_identificacion_perfil", Storage="_tipo_identificacion", ThisKey="TipoIdentificacionID", OtherKey="TipoIdentificacionID", IsForeignKey=true)]
+		public tipo_identificacion tipo_identificacion
+		{
+			get
+			{
+				return this._tipo_identificacion.Entity;
+			}
+			set
+			{
+				tipo_identificacion previousValue = this._tipo_identificacion.Entity;
+				if (((previousValue != value) 
+							|| (this._tipo_identificacion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tipo_identificacion.Entity = null;
+						previousValue.perfil.Remove(this);
+					}
+					this._tipo_identificacion.Entity = value;
+					if ((value != null))
+					{
+						value.perfil.Add(this);
+						this._TipoIdentificacionID = value.TipoIdentificacionID;
+					}
+					else
+					{
+						this._TipoIdentificacionID = default(Nullable<byte>);
+					}
+					this.SendPropertyChanged("tipo_identificacion");
 				}
 			}
 		}
@@ -1018,445 +3467,17 @@ namespace capa_datos
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-	}
-	
-	public partial class SEG_ObtenerDatosResult
-	{
 		
-		private int _CuentaID;
-		
-		private string _Email;
-		
-		private byte _Rol;
-		
-		private byte _Estado;
-		
-		private string _GoogleID;
-		
-		private int _TieneGoogle;
-		
-		private byte _IntentosFallidos;
-		
-		private System.Nullable<System.DateTime> _BloqueadoHasta;
-		
-		private byte _VecesBloqueo;
-		
-		private System.DateTime _FechaRegistro;
-		
-		private System.Nullable<System.DateTime> _UltimoAcceso;
-		
-		private int _PerfilID;
-		
-		private string _PrimerNombre;
-		
-		private string _SegundoNombre;
-		
-		private string _PrimerApellido;
-		
-		private string _SegundoApellido;
-		
-		private string _Cedula;
-		
-		private string _Telefono;
-		
-		private string _Direccion;
-		
-		private System.Nullable<System.DateTime> _FechaNacimiento;
-		
-		private string _Ocupacion;
-		
-		private System.Data.Linq.Binary _FotoPerfil;
-		
-		private System.DateTime _FechaCreacion;
-		
-		private System.Nullable<System.DateTime> _FechaActualizacion;
-		
-		public SEG_ObtenerDatosResult()
+		private void attach_rel_perfil_documento(rel_perfil_documento entity)
 		{
+			this.SendPropertyChanging();
+			entity.perfil = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CuentaID", DbType="Int NOT NULL")]
-		public int CuentaID
+		private void detach_rel_perfil_documento(rel_perfil_documento entity)
 		{
-			get
-			{
-				return this._CuentaID;
-			}
-			set
-			{
-				if ((this._CuentaID != value))
-				{
-					this._CuentaID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this._Email = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rol", DbType="TinyInt NOT NULL")]
-		public byte Rol
-		{
-			get
-			{
-				return this._Rol;
-			}
-			set
-			{
-				if ((this._Rol != value))
-				{
-					this._Rol = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="TinyInt NOT NULL")]
-		public byte Estado
-		{
-			get
-			{
-				return this._Estado;
-			}
-			set
-			{
-				if ((this._Estado != value))
-				{
-					this._Estado = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GoogleID", DbType="VarChar(100)")]
-		public string GoogleID
-		{
-			get
-			{
-				return this._GoogleID;
-			}
-			set
-			{
-				if ((this._GoogleID != value))
-				{
-					this._GoogleID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TieneGoogle", DbType="Int NOT NULL")]
-		public int TieneGoogle
-		{
-			get
-			{
-				return this._TieneGoogle;
-			}
-			set
-			{
-				if ((this._TieneGoogle != value))
-				{
-					this._TieneGoogle = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IntentosFallidos", DbType="TinyInt NOT NULL")]
-		public byte IntentosFallidos
-		{
-			get
-			{
-				return this._IntentosFallidos;
-			}
-			set
-			{
-				if ((this._IntentosFallidos != value))
-				{
-					this._IntentosFallidos = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BloqueadoHasta", DbType="DateTime")]
-		public System.Nullable<System.DateTime> BloqueadoHasta
-		{
-			get
-			{
-				return this._BloqueadoHasta;
-			}
-			set
-			{
-				if ((this._BloqueadoHasta != value))
-				{
-					this._BloqueadoHasta = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VecesBloqueo", DbType="TinyInt NOT NULL")]
-		public byte VecesBloqueo
-		{
-			get
-			{
-				return this._VecesBloqueo;
-			}
-			set
-			{
-				if ((this._VecesBloqueo != value))
-				{
-					this._VecesBloqueo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaRegistro", DbType="DateTime NOT NULL")]
-		public System.DateTime FechaRegistro
-		{
-			get
-			{
-				return this._FechaRegistro;
-			}
-			set
-			{
-				if ((this._FechaRegistro != value))
-				{
-					this._FechaRegistro = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UltimoAcceso", DbType="DateTime")]
-		public System.Nullable<System.DateTime> UltimoAcceso
-		{
-			get
-			{
-				return this._UltimoAcceso;
-			}
-			set
-			{
-				if ((this._UltimoAcceso != value))
-				{
-					this._UltimoAcceso = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PerfilID", DbType="Int NOT NULL")]
-		public int PerfilID
-		{
-			get
-			{
-				return this._PerfilID;
-			}
-			set
-			{
-				if ((this._PerfilID != value))
-				{
-					this._PerfilID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerNombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string PrimerNombre
-		{
-			get
-			{
-				return this._PrimerNombre;
-			}
-			set
-			{
-				if ((this._PrimerNombre != value))
-				{
-					this._PrimerNombre = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoNombre", DbType="VarChar(50)")]
-		public string SegundoNombre
-		{
-			get
-			{
-				return this._SegundoNombre;
-			}
-			set
-			{
-				if ((this._SegundoNombre != value))
-				{
-					this._SegundoNombre = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrimerApellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string PrimerApellido
-		{
-			get
-			{
-				return this._PrimerApellido;
-			}
-			set
-			{
-				if ((this._PrimerApellido != value))
-				{
-					this._PrimerApellido = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SegundoApellido", DbType="VarChar(50)")]
-		public string SegundoApellido
-		{
-			get
-			{
-				return this._SegundoApellido;
-			}
-			set
-			{
-				if ((this._SegundoApellido != value))
-				{
-					this._SegundoApellido = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cedula", DbType="VarChar(10)")]
-		public string Cedula
-		{
-			get
-			{
-				return this._Cedula;
-			}
-			set
-			{
-				if ((this._Cedula != value))
-				{
-					this._Cedula = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="VarChar(15)")]
-		public string Telefono
-		{
-			get
-			{
-				return this._Telefono;
-			}
-			set
-			{
-				if ((this._Telefono != value))
-				{
-					this._Telefono = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(255)")]
-		public string Direccion
-		{
-			get
-			{
-				return this._Direccion;
-			}
-			set
-			{
-				if ((this._Direccion != value))
-				{
-					this._Direccion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaNacimiento", DbType="Date")]
-		public System.Nullable<System.DateTime> FechaNacimiento
-		{
-			get
-			{
-				return this._FechaNacimiento;
-			}
-			set
-			{
-				if ((this._FechaNacimiento != value))
-				{
-					this._FechaNacimiento = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ocupacion", DbType="VarChar(100)")]
-		public string Ocupacion
-		{
-			get
-			{
-				return this._Ocupacion;
-			}
-			set
-			{
-				if ((this._Ocupacion != value))
-				{
-					this._Ocupacion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FotoPerfil", DbType="VarBinary(MAX)")]
-		public System.Data.Linq.Binary FotoPerfil
-		{
-			get
-			{
-				return this._FotoPerfil;
-			}
-			set
-			{
-				if ((this._FotoPerfil != value))
-				{
-					this._FotoPerfil = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaCreacion", DbType="DateTime NOT NULL")]
-		public System.DateTime FechaCreacion
-		{
-			get
-			{
-				return this._FechaCreacion;
-			}
-			set
-			{
-				if ((this._FechaCreacion != value))
-				{
-					this._FechaCreacion = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaActualizacion", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FechaActualizacion
-		{
-			get
-			{
-				return this._FechaActualizacion;
-			}
-			set
-			{
-				if ((this._FechaActualizacion != value))
-				{
-					this._FechaActualizacion = value;
-				}
-			}
+			this.SendPropertyChanging();
+			entity.perfil = null;
 		}
 	}
 }
