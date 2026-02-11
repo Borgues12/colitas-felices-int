@@ -22,7 +22,8 @@
                     <h2>¿Ya tienes cuenta?</h2>
                     <p>Inicia sesión para continuar ayudando a nuestras mascotas.</p>
                     <button type="button" class="btn-hero" onclick="toggleView()">
-                        <i class="fas fa-sign-in-alt"></i> INICIAR SESIÓN
+                        <i class="fas fa-sign-in-alt"></i>INICIAR SESIÓN
+                   
                     </button>
                 </div>
             </div>
@@ -51,7 +52,7 @@
                     <asp:HiddenField ID="hdnVistaActual" runat="server" Value="login" />
                     <!-- FORMULARIO DE REGISTRO -->
                     <asp:Panel ID="pnlRegistro" runat="server" CssClass="panel active">
-                        
+
                         <!-- ═══════════════════════════════════════ -->
                         <!-- SECCIÓN 1: DATOS PERSONALES -->
                         <!-- ═══════════════════════════════════════ -->
@@ -76,7 +77,7 @@
                                         placeholder=" "
                                         MaxLength="40"
                                         CssClass="input-field" />
-                                    <label class="input-label">Segundo Nombre</label>
+                                    <label class="input-label">Segundo Nombre (opcional)</label>
                                 </div>
                             </div>
 
@@ -95,7 +96,7 @@
                                         placeholder=" "
                                         MaxLength="40"
                                         CssClass="input-field" />
-                                    <label class="input-label">Segundo Apellido</label>
+                                    <label class="input-label">Segundo Apellido(opcional)</label>
                                 </div>
                             </div>
 
@@ -140,6 +141,9 @@
                                         MaxLength="50"
                                         CssClass="input-field with-icon" />
                                     <label class="input-label with-icon">Contraseña *</label>
+                                    <button type="button" class="toggle-password" onclick="togglePassword(this)">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
                                 </div>
 
                                 <div class="input-group">
@@ -150,22 +154,25 @@
                                         MaxLength="50"
                                         CssClass="input-field with-icon" />
                                     <label class="input-label with-icon">Confirmar *</label>
+                                    <button type="button" class="toggle-password" onclick="togglePassword(this)">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
                                 </div>
                             </div>
 
                             <!-- Requisitos de contraseña -->
                             <div class="password-hints">
                                 <div class="hint" id="hintLength">
-                                    <i class="fas fa-circle"></i> Mínimo 8 caracteres
+                                    <i class="fas fa-circle"></i>Mínimo 8 caracteres
+                               
                                 </div>
                                 <div class="hint" id="hintUpper">
-                                    <i class="fas fa-circle"></i> Una mayúscula
-                                </div>
-                                <div class="hint" id="hintLower">
-                                    <i class="fas fa-circle"></i> Una minúscula
+                                    <i class="fas fa-circle"></i>Una mayúscula
+                               
                                 </div>
                                 <div class="hint" id="hintNumber">
-                                    <i class="fas fa-circle"></i> Un número
+                                    <i class="fas fa-circle"></i>Un número
+                               
                                 </div>
                             </div>
                         </div>
@@ -177,7 +184,7 @@
                             <div class="check-group">
                                 <asp:CheckBox ID="chkTerminos" runat="server" />
                                 <label for="<%= chkTerminos.ClientID %>">
-                                    Acepto los <a href="#" target="_blank">términos y condiciones</a> 
+                                    Acepto los <a href="#" target="_blank">términos y condiciones</a>
                                     y la <a href="#" target="_blank">política de privacidad</a>
                                 </label>
                             </div>
@@ -189,6 +196,7 @@
 
                             <p class="switch-form mobile-only">
                                 ¿Ya tienes cuenta? 
+                               
                                 <a href="javascript:void(0)" class="toggle-link" onclick="toggleView()">Inicia sesión</a>
                             </p>
                         </div>
@@ -204,7 +212,8 @@
                     <h2>¡Hola de nuevo!</h2>
                     <p>Únete a nuestra comunidad y ayuda a encontrar hogares para mascotas.</p>
                     <button type="button" class="btn-hero" onclick="toggleView()">
-                        <i class="fas fa-user-plus"></i> REGISTRARSE
+                        <i class="fas fa-user-plus"></i>REGISTRARSE
+                   
                     </button>
                 </div>
             </div>
@@ -263,13 +272,14 @@
                             <a href="recuperar.aspx" class="link-forgot">¿Olvidaste tu contraseña?</a>
                         </div>
 
-                        <asp:Button ID="btnLogin" runat="server" 
+                        <asp:Button ID="btnLogin" runat="server"
                             Text="INGRESAR"
-                            CssClass="btn-submit" 
+                            CssClass="btn-submit"
                             OnClick="btnLogin_Click" />
 
                         <p class="switch-form mobile-only">
                             ¿No tienes cuenta? 
+                           
                             <a href="javascript:void(0)" class="toggle-link" onclick="toggleView()">Regístrate</a>
                         </p>
                     </div>
@@ -356,7 +366,6 @@
 
                 toggleHint('hintLength', password.length >= 8);
                 toggleHint('hintUpper', /[A-Z]/.test(password));
-                toggleHint('hintLower', /[a-z]/.test(password));
                 toggleHint('hintNumber', /[0-9]/.test(password));
             });
 
