@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\DTO_BLOB\BlobItemDTO.cs" />
     <Compile Include="DTO\notifyDTO.cs" />
     <Compile Include="DTO\DTO_Login.cs" />
     <Compile Include="DTO\DTO_Cuenta.cs" />

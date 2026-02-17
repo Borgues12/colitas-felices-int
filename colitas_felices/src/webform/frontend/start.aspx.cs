@@ -11,7 +11,7 @@ namespace colitas_felices.src.webform.frontend
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //Logica para implementar el inicio de la aplicacion, como cargar datos o configurar elementos de la interfaz
         }
     }
 }
