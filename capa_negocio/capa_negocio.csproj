@@ -93,6 +93,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CN_BLOB\CN_BlobStorage.cs" />
     <Compile Include="CN_Email.cs" />
     <Compile Include="CN_Perfil.cs" />
     <Compile Include="CN_Login.cs" />
