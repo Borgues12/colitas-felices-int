@@ -1,9 +1,10 @@
-﻿using System;
+﻿using capa_dto;
+using capa_negocio;
+using capa_negocio.Seguridad;
+using Microsoft.Win32;
+using System;
 using System.Threading.Tasks;
 using System.Web.UI;
-using capa_negocio;
-using capa_negocio.capa_negocio;
-using capa_dto;
 
 namespace colitas_felices.src.webform.login
 {
@@ -11,7 +12,7 @@ namespace colitas_felices.src.webform.login
     {
         private notifyVarDTO _resultadoVerificar;
         private notifyDTO _resultadoReenviar;
-        private CN_Registro objRegistro = new CN_Registro();
+        private CN_Registrar objRegistro = new CN_Registrar();
         private string _accion;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -24,7 +25,7 @@ namespace colitas_felices.src.webform.login
                     Navigation.IrARegistro();
                     return;
                 }
-                var registro = new CN_Registro().CN_ObtenerRegistroTemporal(Sessions.RegistroCorreo);
+                var registro = objRegistro.CN_ObtenerRegistroTemporal(Sessions.RegistroCorreo);
                 if (registro != null)
                 {
                     lblEmail.Text = EnmascararEmail(registro);
@@ -74,18 +75,33 @@ namespace colitas_felices.src.webform.login
 
         private async Task CambiarEmailAsync()
         {
-            string registroCorreo = Sessions.RegistroCorreo;
-            string nuevoEmail = txtNuevoEmail.Text.Trim();
+            try 
+            {
+                string registroCorreo = Sessions.RegistroCorreo;
+                string nuevoEmail = txtNuevoEmail.Text.Trim();
+                bool resultado = await objRegistro.CambiarEmailRegistro(registroCorreo, nuevoEmail);
 
-            // TODO: Implementar en CN_Registro.CambiarEmailRegistro()
-            // _resultadoCambio = await objRegistro.CambiarEmailRegistro(registroId, nuevoEmail);
+                if (resultado)
+                {
+                    // Actualizar el email en sesión
+                    Sessions.LimpiarRegistroTemporal();
+                    Sessions.GuardarRegistroTemporal(nuevoEmail);
+                    lblEmail.Text = EnmascararEmail(nuevoEmail);
 
-            // Por ahora, mostrar mensaje de no implementado
-            MostrarMensaje("Función en desarrollo", "warning");
+                    await ReenviarCodigoAsync();
+
+                    MostrarMensaje("¡Correo actualizado, se envio codigo!", "success");
+                }
+            }catch (Exception ex)
+                {
+                System.Diagnostics.Debug.WriteLine("Error enviando correo:");
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                MostrarMensaje("Error inesperado. Intenta nuevamente.", "error");
+            }
         }
 
-        // ========== VERIFICAR CÓDIGO ==========
-        protected void btnVerificar_Click(object sender, EventArgs e)
+            // ========== VERIFICAR CÓDIGO ==========
+            protected void btnVerificar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtCodigo.Text))
             {

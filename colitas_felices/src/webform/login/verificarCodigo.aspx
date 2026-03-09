@@ -3,7 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Verificar Cuenta - Colitas Felices</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin ="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin ="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="stylesheet" href='<%=ResolveUrl("~/src/css/login/verificarCodigo_style.css") %>' />
@@ -48,12 +49,9 @@
             <div class="options" id="divOpciones">
                 <p>¿No recibiste el código?</p>
                 <div class="option-links">
-                    <asp:Button ID="btnReenviar" runat="server" Text="📧 Reenviar código"
+                    <asp:Button ID="btnReenviar" runat="server" Text="Reenviar código"
                         OnClick="btnReenviar_Click" CausesValidation="false" />
-                    <button type="button" id="btnMostrarCambio" onclick="mostrarCambioEmail()">
-                        ✏️ Cambiar correo electrónico
-                   
-                    </button>
+                    <button type="button" id="btnMostrarCambio" onclick="mostrarCambioEmail()"> Cambiar correo electrónico</button>
                 </div>
             </div>
 

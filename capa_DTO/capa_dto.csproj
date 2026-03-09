@@ -47,6 +47,7 @@
     <Compile Include="DTO\DTO_Cuenta.cs" />
     <Compile Include="DTO\DTO_Perfil.cs" />
     <Compile Include="DTO\DTO_Seguridad.cs" />
+    <Compile Include="DTO\Seguridad\LoginDTO.cs" />
     <Compile Include="DTO\Seguridad\RegistroDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

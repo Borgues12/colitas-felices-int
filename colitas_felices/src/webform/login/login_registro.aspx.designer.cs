@@ -15,15 +15,6 @@ namespace colitas_felices.src
     {
 
         /// <summary>
-        /// Control btnGoogle.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnGoogle;
-
-        /// <summary>
         /// Control hdnVistaActual.
         /// </summary>
         /// <remarks>
@@ -31,6 +22,15 @@ namespace colitas_felices.src
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnVistaActual;
+
+        /// <summary>
+        /// Control btnGoogle.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnGoogle;
 
         /// <summary>
         /// Control pnlRegistro.

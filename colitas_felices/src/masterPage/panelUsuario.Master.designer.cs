@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace colitas_felices.src.webform
+namespace colitas_felices.src.masterPage
 {
 
 
-    public partial class panleUsuario
+    public partial class panelUsuario
     {
 
         /// <summary>

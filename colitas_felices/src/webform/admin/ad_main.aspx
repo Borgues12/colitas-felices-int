@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/src/webform/panel.Master" AutoEventWireup="true" CodeBehind="ad_main.aspx.cs" Inherits="colitas_felices.src.webform.admin.ad_main" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/src/masterPage/panel.Master" AutoEventWireup="true" CodeBehind="ad_main.aspx.cs" Inherits="colitas_felices.src.webform.admin.ad_main" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">

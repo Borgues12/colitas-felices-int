@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace colitas_felices.src.webform
+namespace colitas_felices.src.masterPage
 {
-    public partial class panleUsuario
+    public partial class panelUsuario : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

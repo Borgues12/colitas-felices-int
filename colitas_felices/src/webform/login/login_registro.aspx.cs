@@ -1,6 +1,7 @@
 ﻿using capa_dto;
+using capa_DTO.DTO.Seguridad;
 using capa_negocio;
-using capa_negocio.capa_negocio;
+using capa_negocio.Seguridad;
 using System;
 using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
@@ -12,7 +13,8 @@ namespace colitas_felices.src
     public partial class login_registro : NotifyLogic
     {
         private notifyVarDTO _resultado;
-        private CN_Registro objRegistro = new CN_Registro();
+        private CN_Registrar objRegistro = new CN_Registrar();
+        private CN_Login cnLogin = new CN_Login();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -106,8 +108,24 @@ namespace colitas_felices.src
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            // TODO: Implementar login con CN_Login
-            MostrarMensaje("Login en desarrollo.", "info");
+            var resultado = cnLogin.Login(txtEmailLogin.Text, txtPasswordLogin.Text);
+
+            if (!resultado.resultado)
+            {
+                MostrarMensaje(resultado.mensajeSalida, "error");
+                hdnVistaActual.Value = "login";
+                return;
+            }
+
+            // Cast seguro: solo llega aquí si resultado == true
+            var datos = ((notifyVarDTO)resultado).datos as LoginDTO;
+
+            Sessions.IniciarSesion(datos.CuentaID, datos.RolID);
+
+            if (Sessions.EsAdmin)
+                Response.Redirect("~/Admin");
+            else
+                Response.Redirect("~/Home");
         }
 
         // ==================== GOOGLE ====================

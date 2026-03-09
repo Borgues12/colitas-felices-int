@@ -100,9 +100,10 @@
   <ItemGroup>
     <Compile Include="BLOB\BlobStorageDAL.cs" />
     <Compile Include="CD_Cuenta.cs" />
-    <Compile Include="CD_Login_Registro.cs" />
+    <Compile Include="CD_Login_Registro123.cs" />
     <Compile Include="CD_Perfil.cs" />
-    <Compile Include="CD_Registro.cs" />
+    <Compile Include="Seguridad\CD_Login.cs" />
+    <Compile Include="Seguridad\CD_Registro.cs" />
     <Compile Include="ColitasFelices.cs">
       <DependentUpon>ColitasFelices.dbml</DependentUpon>
     </Compile>

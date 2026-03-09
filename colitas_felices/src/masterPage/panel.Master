@@ -21,6 +21,8 @@
 
     <%--    LINK PARA NOTIFICACIONES Y PARA EL LOADER--%>
     <link rel="stylesheet" href="~/src/css/loader.css" />
+   <%-- Para cargar los iconos--%>
+    <script defer src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

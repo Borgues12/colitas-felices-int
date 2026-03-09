@@ -1,7 +1,7 @@
 ﻿using colitas_felices;
 using System.Web;
 
-namespace capa_negocio
+namespace colitas_felices.src
 {
     /// <summary>
     /// Helper para manejo de navegación y redirecciones.
@@ -12,10 +12,10 @@ namespace capa_negocio
      #region RUTAS
 
         public const string RUTA_LOGIN_REGISTRO = "~/iniciar_sesion";
-    public const string RUTA_VERIFICAR = "~/verificar";
-    public const string RUTA_HOME = "~/";
-    public const string RUTA_DASHBOARD = "~/dashboard";
-    public const string RUTA_ADMIN = "~/admin";
+        public const string RUTA_VERIFICAR = "~/verificar";
+        public const string RUTA_HOME = "~/";
+        public const string RUTA_USUARIO = "~/Home";
+        public const string RUTA_ADMIN = "~/Admin";
 
 #endregion
 
@@ -29,7 +29,7 @@ namespace capa_negocio
         if (!Sessions.EstaLogueado)
             return RUTA_HOME;
 
-        return Sessions.EsAdmin ? RUTA_ADMIN : RUTA_DASHBOARD;
+        return Sessions.EsAdmin ? RUTA_ADMIN : RUTA_USUARIO;
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ namespace capa_negocio
 
     public static void IrADashboard()
     {
-        HttpContext.Current.Response.Redirect(RUTA_DASHBOARD, true);
+        HttpContext.Current.Response.Redirect(RUTA_USUARIO, true);
     }
 
     #endregion
@@ -78,14 +78,14 @@ namespace capa_negocio
     /// </summary>
     public static void RequiereLogin()
     {
+        
+            if (!Sessions.EstaLogueado)
+            {
+                IrALogin();
+            }
             if (!Sessions.ValidarTimeout())
             {
                 Sessions.CerrarSesion();
-                IrALogin();
-            }
-
-            if (!Sessions.EstaLogueado)
-            {
                 IrALogin();
             }
         }

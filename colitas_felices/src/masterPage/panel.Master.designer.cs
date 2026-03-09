@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace colitas_felices.src.webform
+namespace colitas_felices.src.masterPage
 {
 
 

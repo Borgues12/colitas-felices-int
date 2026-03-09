@@ -123,8 +123,6 @@ namespace colitas_felices
         /// </summary>
         public static void IniciarSesion(int cuentaId, int rol)
         {
-            // ✅ Regenerar sesión para prevenir fixation
-            RegenerarSesion();
 
             CuentaID = cuentaId;
             Rol = rol;
