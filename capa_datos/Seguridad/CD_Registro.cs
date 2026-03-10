@@ -11,6 +11,7 @@ namespace capa_datos
 {
     public class CD_Registro
     {
+        int CODIGO_EXPIRACION_MINUTOS = 15;
         //Instancia de la base de datos
         private ColitasFelicesDataContext db = new ColitasFelicesDataContext();
 
@@ -58,8 +59,8 @@ namespace capa_datos
                     SegundoApellido = string.IsNullOrWhiteSpace(dto.SegundoApellido) ? null : dto.SegundoApellido.Trim(),
                     Telefono = string.IsNullOrWhiteSpace(dto.Telefono) ? null : dto.Telefono.Trim(),
                     CodigoVerificacion = dto.CodigoVerificacion,
-                    CodigoExpiracion = DateTime.Now,
-                    FechaCreacion = DateTime.Now.AddMinutes(10)
+                    CodigoExpiracion = DateTime.Now.AddMinutes(CODIGO_EXPIRACION_MINUTOS),
+                    FechaCreacion = DateTime.Now
 
                     // CodigoExpiracion y FechaCreacion usan DEFAULT de la BD
                 };
@@ -87,7 +88,7 @@ namespace capa_datos
                 if (registro == null) return false;
 
                 registro.CodigoVerificacion = nuevoCodigo;
-                registro.CodigoExpiracion = DateTime.Now.AddMinutes(15);
+                registro.CodigoExpiracion = DateTime.Now.AddMinutes(CODIGO_EXPIRACION_MINUTOS);
                 registro.Reenvios = (byte)(registro.Reenvios + 1);
                 registro.UltimoReenvio = DateTime.Now;
 
@@ -186,8 +187,8 @@ namespace capa_datos
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error en ConfirmarRegistro: " + ex.Message);
-                return 0;
+                System.Diagnostics.Debug.WriteLine($"[CD_Registro] Error ConfirmarRegistro: {ex}");
+                return -1;
             }
         }
 

@@ -115,21 +115,42 @@ namespace colitas_felices.src.webform.login
 
         private async Task VerificarCodigoAsync()
         {
-            string registroCorreo = Sessions.RegistroCorreo;
-            string codigo = txtCodigo.Text.Trim();
-
-            _resultadoVerificar = await objRegistro.VerificarCodigo(registroCorreo, codigo);
-
-            if (_resultadoVerificar.resultado)
+            try
             {
-                // El código contiene el CuentaID recién creado
-                int cuentaId = _resultadoVerificar.codigo;
+                string registroCorreo = Sessions.RegistroCorreo;
+                string codigo = txtCodigo.Text.Trim();
 
-                // Limpiar sesión temporal
-                Sessions.LimpiarRegistroTemporal();
+                _resultadoVerificar = await objRegistro.VerificarCodigo(registroCorreo, codigo);
 
-                // OPCIONAL: Iniciar sesión automáticamente
-                // Sessions.IniciarSesion(cuentaId, Sessions.ROL_USUARIO);
+                if (_resultadoVerificar.resultado)
+                {
+                    // El código contiene el CuentaID recién creado
+                    int cuentaId = _resultadoVerificar.codigo;
+
+                    // Limpiar sesión temporal
+                    Sessions.LimpiarRegistroTemporal();
+
+                    // OPCIONAL: Iniciar sesión automáticamente
+                    // Sessions.IniciarSesion(cuentaId, Sessions.ROL_USUARIO);
+                }
+                else
+                {
+                    string mensaje = _resultadoVerificar.mensajeSalida.Replace("'", "");
+
+                    ScriptManager.RegisterStartupScript(this, GetType(),
+                        "error",
+                        $"console.error('{mensaje}');",
+                        true);
+                }
+            }
+            catch (Exception ex)
+            {
+                string error = ex.ToString().Replace("'", "").Replace("\r\n", " ");
+
+                ScriptManager.RegisterStartupScript(this, GetType(),
+                    "error",
+                    $"console.error('ERROR SERVIDOR: {error}');",
+                    true);
             }
         }
 

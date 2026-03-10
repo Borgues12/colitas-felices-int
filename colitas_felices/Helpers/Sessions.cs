@@ -123,13 +123,24 @@ namespace colitas_felices
         /// </summary>
         public static void IniciarSesion(int cuentaId, int rol)
         {
+            HttpContext.Current.Session[KEY_CUENTA_ID] = cuentaId;
+            HttpContext.Current.Session[KEY_ROL] = rol;
+            UltimaActividad = DateTime.Now;
+        }
+        /// <summary>
+        /// Versión para handlers .ashx (Google OAuth)
+        /// </summary>
+        public static void IniciarSesion(HttpContext context, int cuentaId, int rol)
+        {
 
-            CuentaID = cuentaId;
-            Rol = rol;
+            context.Session[KEY_CUENTA_ID] = cuentaId;
+            context.Session[KEY_ROL] = rol;
 
             // ✅ Registrar última actividad
             UltimaActividad = DateTime.Now;
         }
+
+
         private static void RegenerarSesion()
         {
             var session = HttpContext.Current.Session;

@@ -72,7 +72,7 @@ namespace colitas_felices.src
                 // Guardar RegistroID en sesión
                 Sessions.GuardarRegistroTemporal(txtEmail.Text);
             }
-            else if (_resultado.codigo == 1)
+            else if (_resultado.codigo > 1)
             {
                 notifyVarDTO datos = (notifyVarDTO)_resultado.datos;
                 // Ya existe registro pendiente
@@ -92,14 +92,14 @@ namespace colitas_felices.src
             {
                 // Redirigir a verificación usando Navigation
                 string script = "setTimeout(function(){ window.location.href = '" +
-                    ResolveUrl(Navigation.RUTA_VERIFICAR) + "'; }, 2000);";
+                    ResolveUrl(Navigation.RUTA_VERIFICAR) + "'; }, 1500);";
                 ClientScript.RegisterStartupScript(this.GetType(), "redirect", script, true);
             }
-            else if (_resultado.codigo == 1)
+            else if (_resultado.codigo > 1)
             {
                 // Si ya hay registro pendiente, también redirigir a verificación
                 string script = "setTimeout(function(){ window.location.href = '" +
-                    ResolveUrl(Navigation.RUTA_VERIFICAR) + "'; }, 2000);";
+                    ResolveUrl(Navigation.RUTA_VERIFICAR) + "'; }, 1500);";
                 ClientScript.RegisterStartupScript(this.GetType(), "redirect", script, true);
             }
         }
@@ -132,7 +132,7 @@ namespace colitas_felices.src
 
         protected void btnGoogle_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/src/handlers/GoogleAuth.ashx", false);
+            Response.Redirect("~/Helpers/GoogleAuth.ashx", false);
             Context.ApplicationInstance.CompleteRequest();
         }
     }

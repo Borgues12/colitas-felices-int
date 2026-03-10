@@ -95,7 +95,7 @@ namespace capa_negocio.Seguridad
                     {
                         resultado = false,
                         mensajeSalida = "Correo con verificación pendiente",
-                        codigo = 1
+                        codigo = registroExistente.RegistroID
                     };
 
                 }
@@ -174,10 +174,11 @@ namespace capa_negocio.Seguridad
 
             // Obtener registro
             var registro = cdRegistro.ObtenerRegistroTemporal(busquedaCorreo);
-            int RegistroID = registro.RegistroID;
 
             if (registro == null)
                 return ErrorVar("Registro no encontrado. Debes registrarte nuevamente.");
+
+            int RegistroID = registro.RegistroID;
 
             // ¿Ya verificado?
             //Extraño porque ya debio eliminarse
@@ -209,6 +210,8 @@ namespace capa_negocio.Seguridad
             // ══════════════════════════════════════════
 
             int cuentaId = cdRegistro.ConfirmarRegistro(RegistroID);
+
+            System.Diagnostics.Debug.WriteLine($"[CN_Registrar] CuentaID recibido: {cuentaId}");
 
             //EXTRAÑO PORQUE YA SE VERIFICO ANTES
             if (cuentaId == -1)
