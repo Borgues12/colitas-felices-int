@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="panel.Master.cs" Inherits="colitas_felices.src.webform.panel" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="panel.Master.cs" Inherits="colitas_felices.src.masterPage.panel" %>
 <%--hola--%>
 <!DOCTYPE html>
 
@@ -63,10 +63,7 @@
                                     <a class="nav-link" href='<%= ResolveUrl("~/src/webform/admin/ad_main.aspx") %>'>Cuentas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href='<%= ResolveUrl("~/src/webform/admin/ad_perfiles.aspx") %>'>Perfiles</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Pendiente</a>
+                                    <a class="nav-link" href='<%= ResolveUrl("~/MascotasAdmin") %>'>Mascotas</a>
                                 </li>
                             </ul>
                         </div>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Threading.Tasks;
-using capa_DTO.DTO.DTO_BLOB;
+using capa_DTO.DTO.Blob;
 namespace capa_datos
 {
     public class BlobStorageDAL

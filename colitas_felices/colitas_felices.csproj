@@ -88,29 +88,11 @@
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.3, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.Logging.Abstractions.8.0.3\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin, Version=4.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Owin.4.2.3\lib\net45\Microsoft.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Owin.Host.SystemWeb.4.2.3\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security, Version=4.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Owin.Security.4.2.3\lib\net45\Microsoft.Owin.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Owin.Security.Cookies.4.2.3\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Google, Version=4.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Owin.Security.Google.4.2.3\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
-    </Reference>
     <Reference Include="MimeKit, Version=4.14.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
       <HintPath>packages\MimeKit.4.14.0\lib\net48\MimeKit.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
-      <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
@@ -900,27 +882,29 @@
     <Content Include="src\js\js_login.js" />
     <Content Include="src\js\pruebas.js" />
     <Content Include="src\js\loader.js" />
-    <Content Include="src\PruebaBlob.aspx" />
+    <Content Include="src\webform\admin\Mascotas\mascotasForm.aspx" />
+    <Content Include="src\webform\admin\Mascotas\view_mascotas.aspx" />
+    <Content Include="src\webform\frontend\fr_adopta.aspx" />
     <Content Include="src\webform\frontend\nosotros.aspx" />
     <Content Include="src\webform\frontend\voluntariado.aspx" />
     <Content Include="src\webform\login\login_registro.aspx" />
     <Content Include="src\webform\admin\ad_main.aspx" />
     <Content Include="src\webform\admin\prueba_design.aspx" />
     <Content Include="src\webform\admin\ad_perfiles.aspx" />
+    <Content Include="src\webform\login\recuperarPassword.aspx" />
     <Content Include="src\webform\login\verificarCodigo.aspx" />
     <Content Include="src\webform\usuario\user_main.aspx" />
     <Content Include="src\webform\frontend\start.aspx" />
     <Content Include="src\webform\volutario\vol_main.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
-    <Content Include="src\webform\login\login.aspx" />
-    <Content Include="src\webform\login\GoogleCallback.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AzureInit.cs" />
     <Compile Include="Helpers\Navigation.cs" />
     <Compile Include="Helpers\NotifyLogic.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -934,11 +918,26 @@
     <Compile Include="src\masterPage\index.Master.designer.cs">
       <DependentUpon>index.Master</DependentUpon>
     </Compile>
-    <Compile Include="src\PruebaBlob.aspx.cs">
-      <DependentUpon>PruebaBlob.aspx</DependentUpon>
+    <Compile Include="src\webform\admin\Mascotas\mascotasForm.aspx.cs">
+      <DependentUpon>mascotasForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="src\PruebaBlob.aspx.designer.cs">
-      <DependentUpon>PruebaBlob.aspx</DependentUpon>
+    <Compile Include="src\webform\admin\Mascotas\mascotasForm.aspx.designer.cs">
+      <DependentUpon>mascotasForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="src\webform\admin\Mascotas\view_mascotas.aspx.cs">
+      <DependentUpon>view_mascotas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="src\webform\admin\Mascotas\view_mascotas.aspx.designer.cs">
+      <DependentUpon>view_mascotas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="src\webform\frontend\fr_adopta.aspx.cs">
+      <DependentUpon>fr_adopta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="src\webform\frontend\fr_adopta.aspx.designer.cs">
+      <DependentUpon>fr_adopta.aspx</DependentUpon>
     </Compile>
     <Compile Include="src\webform\frontend\nosotros.aspx.cs">
       <DependentUpon>nosotros.aspx</DependentUpon>
@@ -963,6 +962,7 @@
     </Compile>
     <Compile Include="src\webform\admin\ad_main.aspx.cs">
       <DependentUpon>ad_main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="src\webform\admin\ad_main.aspx.designer.cs">
       <DependentUpon>ad_main.aspx</DependentUpon>
@@ -980,11 +980,12 @@
     <Compile Include="src\webform\admin\ad_perfiles.aspx.designer.cs">
       <DependentUpon>ad_perfiles.aspx</DependentUpon>
     </Compile>
-    <Compile Include="src\webform\login\login.aspx.cs">
-      <DependentUpon>login.aspx</DependentUpon>
+    <Compile Include="src\webform\login\recuperarPassword.aspx.cs">
+      <DependentUpon>recuperarPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="src\webform\login\login.aspx.designer.cs">
-      <DependentUpon>login.aspx</DependentUpon>
+    <Compile Include="src\webform\login\recuperarPassword.aspx.designer.cs">
+      <DependentUpon>recuperarPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="src\webform\login\verificarCodigo.aspx.cs">
       <DependentUpon>verificarCodigo.aspx</DependentUpon>
@@ -1009,6 +1010,7 @@
     </Compile>
     <Compile Include="src\masterPage\panel.Master.cs">
       <DependentUpon>panel.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="src\masterPage\panel.Master.designer.cs">
       <DependentUpon>panel.Master</DependentUpon>
@@ -1026,13 +1028,6 @@
     </Compile>
     <Compile Include="src\webform\volutario\vol_main.aspx.designer.cs">
       <DependentUpon>vol_main.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Helpers\Startup.cs" />
-    <Compile Include="src\webform\login\GoogleCallback.aspx.cs">
-      <DependentUpon>GoogleCallback.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="src\webform\login\GoogleCallback.aspx.designer.cs">
-      <DependentUpon>GoogleCallback.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -1151,7 +1146,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="src\scripts\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\capa_DTO\capa_dto.csproj">
       <Project>{f8f7759b-e6cd-4fa4-b4e4-1e1c3c3efa32}</Project>

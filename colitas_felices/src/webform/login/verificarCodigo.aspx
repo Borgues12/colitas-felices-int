@@ -68,7 +68,7 @@
                 </div>
             </asp:Panel>
 
-            <a href="/iniciar_sesion" class="back-link">
+            <a href="/Login" class="back-link">
                 <i class="fas fa-arrow-left"></i>Volver al registro
             </a>
         </div>

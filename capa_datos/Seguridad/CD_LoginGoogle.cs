@@ -16,11 +16,11 @@ namespace capa_datos.Seguridad
         /// <summary>
         /// Busca cuenta por GoogleID
         /// </summary>
-        public cuenta ObtenerCuentaPorGoogleID(string googleId)
+        public Cuenta ObtenerCuentaPorGoogleID(string googleId)
         {
             try
             {
-                return db.cuenta.FirstOrDefault(c => c.GoogleID == googleId && c.Estado == 1);
+                return db.Cuenta.FirstOrDefault(c => c.GoogleID == googleId && c.Estado == 1);
             }
             catch (Exception ex)
             {
@@ -32,11 +32,11 @@ namespace capa_datos.Seguridad
         /// <summary>
         /// Busca cuenta por Email
         /// </summary>
-        public cuenta ObtenerCuentaPorEmail(string email)
+        public Cuenta ObtenerCuentaPorEmail(string email)
         {
             try
             {
-                return db.cuenta.FirstOrDefault(c => c.Email == email && c.Estado == 1);
+                return db.Cuenta.FirstOrDefault(c => c.Email == email && c.Estado == 1);
             }
             catch (Exception ex)
             {
@@ -52,7 +52,7 @@ namespace capa_datos.Seguridad
         {
             try
             {
-                var cuenta = db.cuenta.FirstOrDefault(c => c.CuentaID == cuentaId);
+                var cuenta = db.Cuenta.FirstOrDefault(c => c.CuentaID == cuentaId);
                 if (cuenta == null) return false;
 
                 cuenta.GoogleID = googleId;
@@ -84,7 +84,7 @@ namespace capa_datos.Seguridad
                 }
 
                 // Crear cuenta
-                var nuevaCuenta = new cuenta
+                var nuevaCuenta = new Cuenta
                 {
                     Email = googleUser.Email.Trim().ToLower(),
                     PasswordHash = null, // no tiene password, entró con Google
@@ -94,11 +94,11 @@ namespace capa_datos.Seguridad
                     FechaRegistro = DateTime.Now
                 };
 
-                db.cuenta.InsertOnSubmit(nuevaCuenta);
+                db.Cuenta.InsertOnSubmit(nuevaCuenta);
                 db.SubmitChanges();
 
                 // Crear perfil
-                var nuevoPerfil = new perfil
+                var nuevoPerfil = new Perfil
                 {
                     CuentaID = nuevaCuenta.CuentaID,
                     PrimerNombre = googleUser.PrimerNombre ?? "Usuario",
@@ -110,7 +110,7 @@ namespace capa_datos.Seguridad
                     FechaRegistro = DateTime.Now
                 };
 
-                db.perfil.InsertOnSubmit(nuevoPerfil);
+                db.Perfil.InsertOnSubmit(nuevoPerfil);
                 db.SubmitChanges();
 
                 return nuevaCuenta.CuentaID;

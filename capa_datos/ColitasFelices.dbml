@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB_ColitasFelices" Class="ColitasFelicesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DB_ColitasFelices;Integrated Security=True;Encrypt=False" SettingsObjectName="capa_datos.Properties.Settings" SettingsPropertyName="DB_ColitasFelicesConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.cuenta" Member="cuenta">
-    <Type Name="cuenta">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="DB_ColitasFelices" EntityNamespace="capa_datos" ContextNamespace="capa_datos" Class="ColitasFelicesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.cuenta" Member="Cuenta">
+    <Type Name="Cuenta">
       <Column Name="CuentaID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
@@ -13,28 +13,57 @@
       <Column Name="VecesBloqueo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="FechaRegistro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="UltimoAcceso" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="cuenta_cuenta_permiso" Member="cuenta_permiso" ThisKey="CuentaID" OtherKey="AsignadoPor" Type="cuenta_permiso" />
-      <Association Name="cuenta_cuenta_permiso1" Member="cuenta_permiso1" ThisKey="CuentaID" OtherKey="CuentaID" Type="cuenta_permiso" />
-      <Association Name="cuenta_recuperacion_password" Member="recuperacion_password" ThisKey="CuentaID" OtherKey="CuentaID" Type="recuperacion_password" />
-      <Association Name="cuenta_rel_perfil_documento" Member="rel_perfil_documento" ThisKey="CuentaID" OtherKey="RevisadoPor" Type="rel_perfil_documento" />
-      <Association Name="cuenta_perfil" Member="perfil" ThisKey="CuentaID" OtherKey="CuentaID" Type="perfil" />
-      <Association Name="rol_cuenta" Member="rol" ThisKey="RolID" OtherKey="RolID" Type="rol" IsForeignKey="true" />
+      <Association Name="FK_cp_asignador" Member="Cuenta_permiso" ThisKey="CuentaID" OtherKey="AsignadoPor" Type="Cuenta_permiso" DeleteRule="NO ACTION" />
+      <Association Name="FK_cp_cuenta" Member="Cp_cuenta" ThisKey="CuentaID" OtherKey="CuentaID" Type="Cuenta_permiso" DeleteRule="CASCADE" />
+      <Association Name="FK_cuenta_rol" Member="Rol" ThisKey="RolID" OtherKey="RolID" Type="Rol" IsForeignKey="true" />
+      <Association Name="FK_perfil_cuenta" Member="Perfil" ThisKey="CuentaID" OtherKey="CuentaID" Type="Perfil" Cardinality="One" DeleteRule="CASCADE" />
+      <Association Name="FK_recuperacion_cuenta" Member="Cuenta_token_recuperacion" ThisKey="CuentaID" OtherKey="CuentaID" Type="Cuenta_token_recuperacion" DeleteRule="NO ACTION" />
+      <Association Name="FK_rel_revisor" Member="Rel_perfil_documento" ThisKey="CuentaID" OtherKey="RevisadoPor" Type="Rel_perfil_documento" DeleteRule="NO ACTION" />
+      <Association Name="FK_sesion_cuenta" Member="Cuenta_token_sesion" ThisKey="CuentaID" OtherKey="CuentaID" Type="Cuenta_token_sesion" DeleteRule="NO ACTION" />
     </Type>
   </Table>
-  <Table Name="dbo.cuenta_permiso" Member="cuenta_permiso">
-    <Type Name="cuenta_permiso">
+  <Table Name="dbo.cuenta_permiso" Member="Cuenta_permiso">
+    <Type Name="Cuenta_permiso">
       <Column Name="CuentaID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="PermisoID" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="FechaAsignacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="AsignadoPor" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="cuenta_cuenta_permiso" Member="cuenta" ThisKey="AsignadoPor" OtherKey="CuentaID" Type="cuenta" IsForeignKey="true" />
-      <Association Name="cuenta_cuenta_permiso1" Member="cuenta1" ThisKey="CuentaID" OtherKey="CuentaID" Type="cuenta" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="permiso_cuenta_permiso" Member="permiso" ThisKey="PermisoID" OtherKey="PermisoID" Type="permiso" IsForeignKey="true" />
+      <Association Name="FK_cp_asignador" Member="Cuenta" ThisKey="AsignadoPor" OtherKey="CuentaID" Type="Cuenta" IsForeignKey="true" />
+      <Association Name="FK_cp_cuenta" Member="Cp_cuenta" ThisKey="CuentaID" OtherKey="CuentaID" Type="Cuenta" IsForeignKey="true" DeleteOnNull="true" />
+      <Association Name="FK_cp_permiso" Member="Permiso" ThisKey="PermisoID" OtherKey="PermisoID" Type="Permiso" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.documento_perfil" Member="documento_perfil">
-    <Type Name="documento_perfil">
+  <Table Name="dbo.cuenta_token_recuperacion" Member="Cuenta_token_recuperacion">
+    <Type Name="Cuenta_token_recuperacion">
+      <Column Name="TokenID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CuentaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TipoID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Codigo" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaExpira" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FechaUso" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Usado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="FK_recuperacion_cuenta" Member="Cuenta" ThisKey="CuentaID" OtherKey="CuentaID" Type="Cuenta" IsForeignKey="true" />
+      <Association Name="FK_recuperacion_tipo" Member="Token_tipo" ThisKey="TipoID" OtherKey="TipoID" Type="Token_tipo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cuenta_token_sesion" Member="Cuenta_token_sesion">
+    <Type Name="Cuenta_token_sesion">
+      <Column Name="TokenID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CuentaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TipoID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Token" Type="System.String" DbType="Char(36) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaExpira" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FechaUso" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Usado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="FK_sesion_cuenta" Member="Cuenta" ThisKey="CuentaID" OtherKey="CuentaID" Type="Cuenta" IsForeignKey="true" />
+      <Association Name="FK_sesion_tipo" Member="Token_tipo" ThisKey="TipoID" OtherKey="TipoID" Type="Token_tipo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.documento_perfil" Member="Documento_perfil">
+    <Type Name="Documento_perfil">
       <Column Name="DocumentoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TipoDocumentoID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="NombreArchivo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
@@ -42,36 +71,45 @@
       <Column Name="ContentType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="TamanoBytes" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="FechaSubida" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="documento_perfil_rel_perfil_documento" Member="rel_perfil_documento" ThisKey="DocumentoID" OtherKey="DocumentoID" Type="rel_perfil_documento" />
-      <Association Name="tipo_documento_documento_perfil" Member="tipo_documento" ThisKey="TipoDocumentoID" OtherKey="TipoDocumentoID" Type="tipo_documento" IsForeignKey="true" />
+      <Association Name="FK_documento_tipo" Member="Tipo_documento" ThisKey="TipoDocumentoID" OtherKey="TipoDocumentoID" Type="Tipo_documento" IsForeignKey="true" />
+      <Association Name="FK_rel_documento" Member="Rel_perfil_documento" ThisKey="DocumentoID" OtherKey="DocumentoID" Type="Rel_perfil_documento" DeleteRule="NO ACTION" />
     </Type>
   </Table>
-  <Table Name="dbo.permiso" Member="permiso">
-    <Type Name="permiso">
+  <Table Name="dbo.perfil" Member="Perfil">
+    <Type Name="Perfil">
+      <Column Name="PerfilID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CuentaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PrimerNombre" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="SegundoNombre" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="PrimerApellido" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="SegundoApellido" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="TipoIdentificacionID" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="NumeroIdentificacion" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Genero" Type="System.String" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="FechaNacimiento" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TelefonoPrincipal" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="TelefonoAlternativo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Foto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FechaRegistro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FechaActualizacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_perfil_cuenta" Member="Cuenta" ThisKey="CuentaID" OtherKey="CuentaID" Type="Cuenta" IsForeignKey="true" DeleteOnNull="true" />
+      <Association Name="FK_perfil_tipo_identificacion" Member="Tipo_identificacion" ThisKey="TipoIdentificacionID" OtherKey="TipoIdentificacionID" Type="Tipo_identificacion" IsForeignKey="true" />
+      <Association Name="FK_rel_perfil" Member="Rel_perfil_documento" ThisKey="PerfilID" OtherKey="PerfilID" Type="Rel_perfil_documento" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.permiso" Member="Permiso">
+    <Type Name="Permiso">
       <Column Name="PermisoID" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Codigo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(80) NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="Modulo" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="permiso_cuenta_permiso" Member="cuenta_permiso" ThisKey="PermisoID" OtherKey="PermisoID" Type="cuenta_permiso" />
+      <Association Name="FK_cp_permiso" Member="Cuenta_permiso" ThisKey="PermisoID" OtherKey="PermisoID" Type="Cuenta_permiso" DeleteRule="NO ACTION" />
     </Type>
   </Table>
-  <Table Name="dbo.recuperacion_password" Member="recuperacion_password">
-    <Type Name="recuperacion_password">
-      <Column Name="RecuperacionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CuentaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Token" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="TokenExpiracion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Usado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="FechaUso" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="IP" Type="System.String" DbType="VarChar(45)" CanBeNull="true" />
-      <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="cuenta_recuperacion_password" Member="cuenta" ThisKey="CuentaID" OtherKey="CuentaID" Type="cuenta" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.registro_temporal" Member="registro_temporal">
-    <Type Name="registro_temporal">
+  <Table Name="dbo.registro_temporal" Member="Registro_temporal">
+    <Type Name="Registro_temporal">
       <Column Name="RegistroID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
@@ -89,74 +127,62 @@
       <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.rel_perfil_documento" Member="rel_perfil_documento">
-    <Type Name="rel_perfil_documento">
+  <Table Name="dbo.rel_perfil_documento" Member="Rel_perfil_documento">
+    <Type Name="Rel_perfil_documento">
       <Column Name="PerfilID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="DocumentoID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Estado" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="MotivoRechazo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="FechaRevision" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="RevisadoPor" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="documento_perfil_rel_perfil_documento" Member="documento_perfil" ThisKey="DocumentoID" OtherKey="DocumentoID" Type="documento_perfil" IsForeignKey="true" />
-      <Association Name="cuenta_rel_perfil_documento" Member="cuenta" ThisKey="RevisadoPor" OtherKey="CuentaID" Type="cuenta" IsForeignKey="true" />
-      <Association Name="perfil_rel_perfil_documento" Member="perfil" ThisKey="PerfilID" OtherKey="PerfilID" Type="perfil" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="FK_rel_documento" Member="Documento_perfil" ThisKey="DocumentoID" OtherKey="DocumentoID" Type="Documento_perfil" IsForeignKey="true" />
+      <Association Name="FK_rel_perfil" Member="Perfil" ThisKey="PerfilID" OtherKey="PerfilID" Type="Perfil" IsForeignKey="true" DeleteOnNull="true" />
+      <Association Name="FK_rel_revisor" Member="Cuenta" ThisKey="RevisadoPor" OtherKey="CuentaID" Type="Cuenta" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.rol" Member="rol">
-    <Type Name="rol">
+  <Table Name="dbo.rol" Member="Rol">
+    <Type Name="Rol">
       <Column Name="RolID" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="rol_cuenta" Member="cuenta" ThisKey="RolID" OtherKey="RolID" Type="cuenta" />
+      <Association Name="FK_cuenta_rol" Member="Cuenta" ThisKey="RolID" OtherKey="RolID" Type="Cuenta" DeleteRule="NO ACTION" />
     </Type>
   </Table>
-  <Table Name="dbo.tipo_documento" Member="tipo_documento">
-    <Type Name="tipo_documento">
+  <Table Name="dbo.tipo_documento" Member="Tipo_documento">
+    <Type Name="Tipo_documento">
       <Column Name="TipoDocumentoID" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Requerido" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="tipo_documento_documento_perfil" Member="documento_perfil" ThisKey="TipoDocumentoID" OtherKey="TipoDocumentoID" Type="documento_perfil" />
+      <Association Name="FK_documento_tipo" Member="Documento_perfil" ThisKey="TipoDocumentoID" OtherKey="TipoDocumentoID" Type="Documento_perfil" DeleteRule="NO ACTION" />
     </Type>
   </Table>
-  <Table Name="dbo.tipo_identificacion" Member="tipo_identificacion">
-    <Type Name="tipo_identificacion">
+  <Table Name="dbo.tipo_identificacion" Member="Tipo_identificacion">
+    <Type Name="Tipo_identificacion">
       <Column Name="TipoIdentificacionID" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Formato" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="LongitudMin" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
       <Column Name="LongitudMax" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
       <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="tipo_identificacion_perfil" Member="perfil" ThisKey="TipoIdentificacionID" OtherKey="TipoIdentificacionID" Type="perfil" />
+      <Association Name="FK_perfil_tipo_identificacion" Member="Perfil" ThisKey="TipoIdentificacionID" OtherKey="TipoIdentificacionID" Type="Perfil" DeleteRule="NO ACTION" />
     </Type>
   </Table>
-  <Table Name="dbo.perfil" Member="perfil">
-    <Type Name="perfil">
-      <Column Name="PerfilID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CuentaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="PrimerNombre" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
-      <Column Name="SegundoNombre" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
-      <Column Name="PrimerApellido" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
-      <Column Name="SegundoApellido" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
-      <Column Name="TipoIdentificacionID" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Column Name="NumeroIdentificacion" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="Genero" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
-      <Column Name="FechaNacimiento" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="TelefonoPrincipal" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="TelefonoAlternativo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="Foto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="FechaRegistro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="FechaActualizacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="perfil_rel_perfil_documento" Member="rel_perfil_documento" ThisKey="PerfilID" OtherKey="PerfilID" Type="rel_perfil_documento" />
-      <Association Name="cuenta_perfil" Member="cuenta" ThisKey="CuentaID" OtherKey="CuentaID" Type="cuenta" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="tipo_identificacion_perfil" Member="tipo_identificacion" ThisKey="TipoIdentificacionID" OtherKey="TipoIdentificacionID" Type="tipo_identificacion" IsForeignKey="true" />
+  <Table Name="dbo.token_tipo" Member="Token_tipo">
+    <Type Name="Token_tipo">
+      <Column Name="TipoID" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="DuracionMin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="FK_recuperacion_tipo" Member="Cuenta_token_recuperacion" ThisKey="TipoID" OtherKey="TipoID" Type="Cuenta_token_recuperacion" DeleteRule="NO ACTION" />
+      <Association Name="FK_sesion_tipo" Member="Cuenta_token_sesion" ThisKey="TipoID" OtherKey="TipoID" Type="Cuenta_token_sesion" DeleteRule="NO ACTION" />
     </Type>
   </Table>
-  <Function Name="dbo.SEG_ConfirmarRegistro" Method="SEG_ConfirmarRegistro">
-    <Parameter Name="RegistroID" Parameter="registroID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="CuentaID" Parameter="cuentaID" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
+    <Function Name="dbo.SEG_ConfirmarRegistro" Method="SEG_ConfirmarRegistro">
+	    <Parameter Name="RegistroID" Type="System.Int32" DbType="Int" />
+	    <Parameter Name="CuentaID" Type="System.Int32" DbType="Int" Direction="InOut" />
+	    <Return Type="System.Int32" />
+    </Function>
 </Database>

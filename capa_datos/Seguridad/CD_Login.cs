@@ -20,11 +20,11 @@ namespace capa_datos.Seguridad
         /// Busca una cuenta activa por email y retorna los datos necesarios para autenticación.
         /// Retorna null si el email no existe o la cuenta está bloqueada/inactiva.
         /// </summary>
-        public cuenta ObtenerCuentaPorEmail(string email)
+        public Cuenta ObtenerCuentaPorEmail(string email)
         {
             email = email.Trim().ToLower();
 
-            return db.cuenta
+            return db.Cuenta
                 .FirstOrDefault(c => c.Email == email);
         }
 
@@ -34,7 +34,7 @@ namespace capa_datos.Seguridad
         /// </summary>
         public void RegistrarIntentoFallido(int idCuenta)
         {
-            var cuenta = db.cuenta.FirstOrDefault(c => c.CuentaID == idCuenta);
+            var cuenta = db.Cuenta.FirstOrDefault(c => c.CuentaID == idCuenta);
             if (cuenta == null) return;
 
             cuenta.IntentosFallidos += 1;
@@ -67,7 +67,7 @@ namespace capa_datos.Seguridad
         /// </summary>
         public void ReiniciarIntentos(int idCuenta)
         {
-            var cuenta = db.cuenta.FirstOrDefault(c => c.CuentaID == idCuenta);
+            var cuenta = db.Cuenta.FirstOrDefault(c => c.CuentaID == idCuenta);
             if (cuenta == null) return;
 
             cuenta.IntentosFallidos = 0;
@@ -84,7 +84,7 @@ namespace capa_datos.Seguridad
         /// </summary>
         public void VerificarYDesbloquear(int idCuenta)
         {
-            var cuenta = db.cuenta.FirstOrDefault(c => c.CuentaID == idCuenta);
+            var cuenta = db.Cuenta.FirstOrDefault(c => c.CuentaID == idCuenta);
             if (cuenta == null) return;
 
             // Si estaba bloqueada y ya pasó el tiempo → reactivar

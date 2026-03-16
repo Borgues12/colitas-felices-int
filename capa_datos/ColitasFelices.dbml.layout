@@ -1,148 +1,181 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.25, 14.25" name="ColitasFelices">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.25, 16" name="ColitasFelices">
   <DataContextMoniker Name="/ColitasFelicesDataContext" />
   <nestedChildShapes>
-    <classShape Id="b55d06fc-f94f-4748-a211-b38e73543f3a" absoluteBounds="3.5, 4.5, 2, 2.9247054036458326">
+    <classShape Id="dde063e6-d984-449e-877d-169dff4c9813" absoluteBounds="3.5, 6.25, 2, 2.9247054036458309">
       <DataClassMoniker Name="/ColitasFelicesDataContext/cuenta" />
       <nestedChildShapes>
-        <elementListCompartment Id="fd07e3b7-b48e-4da3-b74b-a34b2cd27555" absoluteBounds="3.515, 4.96, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a94cbd0f-53d6-4d40-a38b-470dc8bee34f" absoluteBounds="3.515, 6.71, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fd59ceea-6a59-44df-b9e3-e1c686c7a7aa" absoluteBounds="6.25, 4, 2, 1.7708968098958326">
+    <classShape Id="35d49784-f4e2-49d1-bb3d-7be5400f4777" absoluteBounds="6.25, 6.875, 2, 1.7708968098958326">
       <DataClassMoniker Name="/ColitasFelicesDataContext/cuenta_permiso" />
       <nestedChildShapes>
-        <elementListCompartment Id="2641ad22-6c4d-4a02-9c78-1bba1ff1ef71" absoluteBounds="6.265, 4.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="0724ab37-6c9f-45ca-aa2c-80b441e3a817" absoluteBounds="6.265, 7.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a0546c13-91e7-4ab6-b3f7-0364052d54ff" absoluteBounds="9.25, 11.875, 2, 2.1554996744791666">
+    <classShape Id="ac700ba2-f568-4e8b-ad15-6d4d74961187" absoluteBounds="6.25, 3.5, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/ColitasFelicesDataContext/cuenta_token_recuperacion" />
+      <nestedChildShapes>
+        <elementListCompartment Id="db84eea6-f798-4406-9f0a-1e24dae342d5" absoluteBounds="6.265, 3.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="dbbaa385-49df-4f7b-97d9-5aade32e48e0" absoluteBounds="6.25, 9.5, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/ColitasFelicesDataContext/cuenta_token_sesion" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cc670314-0757-4ef4-b7d3-adb642185c78" absoluteBounds="6.265, 9.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="aac8098c-5755-47d6-9b97-191be24bb087" absoluteBounds="9.25, 13.625, 2, 2.1554996744791666">
       <DataClassMoniker Name="/ColitasFelicesDataContext/documento_perfil" />
       <nestedChildShapes>
-        <elementListCompartment Id="b399dc50-b914-4fab-9270-a13cc7ab30a8" absoluteBounds="9.265, 12.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="af40a2e2-78e3-4280-a779-c06d63cdfd2c" absoluteBounds="9.265, 14.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="eb1b8f22-dfbc-429b-865d-e82beef37460" absoluteBounds="3.5, 1, 2, 1.9631982421875003">
-      <DataClassMoniker Name="/ColitasFelicesDataContext/permiso" />
-      <nestedChildShapes>
-        <elementListCompartment Id="042e7f95-b112-4603-b64b-a045c1610b19" absoluteBounds="3.515, 1.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="391f0c47-7744-4768-a52a-432e8ab2a8ba" absoluteBounds="6.25, 7.25, 2, 2.3478011067708344">
-      <DataClassMoniker Name="/ColitasFelicesDataContext/recuperacion_password" />
-      <nestedChildShapes>
-        <elementListCompartment Id="33687c84-4eb5-4eea-b5fb-a8feed02977f" absoluteBounds="6.265, 7.71, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="445cfda6-1225-4f05-8c89-ae34a3a5ab47" absoluteBounds="0.75, 8.75, 2, 3.6939111328124987">
-      <DataClassMoniker Name="/ColitasFelicesDataContext/registro_temporal" />
-      <nestedChildShapes>
-        <elementListCompartment Id="0323abae-e52e-4677-b014-3e4680ef49d5" absoluteBounds="0.765, 9.21, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="4eecaec3-559f-47ee-bbab-b55ae81abc12" absoluteBounds="12, 5, 2, 1.9631982421875005">
-      <DataClassMoniker Name="/ColitasFelicesDataContext/rel_perfil_documento" />
-      <nestedChildShapes>
-        <elementListCompartment Id="88d61287-a37b-40e4-be0d-f5ced54a287b" absoluteBounds="12.015, 5.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="1e1fd0ba-4753-4471-b490-73432650d4d7" absoluteBounds="0.75, 5.125, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/ColitasFelicesDataContext/rol" />
-      <nestedChildShapes>
-        <elementListCompartment Id="664c27e5-f7d7-4aef-99b1-0ca59792fd00" absoluteBounds="0.765, 5.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="6ee969ef-5eb8-4a1c-a353-2cbade6e26db" absoluteBounds="6.5, 12, 2, 1.7708968098958344">
-      <DataClassMoniker Name="/ColitasFelicesDataContext/tipo_documento" />
-      <nestedChildShapes>
-        <elementListCompartment Id="a79cca77-e230-4593-9d42-388686fe4581" absoluteBounds="6.515, 12.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="2238e3c3-2822-4373-b214-bb98d9c8b1e4" absoluteBounds="6.5, 1, 2, 1.9631982421875003">
-      <DataClassMoniker Name="/ColitasFelicesDataContext/tipo_identificacion" />
-      <nestedChildShapes>
-        <elementListCompartment Id="93abcd47-c403-4e3e-9999-5ee7c62b6769" absoluteBounds="6.515, 1.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(5.5 : 5.13544840494792); (6.25 : 5.13544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ColitasFelicesDataContext/cuenta/cuenta_cuenta_permiso" />
-      <nodes>
-        <classShapeMoniker Id="b55d06fc-f94f-4748-a211-b38e73543f3a" />
-        <classShapeMoniker Id="fd59ceea-6a59-44df-b9e3-e1c686c7a7aa" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 4.75522420247396); (6.25 : 4.75522420247396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ColitasFelicesDataContext/cuenta/cuenta_cuenta_permiso1" />
-      <nodes>
-        <classShapeMoniker Id="b55d06fc-f94f-4748-a211-b38e73543f3a" />
-        <classShapeMoniker Id="fd59ceea-6a59-44df-b9e3-e1c686c7a7aa" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 2.9631982421875); (5.875 : 3.3381982421875); (5.875 : 4.34636010123698); (6.25 : 4.34636010123698)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ColitasFelicesDataContext/permiso/permiso_cuenta_permiso" />
-      <nodes>
-        <classShapeMoniker Id="eb1b8f22-dfbc-429b-865d-e82beef37460" />
-        <classShapeMoniker Id="fd59ceea-6a59-44df-b9e3-e1c686c7a7aa" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(4.5 : 7.42470540364583); (4.5 : 8.51125375520833); (6.25 : 8.51125375520833)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ColitasFelicesDataContext/cuenta/cuenta_recuperacion_password" />
-      <nodes>
-        <classShapeMoniker Id="b55d06fc-f94f-4748-a211-b38e73543f3a" />
-        <classShapeMoniker Id="391f0c47-7744-4768-a52a-432e8ab2a8ba" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(11.25 : 12.9527498372396); (13 : 12.9527498372396); (13 : 6.9631982421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ColitasFelicesDataContext/documento_perfil/documento_perfil_rel_perfil_documento" />
-      <nodes>
-        <classShapeMoniker Id="a0546c13-91e7-4ab6-b3f7-0364052d54ff" />
-        <classShapeMoniker Id="4eecaec3-559f-47ee-bbab-b55ae81abc12" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 6.7973046875); (12 : 6.7973046875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/ColitasFelicesDataContext/cuenta/cuenta_rel_perfil_documento" />
-      <nodes>
-        <classShapeMoniker Id="b55d06fc-f94f-4748-a211-b38e73543f3a" />
-        <classShapeMoniker Id="4eecaec3-559f-47ee-bbab-b55ae81abc12" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 5.91429768880208); (3.5 : 5.91429768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ColitasFelicesDataContext/rol/rol_cuenta" />
-      <nodes>
-        <classShapeMoniker Id="1e1fd0ba-4753-4471-b490-73432650d4d7" />
-        <classShapeMoniker Id="b55d06fc-f94f-4748-a211-b38e73543f3a" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(8.5 : 12.8854484049479); (9.25 : 12.8854484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ColitasFelicesDataContext/tipo_documento/tipo_documento_documento_perfil" />
-      <nodes>
-        <classShapeMoniker Id="6ee969ef-5eb8-4a1c-a353-2cbade6e26db" />
-        <classShapeMoniker Id="a0546c13-91e7-4ab6-b3f7-0364052d54ff" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="896580ac-781d-486d-a548-bdf2adb84e27" absoluteBounds="9.125, 2.875, 2, 3.6939111328124996">
+    <classShape Id="cbe26e67-d7eb-4aac-b67f-3415a21461b5" absoluteBounds="9.25, 5.875, 2, 3.6939111328124978">
       <DataClassMoniker Name="/ColitasFelicesDataContext/perfil" />
       <nestedChildShapes>
-        <elementListCompartment Id="30999c4c-ae5e-4eaf-8e27-22e23a26ffe2" absoluteBounds="9.14, 3.335, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4acd402f-dafa-4c53-97df-03c6cfb1f365" absoluteBounds="9.265, 6.335, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(11.125 : 5.78445556640625); (12 : 5.78445556640625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/ColitasFelicesDataContext/perfil/perfil_rel_perfil_documento" />
+    <classShape Id="7eb2b492-fe53-4fe2-818e-9f228c48086b" absoluteBounds="3.5, 10.75, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/ColitasFelicesDataContext/permiso" />
+      <nestedChildShapes>
+        <elementListCompartment Id="765437eb-b7f0-44df-99c7-214c7a5e5229" absoluteBounds="3.515, 11.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="061555bd-112f-4e72-8052-a34f055edf55" absoluteBounds="9.75, 0.875, 2, 3.6939111328124996">
+      <DataClassMoniker Name="/ColitasFelicesDataContext/registro_temporal" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f98dd0d9-3414-4286-9d5b-4e1c92465ab4" absoluteBounds="9.765, 1.335, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c33c2d6e-1dea-4930-b8c6-d69e2bc510fd" absoluteBounds="12, 6.75, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/ColitasFelicesDataContext/rel_perfil_documento" />
+      <nestedChildShapes>
+        <elementListCompartment Id="03fd6c46-910e-494a-a536-20e66abe2cce" absoluteBounds="12.015, 7.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d080ba36-b359-4aec-9947-9e101e5a48c0" absoluteBounds="0.75, 7, 2, 1.5785953776041657">
+      <DataClassMoniker Name="/ColitasFelicesDataContext/rol" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3860740f-ae2a-4c42-823d-7122fbfe1da5" absoluteBounds="0.765, 7.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fa0194dc-8ed1-4090-8ef9-2dd08e5d3f9b" absoluteBounds="6.5, 13.875, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/ColitasFelicesDataContext/tipo_documento" />
+      <nestedChildShapes>
+        <elementListCompartment Id="476da2da-5399-422f-9e6e-f0de96755c8b" absoluteBounds="6.515, 14.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a59c158e-52a3-492a-8537-1182007a47b1" absoluteBounds="6.5, 0.75, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/ColitasFelicesDataContext/tipo_identificacion" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a3c4539c-47ab-452f-875c-ab9939a9b502" absoluteBounds="6.515, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d9df2b6f-60d7-4c13-9cfc-d7423c77c8e9" absoluteBounds="3.5, 3, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ColitasFelicesDataContext/token_tipo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5025deba-75e0-4eeb-b00f-a3804cda8f4b" absoluteBounds="3.515, 3.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5 : 7.76044840494792); (5.66666666666667 : 7.76044840494792 : JumpStart); (5.83333333333333 : 7.76044840494792 : JumpEnd); (5.85416666666667 : 7.76044840494792 : JumpStart); (6.02083333333333 : 7.76044840494792 : JumpEnd); (6.25 : 7.76044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ColitasFelicesDataContext/cuenta/cuenta_cuenta_permiso" />
       <nodes>
-        <classShapeMoniker Id="896580ac-781d-486d-a548-bdf2adb84e27" />
-        <classShapeMoniker Id="4eecaec3-559f-47ee-bbab-b55ae81abc12" />
+        <classShapeMoniker Id="dde063e6-d984-449e-877d-169dff4c9813" />
+        <classShapeMoniker Id="35d49784-f4e2-49d1-bb3d-7be5400f4777" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 6.20115397135417); (9.125 : 6.20115397135417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 7.25522420247396); (5.66666666666667 : 7.25522420247396 : JumpStart); (5.83333333333333 : 7.25522420247396 : JumpEnd); (5.85416666666667 : 7.25522420247396 : JumpStart); (6.02083333333333 : 7.25522420247396 : JumpEnd); (6.25 : 7.25522420247396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ColitasFelicesDataContext/cuenta/cuenta_cuenta_permiso1" />
+      <nodes>
+        <classShapeMoniker Id="dde063e6-d984-449e-877d-169dff4c9813" />
+        <classShapeMoniker Id="35d49784-f4e2-49d1-bb3d-7be5400f4777" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 6.25); (5.875 : 5.875); (5.875 : 6.22280110677083); (5.87857443490112 : 6.21922667186971 : JumpStart); (5.99642556509888 : 6.10137554167196 : JumpEnd); (6.25 : 5.84780110677083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ColitasFelicesDataContext/cuenta/cuenta_cuenta_token_recuperacion" />
+      <nodes>
+        <classShapeMoniker Id="dde063e6-d984-449e-877d-169dff4c9813" />
+        <classShapeMoniker Id="ac700ba2-f568-4e8b-ad15-6d4d74961187" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 9.17470540364583); (5.875 : 9.54970540364583); (5.875 : 9.125); (5.87857443490112 : 9.12857443490112 : JumpStart); (5.99642556509888 : 9.24642556509888 : JumpEnd); (6.00357443490112 : 9.25357443490112 : JumpStart); (6.12142556509888 : 9.37142556509888 : JumpEnd); (6.25 : 9.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ColitasFelicesDataContext/cuenta/cuenta_cuenta_token_sesion" />
+      <nodes>
+        <classShapeMoniker Id="dde063e6-d984-449e-877d-169dff4c9813" />
+        <classShapeMoniker Id="dbbaa385-49df-4f7b-97d9-5aade32e48e0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 6.5625025); (5.85416666666667 : 6.5625025 : JumpStart); (6.02083333333333 : 6.5625025 : JumpEnd); (8.32291666666667 : 6.5625025 : JumpStart); (8.48958333333333 : 6.5625025 : JumpEnd); (8.91666666666667 : 6.5625025 : JumpStart); (9.08333333333333 : 6.5625025 : JumpEnd); (9.25 : 6.5625025)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ColitasFelicesDataContext/cuenta/cuenta_perfil" />
       <nodes>
-        <classShapeMoniker Id="b55d06fc-f94f-4748-a211-b38e73543f3a" />
-        <classShapeMoniker Id="896580ac-781d-486d-a548-bdf2adb84e27" />
+        <classShapeMoniker Id="dde063e6-d984-449e-877d-169dff4c9813" />
+        <classShapeMoniker Id="cbe26e67-d7eb-4aac-b67f-3415a21461b5" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.5 : 1.9374995); (10.125 : 1.9374995); (10.125 : 2.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 10.8119152522536); (5.87857443490112 : 10.4333408173525 : JumpStart); (5.99642556509888 : 10.3154896871547 : JumpEnd); (6.0625 : 10.2494152522536); (6.0625 : 8.23442460742188); (6.25 : 8.23442460742188)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ColitasFelicesDataContext/permiso/permiso_cuenta_permiso" />
+      <nodes>
+        <classShapeMoniker Id="7eb2b492-fe53-4fe2-818e-9f228c48086b" />
+        <classShapeMoniker Id="35d49784-f4e2-49d1-bb3d-7be5400f4777" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 14.7027498372396); (13 : 14.7027498372396); (13 : 8.7131982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ColitasFelicesDataContext/documento_perfil/documento_perfil_rel_perfil_documento" />
+      <nodes>
+        <classShapeMoniker Id="aac8098c-5755-47d6-9b97-191be24bb087" />
+        <classShapeMoniker Id="c33c2d6e-1dea-4930-b8c6-d69e2bc510fd" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 7.73159912109375); (12 : 7.73159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ColitasFelicesDataContext/perfil/perfil_rel_perfil_documento" />
+      <nodes>
+        <classShapeMoniker Id="cbe26e67-d7eb-4aac-b67f-3415a21461b5" />
+        <classShapeMoniker Id="c33c2d6e-1dea-4930-b8c6-d69e2bc510fd" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 8.46757690429687); (5.75 : 8.46757690429687); (5.75 : 6.75); (5.85416666666667 : 6.75 : JumpStart); (6.02083333333333 : 6.75 : JumpEnd); (8.32291666666667 : 6.75 : JumpStart); (8.48958333333333 : 6.75 : JumpEnd); (9 : 6.75); (9 : 5.625); (13 : 5.625); (13 : 6.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ColitasFelicesDataContext/cuenta/cuenta_rel_perfil_documento" />
+      <nodes>
+        <classShapeMoniker Id="dde063e6-d984-449e-877d-169dff4c9813" />
+        <classShapeMoniker Id="c33c2d6e-1dea-4930-b8c6-d69e2bc510fd" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.78929768880208); (3.5 : 7.78929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ColitasFelicesDataContext/rol/rol_cuenta" />
+      <nodes>
+        <classShapeMoniker Id="d080ba36-b359-4aec-9947-9e101e5a48c0" />
+        <classShapeMoniker Id="dde063e6-d984-449e-877d-169dff4c9813" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 14.7604484049479); (9.25 : 14.7604484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ColitasFelicesDataContext/tipo_documento/tipo_documento_documento_perfil" />
+      <nodes>
+        <classShapeMoniker Id="fa0194dc-8ed1-4090-8ef9-2dd08e5d3f9b" />
+        <classShapeMoniker Id="aac8098c-5755-47d6-9b97-191be24bb087" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.40625 : 2.7131982421875); (8.40625 : 9.07294840494792); (9.25 : 9.07294840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ColitasFelicesDataContext/tipo_identificacion/tipo_identificacion_perfil" />
       <nodes>
-        <classShapeMoniker Id="2238e3c3-2822-4373-b214-bb98d9c8b1e4" />
-        <classShapeMoniker Id="896580ac-781d-486d-a548-bdf2adb84e27" />
+        <classShapeMoniker Id="a59c158e-52a3-492a-8537-1182007a47b1" />
+        <classShapeMoniker Id="cbe26e67-d7eb-4aac-b67f-3415a21461b5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.03929768880208); (6.25 : 4.03929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ColitasFelicesDataContext/token_tipo/token_tipo_cuenta_token_recuperacion" />
+      <nodes>
+        <classShapeMoniker Id="d9df2b6f-60d7-4c13-9cfc-d7423c77c8e9" />
+        <classShapeMoniker Id="ac700ba2-f568-4e8b-ad15-6d4d74961187" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.51666486663662); (5.9375 : 4.95416486663662); (5.9375 : 10.7051525533854); (6.25 : 10.7051525533854)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ColitasFelicesDataContext/token_tipo/token_tipo_cuenta_token_sesion" />
+      <nodes>
+        <classShapeMoniker Id="d9df2b6f-60d7-4c13-9cfc-d7423c77c8e9" />
+        <classShapeMoniker Id="dbbaa385-49df-4f7b-97d9-5aade32e48e0" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

@@ -21,25 +21,25 @@ namespace capa_datos
         public bool ExisteEmailEnCuenta(string email)
         {
             email = email.Trim().ToLower();
-            return db.cuenta.Any(c => c.Email == email);
+            return db.Cuenta.Any(c => c.Email == email);
         }
 
         #region REGISTRO TEMPORAL
         /// <summary>
         /// Obtiene registro temporal por email
         /// </summary>
-        public registro_temporal ObtenerRegistroTemporal(string email)
+        public Registro_temporal ObtenerRegistroTemporal(string email)
         {
             email = email.Trim().ToLower();
-            return db.registro_temporal.FirstOrDefault(r => r.Email == email);
+            return db.Registro_temporal.FirstOrDefault(r => r.Email == email);
         }
 
         /// <summary>
         /// Obtiene registro temporal por ID
         /// </summary>
-        public registro_temporal ObtenerRegistroTemporalPorID(int registroId)
+        public Registro_temporal ObtenerRegistroTemporalPorID(int registroId)
         {
-            return db.registro_temporal.FirstOrDefault(r => r.RegistroID == registroId);
+            return db.Registro_temporal.FirstOrDefault(r => r.RegistroID == registroId);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace capa_datos
         {
             try
             {
-                var registro = new registro_temporal
+                var registro = new Registro_temporal
                 {
                     Email = dto.Email.Trim().ToLower(),
                     PasswordHash = dto.PasswordHash,
@@ -65,7 +65,7 @@ namespace capa_datos
                     // CodigoExpiracion y FechaCreacion usan DEFAULT de la BD
                 };
 
-                db.registro_temporal.InsertOnSubmit(registro);
+                db.Registro_temporal.InsertOnSubmit(registro);
                 db.SubmitChanges();
 
                 return registro.RegistroID;
@@ -84,7 +84,7 @@ namespace capa_datos
         {
             try
             {
-                var registro = db.registro_temporal.FirstOrDefault(r => r.Email == correo);
+                var registro = db.Registro_temporal.FirstOrDefault(r => r.Email == correo);
                 if (registro == null) return false;
 
                 registro.CodigoVerificacion = nuevoCodigo;
@@ -106,12 +106,12 @@ namespace capa_datos
             try
             {
                 // Verificar que el email no esté en uso por otro usuario
-                bool emailOcupado = db.registro_temporal
+                bool emailOcupado = db.Registro_temporal
                     .Any(u => u.Email == nuevoEmail);
 
                 if (emailOcupado) return false;
 
-                var usuario = db.registro_temporal.FirstOrDefault(u => u.Email== antiguoEmail);
+                var usuario = db.Registro_temporal.FirstOrDefault(u => u.Email== antiguoEmail);
 
                 if (usuario == null) return false;
 
@@ -134,7 +134,7 @@ namespace capa_datos
         {
             try
             {
-                var registro = db.registro_temporal.FirstOrDefault(r => r.RegistroID == registroId);
+                var registro = db.Registro_temporal.FirstOrDefault(r => r.RegistroID == registroId);
                 if (registro == null) return false;
 
                 registro.Intentos = (byte)(registro.Intentos + 1);
@@ -155,10 +155,10 @@ namespace capa_datos
         {
             try
             {
-                var registro = db.registro_temporal.FirstOrDefault(r => r.RegistroID == registroId);
+                var registro = db.Registro_temporal.FirstOrDefault(r => r.RegistroID == registroId);
                 if (registro == null) return false;
 
-                db.registro_temporal.DeleteOnSubmit(registro);
+                db.Registro_temporal.DeleteOnSubmit(registro);
                 db.SubmitChanges();
                 return true;
             }

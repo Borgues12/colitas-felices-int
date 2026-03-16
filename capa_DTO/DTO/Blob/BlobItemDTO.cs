@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace capa_DTO.DTO.DTO_BLOB
+namespace capa_DTO.DTO.Blob
 {
     public class BlobItemDTO
     {

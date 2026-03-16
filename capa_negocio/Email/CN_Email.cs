@@ -4,6 +4,7 @@ using Google.Apis.Gmail.v1;
 using Google.Apis.Gmail.v1.Data;
 using Google.Apis.Services;
 using MimeKit;
+using capa_negocio.Email;
 using System;
 using System.Configuration;
 using System.IO;
@@ -107,100 +108,52 @@ namespace capa_negocio
 
         public static async Task<EmailResultado> Verificacion(string email, string nombre, string codigo)
         {
-            string contenido = $@"
-        <p style='margin:0 0 16px 0;'>Hola <strong>{nombre}</strong>,</p>
-        <p style='margin:0 0 24px 0;'>Tu código de verificación es:</p>
-        <div style='background:#6f42c1; color:#ffffff; padding:20px; border-radius:12px; text-align:center; margin:0 0 24px 0;'>
-            <span style='font-size:32px; font-weight:700; letter-spacing:8px;'>{codigo}</span>
-        </div>
-        <p style='margin:0 0 8px 0; color:#666; font-size:14px;'>
-            ⏱️ Este código expira en <strong>15 minutos</strong>.
-        </p>
-        <p style='margin:0; color:#999; font-size:13px;'>
-            Si no solicitaste este código, ignora este mensaje.
-        </p>";
+            string html = PlantillaCorreo.Verificacion(nombre, codigo);
+            bool enviado = await EnviarInterno(email, nombre,
+                "Verifica tu cuenta - Colitas Felices", html,
+                "Colitas Felices - Cuenta");
 
-            return await Enviar(email, nombre, "Código de verificación", "Verifica tu cuenta", contenido, TipoEmail.Autenticacion);
+            return new EmailResultado
+            {
+                Exitoso = enviado,
+                Mensaje = enviado ? "Correo enviado correctamente" : "Error al enviar correo"
+            };
         }
+
 
         public static async Task<EmailResultado> Recuperacion(string email, string nombre, string codigo)
         {
-            string contenido = $@"
-                <p>Hola <strong>{nombre}</strong>,</p>
-                <p>Recibimos una solicitud para restablecer tu contraseña. Tu código es:</p>
-                <div style='background: #dc3545; color: white; padding: 20px; border-radius: 8px; text-align: center; font-size: 32px; letter-spacing: 5px; margin: 20px 0;'>
-                    {codigo}
-                </div>
-                <p>Este código expira en <strong>15 minutos</strong>.</p>
-                <p style='color: #666; font-size: 14px;'>Si no solicitaste este cambio, ignora este mensaje.</p>";
+            string html = PlantillaCorreo.Recuperacion(nombre, codigo);
+            bool enviado = await EnviarInterno(email, nombre,
+                "Recupera tu contrasena - Colitas Felices", html,
+                "Colitas Felices - Cuenta");
 
-            return await Enviar(email, nombre, "Recupera tu contraseña - Colitas Felices", "Recupera tu contraseña", contenido, TipoEmail.Autenticacion);
+            return new EmailResultado
+            {
+                Exitoso = enviado,
+                Mensaje = enviado ? "Correo enviado correctamente" : "Error al enviar correo"
+            };
         }
 
         public static async Task<EmailResultado> Bienvenida(string email, string nombre)
         {
-            string contenido = $@"
-                <p>Hola <strong>{nombre}</strong>,</p>
-                <p>¡Tu cuenta ha sido verificada exitosamente! 🎉</p>
-                <p>Ahora puedes:</p>
-                <div style='text-align: left; background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;'>
-                    <p style='margin: 8px 0;'>🐕 Ver mascotas disponibles para adopción</p>
-                    <p style='margin: 8px 0;'>❤️ Apadrinar a un peludo</p>
-                    <p style='margin: 8px 0;'>🤝 Registrarte como voluntario</p>
-                    <p style='margin: 8px 0;'>💝 Realizar donaciones</p>
-                </div>
-                <p>Gracias por unirte a nuestra familia.</p>";
+            string html = PlantillaCorreo.Bienvenida(nombre);
+            bool enviado = await EnviarInterno(email, nombre,
+                "Bienvenido a Colitas Felices", html,
+                "Colitas Felices");
 
-            return await Enviar(email, nombre, "¡Bienvenido a Colitas Felices!", "¡Bienvenido!", contenido, TipoEmail.Autenticacion);
-        }
-
-        public static async Task<EmailResultado> ConfirmacionDonacion(string email, string nombre, decimal monto, string referencia)
-        {
-            string contenido = $@"
-                <p>Hola <strong>{nombre}</strong>,</p>
-                <p>Hemos recibido tu generosa donación:</p>
-                <div style='background: #28a745; color: white; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;'>
-                    <div style='font-size: 14px;'>Monto recibido</div>
-                    <div style='font-size: 36px; font-weight: bold;'>${monto:N2}</div>
-                    <div style='font-size: 12px; margin-top: 10px;'>Referencia: {referencia}</div>
-                </div>
-                <p>Tu aporte nos ayuda a alimentar y cuidar a más de 90 peludos rescatados.</p>
-                <p>¡Gracias por ser parte de esta causa! 🐾</p>";
-
-            return await Enviar(email, nombre, "Gracias por tu donación - Colitas Felices", "¡Gracias por tu donación!", contenido, TipoEmail.Pago);
-        }
-
-        public static async Task<EmailResultado> SolicitudAdopcion(string email, string nombre, string nombreMascota)
-        {
-            string contenido = $@"
-                <p>Hola <strong>{nombre}</strong>,</p>
-                <p>Hemos recibido tu solicitud para adoptar a <strong>{nombreMascota}</strong>.</p>
-                <div style='background: #e7f3ff; padding: 15px; border-radius: 8px; margin: 20px 0;'>
-                    <p style='margin: 0;'><strong>¿Qué sigue?</strong></p>
-                    <p style='margin: 10px 0 0 0;'>Nuestro equipo revisará tu solicitud y te contactaremos en las próximas 48-72 horas.</p>
-                </div>
-                <p>¡Gracias por elegir adoptar! 🐾</p>";
-
-            return await Enviar(email, nombre, $"Solicitud de adopción: {nombreMascota}", "Solicitud Recibida", contenido, TipoEmail.Adopcion);
-        }
-
-        public static async Task<EmailResultado> Prueba(string email)
-        {
-            string contenido = $@"
-                <p>¡La integración con Gmail API está funcionando!</p>
-                <div style='background: #d4edda; padding: 15px; border-radius: 8px; margin: 15px 0;'>
-                    <p style='margin: 0;'><strong>📅 Fecha:</strong> {DateTime.Now:dd/MM/yyyy}</p>
-                    <p style='margin: 5px 0 0 0;'><strong>🕐 Hora:</strong> {DateTime.Now:HH:mm:ss}</p>
-                </div>";
-
-            return await Enviar(email, "Administrador", "🧪 Test exitoso", "✅ Integración Exitosa", contenido, TipoEmail.Notificacion);
+            return new EmailResultado
+            {
+                Exitoso = enviado,
+                Mensaje = enviado ? "Correo enviado correctamente" : "Error al enviar correo"
+            };
         }
 
         // ═══════════════════════════════════════════════════════════════
         // MÉTODOS PRIVADOS
         // ═══════════════════════════════════════════════════════════════
 
-        private static GmailService GetGmailService()
+        private static async Task<GmailService> GetGmailService()
         {
             var flow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
             {
@@ -215,6 +168,9 @@ namespace capa_negocio
             var token = new Google.Apis.Auth.OAuth2.Responses.TokenResponse { RefreshToken = RefreshToken };
             var credential = new UserCredential(flow, "user", token);
 
+            await credential.RefreshTokenAsync(System.Threading.CancellationToken.None);
+
+
             return new GmailService(new BaseClientService.Initializer
             {
                 HttpClientInitializer = credential,
@@ -226,7 +182,7 @@ namespace capa_negocio
         {
             try
             {
-                var service = GetGmailService();
+                var service = await GetGmailService();
                 var mensaje = new MimeMessage();
                 mensaje.From.Add(new MailboxAddress(nombreRemitente, EmailFrom));
                 mensaje.To.Add(new MailboxAddress(nombreDestinatario ?? "", destinatario));

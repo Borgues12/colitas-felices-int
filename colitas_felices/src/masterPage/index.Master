@@ -47,9 +47,9 @@
                         <i class="fas fa-heart"></i> Adopta <i class="fas fa-chevron-down arrow"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="Galeria.aspx">Ver Mascotas</a></li>
-                        <li><a href="ProcesoAdopcion.aspx">Proceso de Adopción</a></li>
-                        <li><a href="Requisitos.aspx">Requisitos</a></li>
+                        <li><a href='<%= ResolveUrl ("~/Adopta") %>'>Ver Mascotas</a></li>
+                        <li><a href='<%= ResolveUrl ("~/Adopta") %>'>Proceso de Adopción</a></li>
+                        <li><a href='<%= ResolveUrl ("~/Adopta") %>'>Requisitos</a></li>
                     </ul>
                 </li>
                 
@@ -225,7 +225,6 @@
             ripple: true
         });
     </script>
-    <script src='<%= ResolveUrl("~/src/js/pruebas.js") %>'></script>
     <asp:ContentPlaceHolder ID="scripts" runat="server"></asp:ContentPlaceHolder>
 </body>
 </html>

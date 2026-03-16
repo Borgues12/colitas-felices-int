@@ -271,7 +271,7 @@
                                 <input type="checkbox" id="chkRecordar" />
                                 <label for="chkRecordar">Recordarme</label>
                             </div>
-                            <a href="recuperar.aspx" class="link-forgot">¿Olvidaste tu contraseña?</a>
+                            <a href="Recuperar" class="link-forgot">¿Olvidaste tu contraseña?</a>
                         </div>
 
                         <asp:Button ID="btnLogin" runat="server"

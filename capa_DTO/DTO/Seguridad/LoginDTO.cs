@@ -12,4 +12,5 @@ namespace capa_DTO.DTO.Seguridad
         public byte RolID { get; set; }
         public string Email { get; set; }
     }
+
 }

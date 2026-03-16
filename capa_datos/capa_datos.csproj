@@ -98,10 +98,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLOB\BlobStorageDAL.cs" />
-    <Compile Include="CD_Cuenta.cs" />
-    <Compile Include="CD_Login_Registro123.cs" />
-    <Compile Include="CD_Perfil.cs" />
+    <Compile Include="Blob\BlobStorageDAL.cs" />
+    <Compile Include="Blob\CD_BlobStorage.cs" />
+    <Compile Include="Crud\CD_catalogo.cs" />
+    <Compile Include="Crud\CD_cuenta.cs" />
+    <Compile Include="Crud\CD_mascotaFoto.cs" />
+    <Compile Include="Crud\CD_Mascotas.cs" />
+    <Compile Include="Crud\CD_TipoToken.cs" />
     <Compile Include="Seguridad\CD_Login.cs" />
     <Compile Include="Seguridad\CD_LoginGoogle.cs" />
     <Compile Include="Seguridad\CD_Registro.cs" />
@@ -119,6 +122,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Seguridad\CD_TokenRecuperacion.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -144,6 +148,9 @@
       <Project>{f8f7759b-e6cd-4fa4-b4e4-1e1c3c3efa32}</Project>
       <Name>capa_dto</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DEBUG\sp.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,6 @@
 ﻿using capa_negocio;
 using System;
-using capa_dto.DTO;
+using capa_dto;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

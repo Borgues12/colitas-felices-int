@@ -41,14 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\DTO_BLOB\BlobItemDTO.cs" />
+    <Compile Include="DTO\Blob\BlobItemDTO.cs" />
+    <Compile Include="DTO\Crud\CuentaDTO.cs" />
+    <Compile Include="DTO\Crud\MascotasDTO.cs" />
     <Compile Include="DTO\notifyDTO.cs" />
-    <Compile Include="DTO\DTO_Login.cs" />
-    <Compile Include="DTO\DTO_Cuenta.cs" />
-    <Compile Include="DTO\DTO_Perfil.cs" />
-    <Compile Include="DTO\DTO_Seguridad.cs" />
     <Compile Include="DTO\Seguridad\GoogleUserDTO.cs" />
     <Compile Include="DTO\Seguridad\LoginDTO.cs" />
+    <Compile Include="DTO\Seguridad\RecuperacionDTO.cs" />
     <Compile Include="DTO\Seguridad\RegistroDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
