@@ -56,7 +56,14 @@ namespace capa_negocio.Blob
         {
             try
             {
+                //DEBUG TEMPORAL
+                Debug.WriteLine("=== SubirFotoMascota iniciando: " + nombreOriginal);
+
                 string ext = Path.GetExtension(nombreOriginal).ToLower();
+
+                //DEBUG TEMPORAL
+                Debug.WriteLine("Extension: " + ext);
+
                 if (!_extImagen.Contains(ext))
                 {
                     Debug.WriteLine("[CN_BlobStorage] Extensión no permitida: " + ext);
@@ -64,14 +71,25 @@ namespace capa_negocio.Blob
                 }
 
                 string nombreBlob = mascotaID + "/" + Guid.NewGuid().ToString("N") + ext;
+
+                //DEBUG TEMPORAL
+                Debug.WriteLine("NombreBlob: " + nombreBlob);
+
                 stream.Position = 0;
-                var task = _cd.SubirAsync(ContenedorMascotas, nombreBlob, stream, contentType);
-                task.Wait();
-                return task.Result;
+
+                string url = Task.Run(() =>
+                _cd.SubirAsync(ContenedorMascotas, nombreBlob, stream, contentType)).Result;
+
+                //DEBUG TEMPORAL
+                Debug.WriteLine("URL resultado: " + (url ?? "NULL"));
+
+                return url;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("[CN_BlobStorage] Error en SubirFotoMascota: " + ex.Message);
+                if (ex.InnerException != null)
+                    Debug.WriteLine("InnerException: " + ex.InnerException.Message);
                 return null;
             }
         }
@@ -180,9 +198,7 @@ namespace capa_negocio.Blob
                 string nombreBlob = uri.AbsolutePath.Substring(
                     uri.AbsolutePath.IndexOf(prefix) + prefix.Length);
 
-                var task = _cd.EliminarAsync(contenedor, nombreBlob);
-                task.Wait();
-                return task.Result;
+                return Task.Run(() => _cd.EliminarAsync(contenedor, nombreBlob)).Result;
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
-﻿using capa_DTO.DTO.Crud;
+﻿using capa_datos;
+using capa_DTO.DTO.Crud;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -173,6 +174,34 @@ namespace capa_datos.Crud
             {
                 Debug.WriteLine("[CD_Catalogo] Error en GuardarRazasDesdeApi: " + ex.Message);
                 return false;
+            }
+        }
+
+
+        // Método agregado — razas filtradas por especie para el dropdown del formulario
+        public List<DTO_Raza> ObtenerRazasPorEspecie(byte especieID)
+        {
+            try
+            {
+                using (var db = new ColitasFelicesDataContext())
+                {
+                    return db.Raza
+                        .Where(r => r.Activo && r.EspecieID == especieID)
+                        .OrderBy(r => r.Nombre)
+                        .Select(r => new DTO_Raza
+                        {
+                            RazaID = r.RazaID,
+                            EspecieID = r.EspecieID,
+                            Nombre = r.Nombre,
+                            Activo = r.Activo
+                        })
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("[CD_Catalogo] Error en ObtenerRazasPorEspecie: " + ex.Message);
+                return new List<DTO_Raza>();
             }
         }
     }

@@ -89,13 +89,16 @@ namespace capa_negocio.Mascotas
 
                     foreach (var foto in fotos)
                     {
+                       
                         if (foto == null || foto.Stream == null) continue;
 
+                        Debug.WriteLine("Archivo: " + foto.NombreArchivo + " | Stream null: " + (foto.Stream == null));
                         string url = _blob.SubirFotoMascota(
                             foto.Stream,
                             foto.ContentType,
                             foto.NombreArchivo,
                             mascotaID);
+                        Debug.WriteLine("URL resultado: " + (url ?? "NULL"));
 
                         if (url == null) continue;
 
@@ -113,12 +116,20 @@ namespace capa_negocio.Mascotas
                         algunaSubio = true;
                         orden++;
                     }
+                    
 
                     if (!algunaSubio)
                         return notifyVarDTO.ExitoConCodigo(
                             "Mascota guardada, pero no se pudieron subir las fotos.",
                             mascotaID);
                 }
+                else
+                {
+                    Debug.WriteLine("=== NO LLEGARON FOTOS AL NEGOCIO");
+                }
+
+
+
 
                 return notifyVarDTO.ExitoConCodigo("Mascota registrada correctamente.", mascotaID);
             }

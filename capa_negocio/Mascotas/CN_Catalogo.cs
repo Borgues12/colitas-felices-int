@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace capa_negocio.Mascotas
+namespace capa_negocio.Crud
 {
     public class CN_Catalogo
     {
@@ -49,5 +49,15 @@ namespace capa_negocio.Mascotas
                 return new List<DTO_CondicionEspecial>();
             }
         }
-    }
+        // Método agregado — razas filtradas por especie
+        public List<DTO_Raza> ObtenerRazasPorEspecie(byte especieID)
+                {
+                    try { return _cdCatalogo.ObtenerRazasPorEspecie(especieID); }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("[CN_Catalogo] Error en ObtenerRazasPorEspecie: " + ex.Message);
+                        return new List<DTO_Raza>();
+                    }
+                }
+            }
 }

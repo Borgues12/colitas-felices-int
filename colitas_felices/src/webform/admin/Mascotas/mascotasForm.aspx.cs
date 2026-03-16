@@ -1,13 +1,12 @@
 ﻿using capa_dto;
-using capa_DTO.DTO.Crud;
 using capa_negocio.Mascotas;
+using capa_negocio.Crud;
+using capa_DTO.DTO.Crud;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Script.Serialization;
-using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
+using System.Diagnostics;
 
 namespace colitas_felices.src.webform.admin.Mascotas
 {
@@ -16,46 +15,74 @@ namespace colitas_felices.src.webform.admin.Mascotas
         private readonly CN_Mascotas _cn = new CN_Mascotas();
         private readonly CN_Catalogo _cnCatalogo = new CN_Catalogo();
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            GenerarRazasJson();
-
             if (!IsPostBack)
-                CargarCatalogos();
+            {
+                CargarEspecies();
+                CargarEstados();
+                CargarCondiciones();
+                CargarRazas(0); // Sin filtro — dropdown vacío hasta que elijan especie
+            }
         }
 
         // ============================================================
-        // CARGA DE CATÁLOGOS
+        // CATÁLOGOS
         // ============================================================
 
-        private void CargarCatalogos()
+        private void CargarEspecies()
         {
-            // Especies
             var especies = _cnCatalogo.ObtenerEspecies();
             ddlEspecie.Items.Clear();
             ddlEspecie.Items.Add(new ListItem("Seleccione...", "0"));
             foreach (var e in especies)
                 ddlEspecie.Items.Add(new ListItem(e.Nombre, e.EspecieID.ToString()));
+        }
 
-            // Estados
+        private void CargarRazas(byte especieID)
+        {
+            ddlRaza.Items.Clear();
+
+            if (especieID == 0)
+            {
+                ddlRaza.Items.Add(new ListItem("Seleccione especie primero", "0"));
+                ddlRaza.Enabled = false;
+                return;
+            }
+
+            var razas = _cnCatalogo.ObtenerRazasPorEspecie(especieID);
+            ddlRaza.Items.Add(new ListItem("Seleccione...", "0"));
+            foreach (var r in razas)
+                ddlRaza.Items.Add(new ListItem(r.Nombre, r.RazaID.ToString()));
+
+            ddlRaza.Enabled = true;
+        }
+
+        private void CargarEstados()
+        {
             var estados = _cnCatalogo.ObtenerEstadosMascota();
             ddlEstado.Items.Clear();
             ddlEstado.Items.Add(new ListItem("Seleccione...", "0"));
             foreach (var e in estados)
                 ddlEstado.Items.Add(new ListItem(e.Nombre, e.EstadoMascotaID.ToString()));
+        }
 
-            // Condiciones
+        private void CargarCondiciones()
+        {
             var condiciones = _cnCatalogo.ObtenerCondiciones();
             cblCondiciones.Items.Clear();
             foreach (var c in condiciones)
                 cblCondiciones.Items.Add(new ListItem(c.Nombre, c.CondicionID.ToString()));
         }
 
-        private void GenerarRazasJson()
+        // ============================================================
+        // EVENTO — cambio de especie recarga razas desde BD
+        // ============================================================
+
+        protected void ddlEspecie_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var razas = _cnCatalogo.ObtenerRazas();
-            litRazasJson.Text = new JavaScriptSerializer().Serialize(razas);
+            byte.TryParse(ddlEspecie.SelectedValue, out byte especieID);
+            CargarRazas(especieID);
         }
 
         // ============================================================
@@ -64,7 +91,6 @@ namespace colitas_felices.src.webform.admin.Mascotas
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            // Armar DTO
             var dto = new MascotaDto
             {
                 Nombre = txtNombre.Text.Trim(),
@@ -97,32 +123,64 @@ namespace colitas_felices.src.webform.admin.Mascotas
             if (dto.Esterilizado && DateTime.TryParse(txtFechaEsterilizacion.Text, out DateTime fechaEst))
                 dto.FechaEsterilizacion = fechaEst;
 
-            // Condiciones seleccionadas
             dto.CondicionesSeleccionadas = new List<short>();
             foreach (ListItem item in cblCondiciones.Items)
                 if (item.Selected && short.TryParse(item.Value, out short cid))
                     dto.CondicionesSeleccionadas.Add(cid);
 
-            // Fotos — extraer Stream desde cada FileUpload
             var fotos = new List<MascotasFotoStreamDto>();
-            AgregarFoto(fotos, fuFoto1);
-            AgregarFoto(fotos, fuFoto2);
-            AgregarFoto(fotos, fuFoto3);
-            AgregarFoto(fotos, fuFoto4);
-            AgregarFoto(fotos, fuFoto5);
+            var archivos = fuFotos.PostedFiles; // múltiples archivos del mismo FileUpload
 
-            // Llamar al negocio
+
+            // DEBUG TEMPORAL
+            System.Diagnostics.Debug.WriteLine("=== PostedFiles.Count: " + archivos.Count);
+            System.Diagnostics.Debug.WriteLine("=== Request.Files.Count: " + Request.Files.Count);
+
+            for (int i = 0; i < Request.Files.Count; i++)
+                System.Diagnostics.Debug.WriteLine("  File[" + i + "]: '" +
+                    Request.Files[i].FileName + "' size: " + Request.Files[i].ContentLength);
+
+            foreach (var archivo in archivos)
+            {
+                if (archivo != null && archivo.ContentLength > 0)
+                    fotos.Add(new MascotasFotoStreamDto
+                    {
+                        Stream = archivo.InputStream,
+                        ContentType = archivo.ContentType,
+                        NombreArchivo = archivo.FileName
+                    });
+                if (fotos.Count == 5) break;
+            }
+
+            //DEBUG
+            System.Diagnostics.Debug.WriteLine("=== GUARDAR MASCOTA ===");
+            System.Diagnostics.Debug.WriteLine("Nombre: " + dto.Nombre);
+            System.Diagnostics.Debug.WriteLine("EspecieID: " + dto.EspecieID);
+            System.Diagnostics.Debug.WriteLine("RazaID: " + dto.RazaID);
+            System.Diagnostics.Debug.WriteLine("Sexo: " + dto.Sexo);
+            System.Diagnostics.Debug.WriteLine("Tamanio: " + dto.Tamanio);
+            System.Diagnostics.Debug.WriteLine("Color: " + dto.Color);
+            System.Diagnostics.Debug.WriteLine("EstadoID: " + dto.EstadoMascotaID);
+
             notifyVarDTO resultado = _cn.Insertar(dto, fotos);
 
-            MostrarResultado(resultado);
+            //DEBUG
+            System.Diagnostics.Debug.WriteLine("Resultado: " + resultado.resultado);
+            System.Diagnostics.Debug.WriteLine("Mensaje: " + resultado.mensajeSalida);
 
+            MostrarResultado(resultado);
             if (resultado.resultado)
-                Response.Redirect("mascotas.aspx");
+            {
+                string url = ResolveUrl("~/MascotasAdmin");
+                string script = $"setTimeout(function(){{ window.location.href='{url}'; }}, 4000);";
+
+                ClientScript.RegisterStartupScript(this.GetType(), "redirect", script, true);
+            }
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("mascotas.aspx");
+            Response.Redirect("MascotasAdmin");
         }
 
         // ============================================================
@@ -132,7 +190,6 @@ namespace colitas_felices.src.webform.admin.Mascotas
         private void AgregarFoto(List<MascotasFotoStreamDto> lista, System.Web.UI.WebControls.FileUpload fu)
         {
             if (!fu.HasFile) return;
-
             lista.Add(new MascotasFotoStreamDto
             {
                 Stream = fu.PostedFile.InputStream,
