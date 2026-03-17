@@ -78,6 +78,15 @@ namespace colitas_felices.src.webform.admin.Mascotas
         protected global::System.Web.UI.WebControls.DropDownList ddlEstado;
 
         /// <summary>
+        /// Control pnlFechaExacta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlFechaExacta;
+
+        /// <summary>
         /// Control txtFechaNacimiento.
         /// </summary>
         /// <remarks>
@@ -85,6 +94,33 @@ namespace colitas_felices.src.webform.admin.Mascotas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFechaNacimiento;
+
+        /// <summary>
+        /// Control pnlEdadAprox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlEdadAprox;
+
+        /// <summary>
+        /// Control txtEdadAnios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEdadAnios;
+
+        /// <summary>
+        /// Control hfTipoEdad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfTipoEdad;
 
         /// <summary>
         /// Control txtMicrochip.

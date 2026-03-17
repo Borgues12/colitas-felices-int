@@ -305,7 +305,36 @@
                 </div>
                 <div class="field-group">
                     <label>Fecha de nacimiento (aprox.)</label>
-                    <asp:TextBox ID="txtFechaNacimiento" runat="server" TextMode="Date" />
+                    <div class="age-toggle">
+                        <label class="toggle-option">
+                            <input type="radio" name="tipoEdad" value="fecha" checked
+                                onchange="toggleEdad(this.value)" />
+                            Conozco la fecha exacta
+                        </label>
+                        <label class="toggle-option">
+                            <input type="radio" name="tipoEdad" value="aproximada"
+                                onchange="toggleEdad(this.value)" />
+                            No sé la fecha exacta
+                        </label>
+                    </div>
+                    <%-- Panel fecha exacta --%>
+                    <asp:Panel ID="pnlFechaExacta" runat="server">
+                        <asp:TextBox ID="txtFechaNacimiento" runat="server" TextMode="Date" />
+                    </asp:Panel>
+
+                    <%-- Panel edad aproximada --%>
+                    <asp:Panel ID="pnlEdadAprox" runat="server" Style="display: none;">
+                        <div class="edad-aprox-input">
+                            <asp:TextBox ID="txtEdadAnios" runat="server"
+                                TextMode="Number" placeholder="ej: 2"
+                                CssClass="input-anios" />
+                            <span>años</span>
+                        </div>
+                        <small>Se calculará como: hoy menos los años indicados</small>
+                    </asp:Panel>
+
+                    <%-- Campo oculto que indica al servidor cuál modo está activo --%>
+                    <asp:HiddenField ID="hfTipoEdad" runat="server" Value="fecha" />
                 </div>
                 <div class="field-group">
                     <label>N° microchip</label>
@@ -464,5 +493,22 @@
                 fileInput.files = dt.files;
             });
         })();
-</script>
+
+        //Funcion para utilizar la fecha exacta o edad aproximada
+        function toggleEdad(valor) {
+            // Buscar los paneles por sus IDs parciales con querySelector
+            var pnlFecha = document.querySelector('[id$="pnlFechaExacta"]');
+            var pnlAprox = document.querySelector('[id$="pnlEdadAprox"]');
+            var txtFecha = document.querySelector('[id$="txtFechaNacimiento"]');
+            var txtAnios = document.querySelector('[id$="txtEdadAnios"]');
+            var hfTipo = document.querySelector('[id$="hfTipoEdad"]');
+
+            pnlFecha.style.display = valor === 'fecha' ? '' : 'none';
+            pnlAprox.style.display = valor === 'aproximada' ? '' : 'none';
+            hfTipo.value = valor;
+
+            if (valor === 'fecha') txtAnios.value = '';
+            else txtFecha.value = '';
+        }
+    </script>
 </asp:Content>

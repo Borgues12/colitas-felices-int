@@ -117,8 +117,7 @@ namespace colitas_felices.src.webform.admin.Mascotas
             if (byte.TryParse(ddlEstado.SelectedValue, out byte estado) && estado != 0)
                 dto.EstadoMascotaID = estado;
 
-            if (DateTime.TryParse(txtFechaNacimiento.Text, out DateTime fechaNac))
-                dto.FechaNacimientoAprox = fechaNac;
+            dto.FechaNacimientoAprox = ObtenerFechaNacimiento();
 
             if (dto.Esterilizado && DateTime.TryParse(txtFechaEsterilizacion.Text, out DateTime fechaEst))
                 dto.FechaEsterilizacion = fechaEst;
@@ -172,7 +171,7 @@ namespace colitas_felices.src.webform.admin.Mascotas
             if (resultado.resultado)
             {
                 string url = ResolveUrl("~/MascotasAdmin");
-                string script = $"setTimeout(function(){{ window.location.href='{url}'; }}, 4000);";
+                string script = $"setTimeout(function(){{ window.location.href='{url}'; }}, 3000);";
 
                 ClientScript.RegisterStartupScript(this.GetType(), "redirect", script, true);
             }
@@ -198,9 +197,29 @@ namespace colitas_felices.src.webform.admin.Mascotas
             });
         }
 
+        //Sacar el ID de la Session
         private int ObtenerCuentaID()
         {
             return Session["CuentaID"] != null ? (int)Session["CuentaID"] : 1;
+        }
+
+        // El usuario puede ingresar una fecha exacta o una edad aproximada. Se valida y convierte a DateTime.
+        private DateTime? ObtenerFechaNacimiento()
+        {
+            string tipo = hfTipoEdad.Value;
+
+            if (tipo == "fecha")
+            {
+                if (DateTime.TryParse(txtFechaNacimiento.Text, out DateTime fechaExacta))
+                    return fechaExacta;
+            }
+            else if (tipo == "aproximada")
+            {
+                if (int.TryParse(txtEdadAnios.Text, out int anios) && anios >= 0 && anios <= 30)
+                    return DateTime.Today.AddYears(-anios);
+            }
+
+            return null; // Campo opcional — puede no saberse nada
         }
     }
 }
