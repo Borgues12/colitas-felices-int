@@ -1040,6 +1040,7 @@
   <ItemGroup>
     <Content Include="libman.json" />
     <Content Include="Helpers\GoogleAuth.ashx" />
+    <Content Include="AppSecrets.config" />
     <None Include="packages.config" />
     <Content Include="src\masterPage\index.Master" />
     <Content Include="src\masterPage\panel.Master" />
