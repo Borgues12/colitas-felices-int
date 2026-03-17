@@ -27,7 +27,7 @@ public class GoogleAuth : HttpTaskAsyncHandler, IRequiresSessionState
         // Usuario negó el permiso
         if (!string.IsNullOrEmpty(error))
         {
-            context.Response.Redirect("~/src/login-registro?v=login&error=google_cancelado");
+            context.Response.Redirect("~/iniciar_sesion?v=login&error=google_cancelado");
             return;
         }
 
@@ -53,7 +53,7 @@ public class GoogleAuth : HttpTaskAsyncHandler, IRequiresSessionState
 
             if (!resultado.resultado)
             {
-                context.Response.Redirect($"~/src/login-registro?v=login&error={Uri.EscapeDataString(resultado.mensajeSalida)}");
+                context.Response.Redirect($"~/iniciar_sesion?v=login&error={Uri.EscapeDataString(resultado.mensajeSalida)}");
                 return;
             }
 
@@ -70,7 +70,7 @@ public class GoogleAuth : HttpTaskAsyncHandler, IRequiresSessionState
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine("Error GoogleAuth: " + ex.Message);
-            context.Response.Redirect("~/src/login-registro?v=login&error=google_error");
+            context.Response.Redirect("~/iniciar_sesion?v=login&error=google_error");
         }
     }
 }
