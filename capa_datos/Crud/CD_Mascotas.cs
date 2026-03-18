@@ -301,5 +301,33 @@ namespace capa_datos.Crud
                 return false;
             }
         }
+
+        /// <summary>
+        /// Actualiza estado de una mascota
+        /// </summary>
+        public bool CambiarEstado(int mascotaID, byte estadoID)
+        {
+            try
+            {
+                using (var db = new ColitasFelicesDataContext())
+                {
+                    var mascota = db.Mascota.FirstOrDefault(m => m.MascotaID == mascotaID);
+                    if (mascota == null) return false;
+
+                    mascota.EstadoMascotaID = estadoID;
+                    mascota.FechaActualizacion = DateTime.Now;
+                    db.SubmitChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("[CD_Mascota] Error en CambiarEstado: " + ex.Message);
+                return false;
+            }
+        }
     }
+
+
+
 }

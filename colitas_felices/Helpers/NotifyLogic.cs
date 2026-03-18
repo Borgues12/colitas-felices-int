@@ -46,7 +46,7 @@ namespace colitas_felices
             }
 
             /// Muestra mensaje con tipo personalizado basado en notifyVarDTO
-            protected void MostrarResultado(notifyVarDTO resultado, string tipoExito = "success")
+            protected void MostrarMensajeVAR(notifyVarDTO resultado, string tipoExito = "success")
             {
                 string tipo = resultado.resultado ? tipoExito : "error";
                 MostrarMensaje(resultado.mensajeSalida, tipo);

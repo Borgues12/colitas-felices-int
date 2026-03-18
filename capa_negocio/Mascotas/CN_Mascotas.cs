@@ -46,99 +46,116 @@ namespace capa_negocio.Mascotas
                 return new List<MascotaDto>();
             }
         }
-        public notifyVarDTO Insertar(MascotaDto dto, IList<MascotasFotoStreamDto> fotos = null)
+
+        //METODO PARA CREAR NUEVAS MASCOTAS
+        public notifyDTO Insertar(MascotaDto dto)
         {
             try
             {
                 // ---- Validaciones ----
                 if (string.IsNullOrWhiteSpace(dto.Nombre))
-                    return notifyVarDTO.Error("El nombre es obligatorio.");
+                    return notifyDTO.Error("El nombre es obligatorio.");
 
                 if (dto.EspecieID == 0)
-                    return notifyVarDTO.Error("Debe seleccionar una especie.");
+                    return notifyDTO.Error("Debe seleccionar una especie.");
 
                 if (dto.RazaID == 0)
-                    return notifyVarDTO.Error("Debe seleccionar una raza.");
+                    return notifyDTO.Error("Debe seleccionar una raza.");
 
                 if (dto.Sexo == 0)
-                    return notifyVarDTO.Error("Debe seleccionar el sexo.");
+                    return notifyDTO.Error("Debe seleccionar el sexo.");
 
                 if (dto.Tamanio == 0)
-                    return notifyVarDTO.Error("Debe seleccionar el tamaño.");
+                    return notifyDTO.Error("Debe seleccionar el tamaño.");
 
                 if (string.IsNullOrWhiteSpace(dto.Color))
-                    return notifyVarDTO.Error("El color es obligatorio.");
+                    return notifyDTO.Error("El color es obligatorio.");
 
                 if (dto.EstadoMascotaID == 0)
-                    return notifyVarDTO.Error("Debe seleccionar un estado.");
+                    return notifyDTO.Error("Debe seleccionar un estado.");
 
                 if (dto.Esterilizado && !dto.FechaEsterilizacion.HasValue)
-                    return notifyVarDTO.Error("Si está esterilizado, ingrese la fecha.");
+                    return notifyDTO.Error("Si está esterilizado, ingrese la fecha.");
 
                 // ---- Insertar mascota en BD ----
                 int mascotaID = _cdMascota.Insertar(dto);
                 if (mascotaID == -1)
-                    return notifyVarDTO.Error("No se pudo guardar la mascota. Intente nuevamente.");
+                    return notifyDTO.Error("No se pudo guardar la mascota. Intente nuevamente.");
 
-                // ---- Subir fotos al blob ----
-                if (fotos != null && fotos.Count > 0)
-                {
-                    bool algunaSubio = false;
-                    bool esPrincipal = true;
-                    byte orden = 1;
-
-                    foreach (var foto in fotos)
-                    {
-                       
-                        if (foto == null || foto.Stream == null) continue;
-
-                        Debug.WriteLine("Archivo: " + foto.NombreArchivo + " | Stream null: " + (foto.Stream == null));
-                        string url = _blob.SubirFotoMascota(
-                            foto.Stream,
-                            foto.ContentType,
-                            foto.NombreArchivo,
-                            mascotaID);
-                        Debug.WriteLine("URL resultado: " + (url ?? "NULL"));
-
-                        if (url == null) continue;
-
-                        _cdFoto.Insertar(new MascotasFotoDto
-                        {
-                            MascotaID = mascotaID,
-                            NombreArchivo = foto.NombreArchivo,
-                            BlobUrl = url,
-                            EsPrincipal = esPrincipal,
-                            Orden = orden,
-                            SubidoPor = dto.RegistradoPor
-                        });
-
-                        esPrincipal = false;
-                        algunaSubio = true;
-                        orden++;
-                    }
-                    
-
-                    if (!algunaSubio)
-                        return notifyVarDTO.ExitoConCodigo(
-                            "Mascota guardada, pero no se pudieron subir las fotos.",
-                            mascotaID);
-                }
-                else
-                {
-                    Debug.WriteLine("=== NO LLEGARON FOTOS AL NEGOCIO");
-                }
-
-
-
-
-                return notifyVarDTO.ExitoConCodigo("Mascota registrada correctamente.", mascotaID);
+                return notifyDTO.Exito("Mascota registrada correctamente.");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("[CN_Mascotas] Error en Insertar: " + ex.Message);
-                return notifyVarDTO.Error("Error inesperado al guardar la mascota.");
+                return notifyDTO.Error("Error inesperado al guardar la mascota.");
             }
         }
 
+        //METODO PARA CONSULTAR DATOS DE UNA MASCOTA
+        public MascotaDto ObtenerPorId(int mascotaID)
+        {
+            return _cdMascota.ObtenerPorId(mascotaID);
+        }
+
+        //METODO PARA ACTUALIZAR UNA MASCOTA
+        public notifyDTO Actualizar(MascotaDto dto)
+        {
+            try
+            {
+                // ---- Validaciones (mismas que Insertar) ----
+                if (string.IsNullOrWhiteSpace(dto.Nombre))
+                    return notifyDTO.Error("El nombre es obligatorio.");
+
+                if (dto.EspecieID == 0)
+                    return notifyDTO.Error("Debe seleccionar una especie.");
+
+                if (dto.RazaID == 0)
+                    return notifyDTO.Error("Debe seleccionar una raza.");
+
+                if (dto.Sexo == 0)
+                    return notifyDTO.Error("Debe seleccionar el sexo.");
+
+                if (dto.Tamanio == 0)
+                    return notifyDTO.Error("Debe seleccionar el tamaño.");
+
+                if (string.IsNullOrWhiteSpace(dto.Color))
+                    return notifyDTO.Error("El color es obligatorio.");
+
+                if (dto.EstadoMascotaID == 0)
+                    return notifyDTO.Error("Debe seleccionar un estado.");
+
+                if (dto.Esterilizado && !dto.FechaEsterilizacion.HasValue)
+                    return notifyDTO.Error("Si está esterilizado, ingrese la fecha.");
+
+                // ---- Actualizar datos en BD ----
+                bool ok = _cdMascota.Actualizar(dto);
+                if (!ok)
+                    return notifyDTO.Error("No se pudo actualizar la mascota. Intente nuevamente.");
+
+                return notifyDTO.Exito("Mascota actualizada correctamente.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("[CN_Mascotas] Error en Actualizar: " + ex.Message);
+                return notifyDTO.Error("Error inesperado al actualizar la mascota.");
+            }
+        }
+
+        //METODO - CAMBIAR ESTADO
+        public notifyDTO CambiarEstado(int mascotaID, byte estadoID)
+        {
+            try
+            {
+                bool ok = _cdMascota.CambiarEstado(mascotaID, estadoID);
+                return ok
+                    ? notifyDTO.Exito("Estado actualizado.")
+                    : notifyDTO.Error("No se encontró la mascota.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("[CN_Mascotas] Error en CambiarEstado: " + ex.Message);
+                return notifyVarDTO.Error("Error inesperado al cambiar el estado.");
+            }
+        }
     }
 }

@@ -249,8 +249,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="form-wrapper">
-
-        <p class="form-title">Nueva mascota</p>
+        <asp:Label ID="lblTitulo" runat="server" CssClass="form-title"></asp:Label>
 
         <%-- SECCION: Datos basicos --%>
         <div class="form-section">
@@ -385,24 +384,6 @@
                 placeholder="Historia de la mascota, personalidad, necesidades..."
                 Style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 1px solid #ced4da; border-radius: 6px; font-size: 14px; resize: vertical;" />
         </div>
-
-        <%-- SECCION: Fotos --%>
-        <div class="form-section">
-            <p class="section-label">Fotos</p>
-            <p style="font-size: 12px; color: #6c757d; margin: -8px 0 1rem;">Máx. 5 imágenes — la primera será la principal</p>
-
-            <div id="dropZone" class="drop-zone">
-                <p>Arrastra las imágenes aquí</p>
-                <p class="sub">o haz clic para seleccionar</p>
-                <button type="button" onclick="document.getElementById('fileInputDrop').click()">Seleccionar archivos</button>
-                <asp:FileUpload ID="fuFotos" runat="server"
-                    accept=".jpg,.jpeg,.png,.webp"
-                    multiple="multiple"
-                    Style="display: none;" />
-            </div>
-            <div id="previewGrid" class="preview-grid"></div>
-            <p id="countMsg" class="count-msg"></p>
-        </div>
         <%-- BOTONES --%>
         <div class="btn-row">
             <asp:Button ID="btnCancelar" runat="server" Text="Cancelar"
@@ -421,8 +402,6 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="scripts" runat="server">
     <script>
         (function () {
-            var dropZone = document.getElementById('dropZone');
-            var fileInput = document.getElementById('<%= fuFotos.ClientID %>');
             var grid = document.getElementById('previewGrid');
             var countMsg = document.getElementById('countMsg');
             var MAX = 5;
@@ -480,10 +459,7 @@
             dropZone.addEventListener('click', function (e) {
                 if (e.target.tagName !== 'BUTTON') fileInput.click();
             });
-            fileInput.addEventListener('change', function () {
-                addFiles(fileInput.files);
-                fileInput.value = '';
-            });
+           
             // Asignar archivos al input de ASP.NET antes del postback
             document.getElementById('<%= btnGuardar.ClientID %>').addEventListener('click', function (e) {
                 if (files.length === 0) return;

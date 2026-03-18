@@ -1041,6 +1041,8 @@
     <Content Include="libman.json" />
     <Content Include="Helpers\GoogleAuth.ashx" />
     <Content Include="AppSecrets.config" />
+    <Content Include="Handlers\FotosMascotaHandler.ashx" />
+    <Content Include="Handlers\MascotaEstadoHandler.ashx" />
     <None Include="packages.config" />
     <Content Include="src\masterPage\index.Master" />
     <Content Include="src\masterPage\panel.Master" />

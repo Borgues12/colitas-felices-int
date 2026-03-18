@@ -24,6 +24,9 @@ namespace colitas_felices.src.webform.admin.Mascotas
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            PassarEstadosAJS();
+
             if (!IsPostBack)
             {
                 CargarFiltros();
@@ -31,6 +34,7 @@ namespace colitas_felices.src.webform.admin.Mascotas
             }
         }
 
+        #region carga de datos
         // ---- Carga inicial ----
 
         private void CargarFiltros()
@@ -64,6 +68,35 @@ namespace colitas_felices.src.webform.admin.Mascotas
             btnSiguiente.Enabled = lista.Count == filtro.RegistrosPorPagina;
         }
 
+        private void PassarEstadosAJS()
+        {
+            var estados = _cnCatalogo.ObtenerEstadosMascota();
+
+            // Usar JSON.NET si lo tienes, o construir manualmente con escape
+            var sb = new System.Text.StringBuilder();
+            sb.Append("[");
+            for (int i = 0; i < estados.Count; i++)
+            {
+                if (i > 0) sb.Append(",");
+                sb.Append("{");
+                sb.Append("\"id\":" + estados[i].EstadoMascotaID + ",");
+                // EscapeString evita problemas con tildes y caracteres especiales
+                sb.Append("\"nombre\":\"" + estados[i].Nombre
+                    .Replace("\\", "\\\\")
+                    .Replace("\"", "\\\"") + "\"");
+                sb.Append("}");
+            }
+            sb.Append("]");
+
+            // Agregar charset al script
+            ClientScript.RegisterStartupScript(
+                this.GetType(),
+                "estados",
+                "var ESTADOS = " + sb.ToString() + ";",
+                true);
+        }
+
+        #endregion
         private DTO_MascotaFiltro ObtenerFiltroActual()
         {
             var filtro = new DTO_MascotaFiltro
@@ -135,10 +168,7 @@ namespace colitas_felices.src.webform.admin.Mascotas
             int id = Convert.ToInt32(e.CommandArgument);
 
             if (e.CommandName == "Editar")
-                Response.Redirect("fr_mascota_form.aspx?id=" + id);
-
-            if (e.CommandName == "Ver")
-                Response.Redirect("fr_mascota_detalle.aspx?id=" + id);
+                Response.Redirect("~/MascotasAdmin/Form?id=" + id);
         }
 
         protected void btnNueva_Click(object sender, EventArgs e)

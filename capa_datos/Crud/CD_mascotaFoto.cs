@@ -74,10 +74,19 @@ namespace capa_datos.Crud
 
                     if (!fotos.Any(f => f.FotoID == fotoID)) return false;
 
-                    foreach (var f in fotos)
-                        f.EsPrincipal = (f.FotoID == fotoID);
+                    // Paso 1 — Desmarcar la principal actual
+                    var actualPrincipal = fotos.FirstOrDefault(f => f.EsPrincipal);
+                    if (actualPrincipal != null)
+                    {
+                        actualPrincipal.EsPrincipal = false;
+                        db.SubmitChanges();  // ← Guarda primero el desmarcado
+                    }
 
-                    db.SubmitChanges();
+                    // Paso 2 — Marcar la nueva principal
+                    var nuevaPrincipal = fotos.First(f => f.FotoID == fotoID);
+                    nuevaPrincipal.EsPrincipal = true;
+                    db.SubmitChanges();  // ← Ahora sí, solo hay una principal
+
                     return true;
                 }
             }
@@ -165,5 +174,22 @@ namespace capa_datos.Crud
                 return new List<MascotasFotoDto>();
             }
         }
+
+        /// <summary>
+        /// Obtener el ultimo orden de, las fotos
+        /// </summary>
+        public byte ObtenerUltimoOrden(int mascotaID)
+        {
+            using (var db = new ColitasFelicesDataContext())
+            {
+                var ultima = db.Mascota_foto
+                    .Where(f => f.MascotaID == mascotaID)
+                    .OrderByDescending(f => f.Orden)
+                    .FirstOrDefault();
+
+                return ultima != null ? ultima.Orden : (byte)0;
+            }
+        }
     }
+
 }

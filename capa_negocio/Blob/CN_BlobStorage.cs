@@ -194,9 +194,16 @@ namespace capa_negocio.Blob
                 if (string.IsNullOrWhiteSpace(blobUrl)) return false;
 
                 var uri = new Uri(blobUrl);
-                string prefix = "/devstoreaccount1/" + contenedor + "/";
-                string nombreBlob = uri.AbsolutePath.Substring(
-                    uri.AbsolutePath.IndexOf(prefix) + prefix.Length);
+                string path = uri.AbsolutePath;
+
+                // Busca el contenedor en la ruta sin importar el prefijo de cuenta
+                string marca = "/" + contenedor + "/";
+                int idx = path.IndexOf(marca);
+                if (idx < 0) return false;
+
+                string nombreBlob = path.Substring(idx + marca.Length);
+                // Local:      1/guid.jpg  ✓
+                // Producción: 1/guid.jpg  ✓
 
                 return Task.Run(() => _cd.EliminarAsync(contenedor, nombreBlob)).Result;
             }

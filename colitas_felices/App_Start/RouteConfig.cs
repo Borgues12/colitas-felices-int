@@ -11,7 +11,7 @@ namespace colitas_felices
         // Método que registra todas las rutas de la aplicación
         public static void RegisterRoutes(RouteCollection routes)
         {
-            //no bsucar archivos fisicos
+            //no buscar archivos fisicos
             routes.RouteExistingFiles = false;
 
             routes.MapPageRoute("Default", "", "~/src/webform/frontend/start.aspx");

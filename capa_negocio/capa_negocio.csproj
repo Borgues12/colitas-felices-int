@@ -95,15 +95,14 @@
   <ItemGroup>
     <Compile Include="Blob\CN_BlobStorage.cs" />
     <Compile Include="Email\CN_Email.cs" />
-    <Compile Include="CN_Perfil.cs" />
     <Compile Include="Email\PlantillaCorreo.cs" />
     <Compile Include="Mascotas\CN_Catalogo.cs" />
+    <Compile Include="Mascotas\CN_MascotaFoto.cs" />
     <Compile Include="Mascotas\CN_Mascotas.cs" />
     <Compile Include="Seguridad\CN_Login.cs" />
     <Compile Include="Seguridad\CN_LoginGoogle.cs" />
     <Compile Include="Seguridad\CN_RecuperarPassword.cs" />
     <Compile Include="Seguridad\CN_Registrar.cs" />
-    <Compile Include="CN_Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
