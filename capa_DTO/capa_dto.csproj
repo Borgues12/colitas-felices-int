@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\Blob\BlobItemDTO.cs" />
+    <Compile Include="DTO\Crud\CuentaAdminDTO.cs" />
     <Compile Include="DTO\Crud\CuentaDTO.cs" />
     <Compile Include="DTO\Crud\MascotasDTO.cs" />
     <Compile Include="DTO\notifyDTO.cs" />

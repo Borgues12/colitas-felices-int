@@ -154,7 +154,7 @@ namespace capa_negocio.Mascotas
             catch (Exception ex)
             {
                 Debug.WriteLine("[CN_Mascotas] Error en CambiarEstado: " + ex.Message);
-                return notifyVarDTO.Error("Error inesperado al cambiar el estado.");
+                return notifyDTO.Error("Error inesperado al cambiar el estado.");
             }
         }
     }

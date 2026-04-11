@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blob\CN_BlobStorage.cs" />
+    <Compile Include="Cuentas\CN_CuentaAdmin.cs" />
     <Compile Include="Email\CN_Email.cs" />
     <Compile Include="Email\PlantillaCorreo.cs" />
     <Compile Include="Mascotas\CN_Catalogo.cs" />
