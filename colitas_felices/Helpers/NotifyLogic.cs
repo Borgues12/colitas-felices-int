@@ -10,7 +10,7 @@ namespace colitas_felices
     public class NotifyLogic : Page
     {
             /// Muestra mensaje usando Notyf
-            protected void MostrarMensaje(string mensaje, string tipo)
+            public void MostrarMensaje(string mensaje, string tipo)
             {
                 string notyfCall;
                 switch (tipo.ToLower())

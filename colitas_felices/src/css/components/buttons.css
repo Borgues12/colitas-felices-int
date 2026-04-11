@@ -1,0 +1,71 @@
+﻿.cf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--espacio-2);
+    padding: var(--espacio-3) var(--espacio-6);
+    border-radius: var(--radio-full);
+    font-size: var(--texto-sm);
+    font-weight: var(--peso-medio);
+    font-family: var(--fuente-body);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--transicion-rapida);
+    text-decoration: none;
+}
+
+/* Primario — rosa sólido */
+.cf-btn--primario {
+    background-color: var(--color-primario);
+    color: white;
+    border-color: var(--color-primario);
+}
+
+    .cf-btn--primario:hover {
+        background-color: var(--color-primario-dark);
+        border-color: var(--color-primario-dark);
+        color: white;
+        box-shadow: var(--sombra-primario);
+    }
+
+/* Outline — borde sin relleno */
+.cf-btn--outline {
+    background-color: transparent;
+    color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+
+    .cf-btn--outline:hover {
+        background-color: var(--color-primario);
+        color: white;
+    }
+
+/* Blanco — para usar sobre fondos oscuros o de color */
+.cf-btn--blanco {
+    background-color: white;
+    color: var(--color-primario);
+    border-color: white;
+}
+
+    .cf-btn--blanco:hover {
+        background-color: var(--color-primario-light);
+        border-color: var(--color-primario-light);
+    }
+
+/* Acento — verde para acciones positivas */
+.cf-btn--acento {
+    background-color: var(--color-acento);
+    color: white;
+    border-color: var(--color-acento);
+}
+
+    .cf-btn--acento:hover {
+        background-color: var(--color-acento-dark);
+        border-color: var(--color-acento-dark);
+        color: white;
+    }
+
+/* Tamaño grande — para CTAs del hero */
+.cf-btn--lg {
+    padding: var(--espacio-4) var(--espacio-8);
+    font-size: var(--texto-base);
+}

@@ -1,0 +1,360 @@
+﻿/* ============================================================
+   NAVBAR
+   Archivo: src/css/components/navbar.css
+   
+   Nomenclatura BEM (Block__Element--Modifier):
+   - Block:    .navbar-cf          → el componente completo
+   - Element:  .navbar-cf__logo    → parte del componente
+   - Modifier: .navbar-cf--scrolled → variación del estado
+============================================================ */
+
+/* ----------------------------------------------------------
+   NAVBAR BASE
+---------------------------------------------------------- */
+.navbar-cf {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: var(--altura-navbar);
+    background-color: var(--color-fondo-blanco);
+    border-bottom: 1px solid var(--color-borde);
+    transition: box-shadow var(--transicion-normal);
+}
+
+/* Sombra al hacer scroll — se activa con JS */
+.navbar-cf--scrolled {
+    box-shadow: var(--sombra-md);
+}
+
+.navbar-cf__container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    max-width: var(--ancho-max-contenido);
+    margin: 0 auto;
+    padding: 0 var(--espacio-6);
+    gap: var(--espacio-8);
+}
+
+/* ----------------------------------------------------------
+   LOGO
+---------------------------------------------------------- */
+.navbar-cf__logo {
+    flex-shrink: 0;
+    /* flex-shrink: 0 evita que el logo se encoja cuando
+       no hay suficiente espacio — tiene prioridad sobre el menú */
+}
+
+.navbar-cf__logo-img {
+    height: 48px;
+    width: auto;
+    border-radius: var(--radio-sm);
+    object-fit: contain;
+}
+
+/* ----------------------------------------------------------
+   MENÚ PRINCIPAL
+---------------------------------------------------------- */
+.navbar-cf__menu {
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex: 1;
+    /* flex: 1 hace que el menú ocupe todo el espacio disponible
+       entre el logo y los botones de auth */
+}
+
+.navbar-cf__link {
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-2);
+    padding: var(--espacio-2) var(--espacio-3);
+    border-radius: var(--radio-md);
+    font-size: var(--texto-sm);
+    font-weight: var(--peso-medio);
+    color: var(--color-texto-secundario);
+    white-space: nowrap;
+    transition: color var(--transicion-rapida), background-color var(--transicion-rapida);
+}
+
+    .navbar-cf__link:hover,
+    .navbar-cf__link.active {
+        color: var(--color-primario);
+        background-color: var(--color-primario-light);
+    }
+
+.navbar-cf__arrow {
+    font-size: 10px;
+    transition: transform var(--transicion-rapida);
+}
+
+/* ----------------------------------------------------------
+   DROPDOWN
+   Se muestra al hacer hover en desktop.
+   En móvil se maneja con JS (toggle de clase).
+---------------------------------------------------------- */
+.navbar-cf__item--dropdown {
+    position: relative;
+}
+
+.navbar-cf__dropdown {
+    position: absolute;
+    top: calc(100% + var(--espacio-2));
+    left: 0;
+    min-width: 200px;
+    background-color: var(--color-fondo-blanco);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-lg);
+    padding: var(--espacio-2);
+    list-style: none;
+    margin: 0;
+    /* Oculto por defecto — se muestra con opacity/visibility
+       en lugar de display:none para poder animar la transición */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity var(--transicion-normal), visibility var(--transicion-normal), transform var(--transicion-normal);
+    pointer-events: none;
+}
+
+/* Mostrar al hacer hover en desktop */
+.navbar-cf__item--dropdown:hover .navbar-cf__dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Rotar flecha cuando el dropdown está abierto */
+.navbar-cf__item--dropdown:hover .navbar-cf__arrow,
+.navbar-cf__item--open .navbar-cf__arrow {
+    transform: rotate(180deg);
+}
+
+.navbar-cf__dropdown a {
+    display: block;
+    padding: var(--espacio-2) var(--espacio-4);
+    border-radius: var(--radio-md);
+    font-size: var(--texto-sm);
+    color: var(--color-texto-secundario);
+    transition: color var(--transicion-rapida), background-color var(--transicion-rapida);
+}
+
+    .navbar-cf__dropdown a:hover {
+        color: var(--color-primario);
+        background-color: var(--color-primario-light);
+    }
+
+/* ----------------------------------------------------------
+   BOTÓN DE LOGIN / AUTH
+---------------------------------------------------------- */
+.navbar-cf__auth {
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.navbar-cf__btn-login {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--espacio-2);
+    padding: var(--espacio-2) var(--espacio-5);
+    background-color: var(--color-primario);
+    color: var(--color-texto-inverso) !important;
+    border-radius: var(--radio-full);
+    font-size: var(--texto-sm);
+    font-weight: var(--peso-medio);
+    transition: background-color var(--transicion-rapida), box-shadow var(--transicion-rapida);
+}
+
+    .navbar-cf__btn-login:hover {
+        background-color: var(--color-primario-dark);
+        box-shadow: var(--sombra-primario);
+        color: var(--color-texto-inverso) !important;
+    }
+
+/* ----------------------------------------------------------
+   DROPDOWN DEL USUARIO LOGUEADO
+---------------------------------------------------------- */
+.navbar-cf__btn-user {
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-2);
+    padding: var(--espacio-2) var(--espacio-3);
+    border-radius: var(--radio-full);
+    font-size: var(--texto-sm);
+    font-weight: var(--peso-medio);
+    color: var(--color-texto-secundario);
+    background: none;
+    border: 1px solid var(--color-borde);
+    transition: border-color var(--transicion-rapida);
+}
+
+    .navbar-cf__btn-user:hover {
+        border-color: var(--color-primario);
+        color: var(--color-primario);
+    }
+
+.navbar-cf__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radio-full);
+    object-fit: cover;
+}
+
+.navbar-cf__user-options {
+    position: absolute;
+    right: 0;
+    top: calc(100% + var(--espacio-2));
+    min-width: 200px;
+    background-color: var(--color-fondo-blanco);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-lg);
+    padding: var(--espacio-2);
+    list-style: none;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transicion-normal), visibility var(--transicion-normal);
+}
+
+.navbar-cf__user-dropdown--open .navbar-cf__user-options {
+    opacity: 1;
+    visibility: visible;
+}
+
+.navbar-cf__user-options a,
+.navbar-cf__logout {
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-3);
+    padding: var(--espacio-2) var(--espacio-4);
+    border-radius: var(--radio-md);
+    font-size: var(--texto-sm);
+    color: var(--color-texto-secundario);
+    width: 100%;
+    transition: color var(--transicion-rapida), background-color var(--transicion-rapida);
+}
+
+    .navbar-cf__user-options a:hover,
+    .navbar-cf__logout:hover {
+        background-color: var(--color-primario-light);
+        color: var(--color-primario);
+    }
+
+.navbar-cf__divider {
+    height: 1px;
+    background-color: var(--color-borde);
+    margin: var(--espacio-2) 0;
+}
+
+/* ----------------------------------------------------------
+   BOTÓN HAMBURGUESA (MÓVIL)
+---------------------------------------------------------- */
+.navbar-cf__toggle {
+    display: none; /* oculto en desktop */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    padding: 0;
+    margin-left: var(--espacio-4);
+    flex-shrink: 0;
+}
+
+    .navbar-cf__toggle span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-texto-principal);
+        border-radius: 2px;
+        transition: transform var(--transicion-normal), opacity var(--transicion-normal);
+        transform-origin: center;
+    }
+
+/* Animación X al abrir */
+.navbar-cf__toggle--active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.navbar-cf__toggle--active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.navbar-cf__toggle--active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE — TABLET Y MÓVIL (< 992px)
+   
+   En Bootstrap, lg empieza en 992px. Usamos el mismo
+   breakpoint para que el comportamiento sea consistente.
+---------------------------------------------------------- */
+@media (max-width: 991px) {
+
+    .navbar-cf__toggle {
+        display: flex;
+    }
+
+    /* Menú se convierte en panel lateral deslizante */
+    .navbar-cf__menu {
+        position: fixed;
+        top: var(--altura-navbar);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        background-color: var(--color-fondo-blanco);
+        padding: var(--espacio-4);
+        overflow-y: auto;
+        border-top: 1px solid var(--color-borde);
+        /* Oculto — desliza hacia la izquierda */
+        transform: translateX(-100%);
+        transition: transform var(--transicion-suave);
+    }
+
+    .navbar-cf__menu--open {
+        transform: translateX(0);
+    }
+
+    .navbar-cf__item {
+        width: 100%;
+    }
+
+    .navbar-cf__link {
+        width: 100%;
+        padding: var(--espacio-3) var(--espacio-4);
+    }
+
+    /* Dropdown en móvil: se despliega verticalmente */
+    .navbar-cf__dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        border-left: 2px solid var(--color-primario-light);
+        border-radius: 0;
+        padding-left: var(--espacio-4);
+        margin-left: var(--espacio-4);
+        /* Oculto por altura */
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height var(--transicion-suave);
+    }
+
+    .navbar-cf__item--open .navbar-cf__dropdown {
+        max-height: 300px;
+    }
+}

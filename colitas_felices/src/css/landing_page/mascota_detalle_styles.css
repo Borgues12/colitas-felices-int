@@ -1,0 +1,259 @@
+﻿/* ═══════════════════════════════════════════════════════════════════════════════
+   MASCOTA_DETALLE_STYLES.CSS — Layout del detalle de mascota
+   Solo layout. Componentes en global.css.
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+
+/* ─── Breadcrumb / Volver ─── */
+.detalle-breadcrumb {
+    padding: var(--spacing-lg) 0;
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.btn-volver {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-text-light);
+    transition: var(--transition);
+}
+
+    .btn-volver:hover {
+        color: var(--color-primary);
+    }
+
+
+/* ─── Sección hero del detalle ─── */
+.detalle-hero {
+    padding: var(--spacing-2xl) 0 var(--spacing-3xl);
+    background-color: var(--color-background);
+}
+
+/* Layout de dos columnas */
+.detalle-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: start;
+}
+
+
+/* ─── Galería de imágenes ─── */
+.detalle-galeria {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* Imagen principal */
+.galeria-principal {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--color-surface);
+    border: 2px solid var(--color-primary-light);
+}
+
+    .galeria-principal img {
+        width: 100%;
+        height: 380px;
+        object-fit: cover;
+        display: block;
+    }
+
+/* Badge urgente sobre la imagen */
+.detalle-urgente {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) var(--spacing-md);
+}
+
+/* Miniaturas */
+.galeria-thumbs {
+    display: flex;
+    gap: var(--spacing-sm);
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.thumb {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid var(--color-border);
+    transition: var(--transition);
+    opacity: 0.7;
+}
+
+    .thumb:hover {
+        opacity: 1;
+        border-color: var(--color-primary-light);
+    }
+
+.thumb--active {
+    opacity: 1;
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-primary);
+}
+
+.thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* ─── Información del animal ─── */
+.detalle-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+/* Encabezado: nombre + badge */
+.detalle-encabezado {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.detalle-nombre {
+    font-size: var(--font-size-3xl);
+    margin: 0;
+    color: var(--color-text);
+}
+
+.detalle-disponible {
+    font-size: var(--font-size-sm);
+}
+
+/* Chips de características */
+.detalle-chips {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.detalle-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+}
+
+    .detalle-chip iconify-icon {
+        color: var(--color-primary);
+        font-size: 1.1rem;
+    }
+
+.detalle-chip--highlight {
+    background: var(--color-primary-light);
+    border-color: var(--color-primary);
+    color: var(--color-primary-dark);
+    font-weight: 600;
+}
+
+/* Descripción breve */
+.detalle-descripcion-breve {
+    font-size: var(--font-size-base);
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+/* Tarjetas de info (rescate, personalidad, necesidades) */
+.detalle-cards-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.info-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    border: 1px solid var(--color-border-light);
+}
+
+.info-card-titulo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+}
+
+    .info-card-titulo iconify-icon {
+        color: var(--color-primary);
+        font-size: 1.2rem;
+    }
+
+.info-card p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    margin: 0;
+    line-height: 1.7;
+}
+
+/* Sección de acciones (botón + aviso) */
+.detalle-acciones {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding-top: var(--spacing-sm);
+}
+
+.detalle-aviso {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+    .detalle-aviso iconify-icon {
+        color: var(--color-info);
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+
+/* ─── Responsive ─── */
+@media (max-width: 992px) {
+    .detalle-layout {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .galeria-principal img {
+        height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .detalle-nombre {
+        font-size: var(--font-size-2xl);
+    }
+
+    .thumb {
+        width: 65px;
+        height: 65px;
+    }
+}

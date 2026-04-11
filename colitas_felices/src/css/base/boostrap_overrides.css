@@ -1,0 +1,39 @@
+﻿/* ============================================================
+   BOOTSTRAP OVERRIDES
+   Archivo: src/css/base/bootstrap_overrides.css
+   
+   Bootstrap 5 usa sus propias variables CSS con el prefijo --bs-.
+   Al sobreescribirlas DESPUÉS de cargar Bootstrap, todos sus
+   componentes (botones, badges, alerts, forms...) usan
+   automáticamente los colores de Colitas Felices.
+   
+   Analogía: es como cambiarle el color a todo el uniforme
+   del equipo desde un solo lugar — no jugador por jugador.
+============================================================ */
+
+:root {
+    /* Color principal → Rosa de Colitas Felices */
+    --bs-primary: var(--color-primario);
+    --bs-primary-rgb: 233, 30, 99;
+    /* Color secundario → Naranja */
+    --bs-secondary: var(--color-secundario);
+    --bs-secondary-rgb: 255, 112, 67;
+    /* Éxito → Verde del sistema */
+    --bs-success: var(--color-acento);
+    --bs-success-rgb: 76, 175, 80;
+    /* Tipografía */
+    --bs-body-font-family: var(--fuente-body);
+    --bs-body-font-size: var(--texto-base);
+    --bs-body-color: var(--color-texto-principal);
+    --bs-body-bg: var(--color-fondo-pagina);
+    /* Bordes */
+    --bs-border-color: var(--color-borde);
+    --bs-border-radius: var(--radio-md);
+    --bs-border-radius-sm: var(--radio-sm);
+    --bs-border-radius-lg: var(--radio-lg);
+    --bs-border-radius-xl: var(--radio-xl);
+    --bs-border-radius-pill: var(--radio-full);
+    /* Links */
+    --bs-link-color: var(--color-primario);
+    --bs-link-hover-color: var(--color-primario-dark);
+}

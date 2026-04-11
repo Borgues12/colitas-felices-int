@@ -12,12 +12,7 @@ namespace colitas_felices.src.masterPage
     {
 
         public dynamic perfilUsuario = null;
-        protected void Logout_Click(object sender, EventArgs e)
-        {
-            Session.Clear();
-            Session.Abandon();
-            Response.Redirect("~/login.aspx");
-        }
+     
 
         public string ObtenerFotoUsuario()
         {
@@ -32,6 +27,12 @@ namespace colitas_felices.src.masterPage
         public string ObtenerNombreRol()
         {
             return "Administrador";
+        }
+
+        protected void Logout_Click(object sender, EventArgs e)
+        {
+            Sessions.CerrarSesion();
+            Response.Redirect("~/iniciar_sesion");
         }
 
     }

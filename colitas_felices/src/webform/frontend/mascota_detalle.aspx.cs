@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace colitas_felices.src.webform.admin
+namespace colitas_felices.src.webform.frontend
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class mascota_detalle : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

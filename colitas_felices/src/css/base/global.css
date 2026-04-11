@@ -1,0 +1,149 @@
+﻿/* ============================================================
+   GLOBAL
+   Archivo: src/css/base/global.css
+   
+   Estilos base del sitio que aplican en todas las páginas:
+   - Clases utilitarias propias (complementan a Bootstrap)
+   - Secciones base
+   - Contenedores del sistema
+============================================================ */
+
+/* ----------------------------------------------------------
+   CONTENEDOR PRINCIPAL
+   Limita el ancho del contenido y lo centra.
+   
+   Usamos nuestra propia clase además del .container de Bootstrap
+   porque nos da más control sobre el ancho máximo.
+---------------------------------------------------------- */
+.cf-container {
+    width: 100%;
+    max-width: var(--ancho-max-contenido);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--espacio-6);
+    padding-right: var(--espacio-6);
+}
+
+/* Contenedor angosto para texto o formularios centrados */
+.cf-container--narrow {
+    max-width: var(--ancho-max-texto);
+}
+
+/* ----------------------------------------------------------
+   ESTRUCTURA DE SECCIONES
+   Cada sección de la landing usa estas clases base.
+---------------------------------------------------------- */
+.cf-section {
+    padding-top: var(--espacio-20);
+    padding-bottom: var(--espacio-20);
+}
+
+/* Sección con fondo alternado (gris suave) */
+.cf-section--alt {
+    background-color: var(--color-fondo-gris);
+}
+
+/* Sección con fondo de color primario claro */
+.cf-section--primary-soft {
+    background-color: var(--color-primario-light);
+}
+
+/* Sección oscura (footer, CTAs) */
+.cf-section--dark {
+    background-color: var(--color-fondo-oscuro);
+    color: var(--color-texto-inverso);
+}
+
+/* Header de sección: título + subtítulo centrado */
+.cf-section__header {
+    text-align: center;
+    margin-bottom: var(--espacio-12);
+}
+
+.cf-section__title {
+    font-size: var(--texto-2xl);
+    font-family: var(--fuente-display);
+    color: var(--color-texto-principal);
+    margin-bottom: var(--espacio-3);
+}
+
+.cf-section__subtitle {
+    font-size: var(--texto-md);
+    color: var(--color-texto-secundario);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ----------------------------------------------------------
+   BADGE / ETIQUETA DE CATEGORÍA
+   Pequeña píldora de texto para clasificar contenido.
+---------------------------------------------------------- */
+.cf-badge {
+    display: inline-block;
+    padding: var(--espacio-1) var(--espacio-3);
+    border-radius: var(--radio-full);
+    font-size: var(--texto-xs);
+    font-weight: var(--peso-medio);
+    font-family: var(--fuente-body);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cf-badge--primario {
+    background-color: var(--color-primario-light);
+    color: var(--color-primario-dark);
+}
+
+.cf-badge--acento {
+    background-color: var(--color-acento-light);
+    color: var(--color-acento-dark);
+}
+
+.cf-badge--alerta {
+    background-color: var(--color-alerta-light);
+    color: var(--color-alerta);
+}
+
+/* ----------------------------------------------------------
+   UTILIDADES DE TEXTO
+   Complementan las clases de Bootstrap cuando necesitamos
+   usar nuestras propias variables de color.
+---------------------------------------------------------- */
+.text-primario {
+    color: var(--color-primario) !important;
+}
+
+.text-secundario {
+    color: var(--color-texto-secundario) !important;
+}
+
+.text-suave {
+    color: var(--color-texto-suave) !important;
+}
+
+/* Texto con fuente display (Playfair) */
+.font-display {
+    font-family: var(--fuente-display);
+}
+
+/* ----------------------------------------------------------
+   AJUSTE DE BODY PARA LA NAVBAR FIJA
+   La navbar tiene posición fixed, así que ocupa espacio
+   encima del contenido. padding-top compensa eso para
+   que el contenido no quede tapado.
+   
+   Nota: se ajusta en navbar.css cuando se define la altura
+   real del navbar en móvil vs desktop.
+---------------------------------------------------------- */
+body {
+    padding-top: var(--altura-navbar);
+}
+/* ----------------------------------------------------------
+   ESTADO DE CARGA DE PÁGINA
+   Mientras el loader está activo, ocultamos el scroll.
+   loader.js remueve esta clase cuando termina la carga.
+---------------------------------------------------------- */
+    body.loading {
+        overflow: hidden;
+    }

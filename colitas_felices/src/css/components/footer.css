@@ -1,0 +1,95 @@
+﻿.footer-cf {
+    background-color: var(--color-fondo-oscuro);
+    color: var(--color-texto-inverso);
+    padding: var(--espacio-16) 0 0;
+}
+
+.footer-cf__container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--espacio-8);
+    max-width: var(--ancho-max-contenido);
+    margin: 0 auto;
+    padding: 0 var(--espacio-6);
+}
+
+.footer-cf__title {
+    font-family: var(--fuente-body);
+    font-size: var(--texto-base);
+    font-weight: var(--peso-medio);
+    color: var(--color-texto-inverso);
+    margin-bottom: var(--espacio-4);
+}
+
+.footer-cf__text {
+    font-size: var(--texto-sm);
+    color: var(--color-texto-suave);
+    line-height: var(--linea-suelta);
+}
+
+.footer-cf__list li {
+    font-size: var(--texto-sm);
+    color: var(--color-texto-suave);
+    padding: var(--espacio-1) 0;
+}
+
+.footer-cf__list a {
+    color: var(--color-texto-suave);
+    transition: color var(--transicion-rapida);
+}
+
+    .footer-cf__list a:hover {
+        color: var(--color-primario);
+    }
+
+.footer-cf__list--contact li {
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-2);
+}
+
+.footer-cf__social {
+    display: flex;
+    gap: var(--espacio-3);
+    margin-top: var(--espacio-4);
+}
+
+    .footer-cf__social a {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radio-full);
+        border: 1px solid rgba(255,255,255,0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-texto-suave);
+        font-size: var(--texto-sm);
+        transition: background-color var(--transicion-rapida), color var(--transicion-rapida);
+    }
+
+        .footer-cf__social a:hover {
+            background-color: var(--color-primario);
+            color: white;
+            border-color: var(--color-primario);
+        }
+
+.footer-cf__bottom {
+    text-align: center;
+    padding: var(--espacio-6);
+    margin-top: var(--espacio-12);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: var(--texto-sm);
+    color: var(--color-texto-suave);
+}
+
+@media (max-width: 768px) {
+    .footer-cf__container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-cf__container {
+        grid-template-columns: 1fr;
+    }
+}

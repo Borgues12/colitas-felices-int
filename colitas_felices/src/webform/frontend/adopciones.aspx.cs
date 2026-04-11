@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace colitas_felices.src.webform.frontend
 {
-    public partial class start : System.Web.UI.Page
+    public partial class adopciones : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Logica para implementar el inicio de la aplicacion, como cargar datos o configurar elementos de la interfaz
+
         }
     }
 }

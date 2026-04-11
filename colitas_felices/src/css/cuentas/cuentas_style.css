@@ -1,0 +1,267 @@
+﻿/* ============================================================
+   CUENTAS ADMIN — Tabla de gestión de usuarios
+   ============================================================ */
+
+/* --- Header --- */
+.cuentas-header {
+    margin-bottom: 1.5rem;
+}
+
+.cuentas-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+/* --- Filtros --- */
+.cuentas-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+}
+
+.filtro-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.filtro-busqueda {
+    flex: 1;
+    min-width: 200px;
+}
+
+.filtro-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.filtro-input,
+.filtro-select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #334155;
+    background: #fff;
+    transition: border-color 0.2s;
+}
+
+    .filtro-input:focus,
+    .filtro-select:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+.filtro-acciones {
+    flex-direction: row;
+    gap: 0.5rem;
+    align-self: flex-end;
+}
+
+.btn-filtro {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+    .btn-filtro:active {
+        transform: scale(0.97);
+    }
+
+.btn-filtro--buscar {
+    background: #6366f1;
+    color: #fff;
+}
+
+    .btn-filtro--buscar:hover {
+        background: #4f46e5;
+    }
+
+.btn-filtro--limpiar {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+    .btn-filtro--limpiar:hover {
+        background: #cbd5e1;
+    }
+
+/* --- Tabla --- */
+.cuentas-tabla-wrapper {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+}
+
+.cuentas-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+    .cuentas-tabla thead {
+        background: #f1f5f9;
+    }
+
+    .cuentas-tabla th {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: #475569;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        border-bottom: 2px solid #e2e8f0;
+        white-space: nowrap;
+    }
+
+    .cuentas-tabla td {
+        padding: 0.75rem 1rem;
+        color: #334155;
+        border-bottom: 1px solid #f1f5f9;
+        vertical-align: middle;
+    }
+
+    .cuentas-tabla tbody tr:hover {
+        background: #f8fafc;
+    }
+
+    .cuentas-tabla tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+/* --- Badges de rol --- */
+.rol-badge {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.rol-badge--admin {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.rol-badge--user {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+/* --- Badges de estado --- */
+.estado-badge {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.estado-badge--activo {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.estado-badge--bloqueado {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.estado-badge--inactivo {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+/* --- Botón cambiar rol --- */
+.btn-rol {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.85rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+    white-space: nowrap;
+}
+
+    .btn-rol:active {
+        transform: scale(0.96);
+    }
+
+.btn-rol--dar {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+    .btn-rol--dar:hover {
+        background: #bfdbfe;
+    }
+
+.btn-rol--quitar {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+    .btn-rol--quitar:hover {
+        background: #fde68a;
+    }
+
+/* --- Empty state --- */
+.cuentas-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    color: #94a3b8;
+    gap: 0.75rem;
+}
+
+    .cuentas-empty p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .cuentas-filtros {
+        flex-direction: column;
+    }
+
+    .filtro-acciones {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .cuentas-tabla th:nth-child(3),
+    .cuentas-tabla td:nth-child(3),
+    .cuentas-tabla th:nth-child(4),
+    .cuentas-tabla td:nth-child(4),
+    .cuentas-tabla th:nth-child(7),
+    .cuentas-tabla td:nth-child(7) {
+        display: none;
+    }
+}

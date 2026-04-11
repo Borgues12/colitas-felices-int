@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace colitas_felices.src.webform.admin
+namespace colitas_felices.src.webform.frontend
 {
 
 
-    public partial class WebForm1
+    public partial class adopciones
     {
     }
 }

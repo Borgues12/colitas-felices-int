@@ -1,0 +1,162 @@
+﻿/* ============================================================
+   COLITAS FELICES — Variables CSS globales
+   Archivo: src/css/base/variables.css
+   
+   Este archivo se importa y define
+   todos los valores reutilizables del sistema de diseño.
+   Nunca escribas colores, fuentes ni tamaños directamente
+   en otros archivos CSS — siempre usa estas variables.
+   ============================================================ */
+
+:root {
+    /* ----------------------------------------------------------
+       PALETA DE COLORES
+       
+       Cada color tiene tres variantes:
+       - base: el color principal
+       - light: versión más clara, para fondos suaves
+       - dark:  versión más oscura, para hover o contraste
+    ---------------------------------------------------------- */
+    /* Color primario — Rosa/fucsia, identidad del refugio */
+    --color-primario: #E91E63;
+    --color-primario-light: #FCE4EC; /* fondo suave para secciones */
+    --color-primario-dark: #C2185B; /* hover de botones */
+    /* Color secundario — Naranja cálido, energía y emoción */
+    --color-secundario: #FF7043;
+    --color-secundario-light: #FBE9E7;
+    --color-secundario-dark: #E64A19;
+    /* Color de acento — Verde, adopción exitosa, éxito */
+    --color-acento: #4CAF50;
+    --color-acento-light: #E8F5E9;
+    --color-acento-dark: #388E3C;
+    /* Colores neutros — Para textos, fondos y bordes */
+    --color-texto-principal: #212121; /* títulos y cuerpo principal */
+    --color-texto-secundario: #616161; /* subtítulos y descripciones */
+    --color-texto-suave: #9E9E9E; /* placeholders, metadata */
+    --color-texto-inverso: #FFFFFF; /* texto sobre fondos oscuros */
+    /* Fondos */
+    --color-fondo-pagina: #FAFAFA; /* fondo general del sitio */
+    --color-fondo-blanco: #FFFFFF; /* cards, formularios */
+    --color-fondo-gris: #F5F5F5; /* secciones alternadas */
+    --color-fondo-oscuro: #212121; /* footer */
+    /* Bordes */
+    --color-borde: #E0E0E0; /* bordes suaves generales */
+    --color-borde-foco: #E91E63; /* borde al enfocar un input */
+    /* Colores de estado — feedback al usuario */
+    --color-exito: #4CAF50;
+    --color-error: #F44336;
+    --color-alerta: #FF9800;
+    --color-info: #2196F3;
+    /* Fondos de estado (versiones claras para alertas) */
+    --color-exito-light: #E8F5E9;
+    --color-error-light: #FFEBEE;
+    --color-alerta-light: #FFF3E0;
+    --color-info-light: #E3F2FD;
+    /* ----------------------------------------------------------
+       TIPOGRAFÍA
+       
+       Se usa Google Fonts. La importacion va en la pagina que lo use
+       
+       - display: fuente para títulos grandes (hero, secciones)
+       - body:    fuente para texto corrido y UI
+    ---------------------------------------------------------- */
+
+    --fuente-display: 'Mogra', Georgia, serif;
+    --fuente-body: 'Nunito', 'Segoe UI', sans-serif;
+    /* Escala de tamaños — cada paso sube aprox. 25% */
+    --texto-xs: 0.75rem; /* 12px — etiquetas pequeñas */
+    --texto-sm: 0.875rem; /* 14px — texto secundario */
+    --texto-base: 1rem; /* 16px — texto del cuerpo */
+    --texto-md: 1.125rem; /* 18px — texto destacado */
+    --texto-lg: 1.25rem; /* 20px — subtítulos */
+    --texto-xl: 1.5rem; /* 24px — títulos de sección */
+    --texto-2xl: 2rem; /* 32px — títulos de página */
+    --texto-3xl: 2.5rem; /* 40px — hero desktop */
+    --texto-4xl: 3rem; /* 48px — hero grande */
+    /* Pesos de fuente */
+    --peso-normal: 400;
+    --peso-medio: 600;
+    --peso-bold: 700;
+    --peso-extrabold: 800;
+    /* Altura de línea */
+    --linea-ajustada: 1.25; /* títulos */
+    --linea-normal: 1.5; /* texto de UI */
+    --linea-suelta: 1.75; /* párrafos de lectura */
+    /* ----------------------------------------------------------
+       ESPACIADO
+       
+       Usa una escala fija de 4px (0.25rem).
+       El valor de --espacio-4 es la unidad base (1rem = 16px).
+       Nombrados por su multiplicador para que sean predecibles:
+       espacio-1 = 4px, espacio-2 = 8px, espacio-4 = 16px, etc.
+    ---------------------------------------------------------- */
+
+    --espacio-1: 0.25rem; /*  4px */
+    --espacio-2: 0.5rem; /*  8px */
+    --espacio-3: 0.75rem; /* 12px */
+    --espacio-4: 1rem; /* 16px — unidad base */
+    --espacio-5: 1.25rem; /* 20px */
+    --espacio-6: 1.5rem; /* 24px */
+    --espacio-8: 2rem; /* 32px */
+    --espacio-10: 2.5rem; /* 40px */
+    --espacio-12: 3rem; /* 48px */
+    --espacio-16: 4rem; /* 64px */
+    --espacio-20: 5rem; /* 80px */
+    --espacio-24: 6rem; /* 96px */
+    /* ----------------------------------------------------------
+       BORDES Y RADIOS
+       
+       border-radius controla qué tan redondeadas son las esquinas.
+       Un refugio de animales pide formas amigables, nada muy cuadrado.
+    ---------------------------------------------------------- */
+
+    --radio-sm: 4px; /* inputs, badges pequeños */
+    --radio-md: 8px; /* botones, inputs grandes */
+    --radio-lg: 12px; /* cards */
+    --radio-xl: 20px; /* cards destacadas, secciones */
+    --radio-full: 9999px; /* pills, chips, avatares */
+    /* ----------------------------------------------------------
+       SOMBRAS
+       
+       Tres niveles de elevación. Úsalos consistentemente:
+       - sm:  elementos en reposo (cards normales)
+       - md:  hover o elementos activos
+       - lg:  modales, dropdowns, elementos flotantes
+    ---------------------------------------------------------- */
+
+    --sombra-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --sombra-md: 0 4px 12px rgba(0, 0, 0, 0.10), 0 2px 4px rgba(0, 0, 0, 0.06);
+    --sombra-lg: 0 10px 30px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08);
+    /* Sombra de color — para botones primarios */
+    --sombra-primario: 0 4px 14px rgba(233, 30, 99, 0.35);
+    /* ----------------------------------------------------------
+       TRANSICIONES
+       
+       Valores predefinidos para animaciones consistentes.
+       Úsalos en lugar de escribir duraciones distintas en cada lugar.
+    ---------------------------------------------------------- */
+
+    --transicion-rapida: 150ms ease;
+    --transicion-normal: 250ms ease;
+    --transicion-suave: 400ms ease;
+    /* ----------------------------------------------------------
+       LAYOUT — Anchos máximos y breakpoints como referencia
+       
+       Los breakpoints no se pueden usar como variables en
+       media queries directamente (limitación de CSS puro),
+       pero sirven como documentación del sistema.
+       
+       Breakpoints del sistema:
+         xs:  < 576px   (móvil pequeño)
+         sm:  >= 576px  (móvil)
+         md:  >= 768px  (tablet)
+         lg:  >= 992px  (desktop)
+         xl:  >= 1200px (desktop grande)
+    ---------------------------------------------------------- */
+
+    --ancho-max-contenido: 1200px; /* contenedor principal */
+    --ancho-max-texto: 720px; /* columnas de texto */
+    --ancho-max-formulario: 520px; /* formularios centrados */
+    /* Altura de la navbar — usada para calcular scroll offsets */
+    --altura-navbar: 70px;
+}

@@ -15,6 +15,24 @@ namespace colitas_felices.src.webform.admin.Mascotas
     {
 
         /// <summary>
+        /// Control lblMensaje.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensaje;
+
+        /// <summary>
+        /// Control btnNueva.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNueva;
+
+        /// <summary>
         /// Control ddlEspecie.
         /// </summary>
         /// <remarks>
@@ -60,15 +78,6 @@ namespace colitas_felices.src.webform.admin.Mascotas
         protected global::System.Web.UI.WebControls.Button btnLimpiar;
 
         /// <summary>
-        /// Control lblMensaje.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensaje;
-
-        /// <summary>
         /// Control gvMascotas.
         /// </summary>
         /// <remarks>
@@ -103,14 +112,5 @@ namespace colitas_felices.src.webform.admin.Mascotas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSiguiente;
-
-        /// <summary>
-        /// Control btnNueva.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNueva;
     }
 }

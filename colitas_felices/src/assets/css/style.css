@@ -2694,13 +2694,13 @@ sup {
 }
 
 a {
-    color: #007bff;
+    color: #ffffff;
     text-decoration: none;
     background-color: transparent;
 }
 
     a:hover {
-        color: #0056b3;
+        color: #827f7f;
         text-decoration: underline;
     }
 
@@ -20749,8 +20749,8 @@ dl {
 /* Sidebar */
 .sidebar {
     min-height: calc(100vh - 70px);
-    background: -webkit-gradient(linear, left top, left bottom, from(#e6e5f2), to(#4599cd));
-    background: linear-gradient(to bottom, #e6e5f2, #4599cd);
+    /* Rosa elegante que combina con negro */
+    background: linear-gradient(to bottom, #f06292, #c2185b);
     font-family: "Rubik", sans-serif;
     padding: 0;
     width: 260px;
@@ -20825,7 +20825,7 @@ dl {
             align-items: center;
             white-space: nowrap;
             padding: 12px 0 12px 0;
-            color: #3e4b5b;
+            color: #ffffff;
             -webkit-transition: all .3s ease-in-out;
             transition: all .3s ease-in-out;
         }
@@ -20838,7 +20838,7 @@ dl {
                     font-size: 20px;
                     line-height: 1;
                     margin-right: 10px;
-                    color: #423a8e;
+                    color: #000000;
                 }
 
 .rtl .sidebar .nav .nav-item .nav-link i.menu-icon {
@@ -20915,7 +20915,7 @@ dl {
     }
 
         .sidebar .nav .nav-item.active > .nav-link .menu-title {
-            color: inherit;
+            color: black;
             font-family: "Rubik", sans-serif;
             font-weight: 500;
         }
@@ -20999,7 +20999,7 @@ dl {
     }
 
         .sidebar .nav.sub-menu .nav-item .nav-link {
-            color: #3e4b5b;
+            color: #ffffff;
             padding: 0.75rem 2rem 0.75rem 2rem;
             position: relative;
             font-size: 0.8125rem;
@@ -21015,14 +21015,14 @@ dl {
                 position: absolute;
                 width: 9px;
                 height: 9px;
-                border: 2px solid #3e4b5b;
+                border: 2px solid #ffffff;
                 border-radius: 50%;
                 margin-left: -1.25rem;
                 top: 19px;
                 top: 50%;
                 -webkit-transform: translateY(-50%);
                 transform: translateY(-50%);
-                color: #536479;
+                color: #ffffff;
                 font-size: 0.75rem;
             }
 
@@ -21032,8 +21032,10 @@ dl {
 }
 
 .sidebar .nav.sub-menu .nav-item .nav-link.active {
-    color: #3f50f6;
+    color: #ffffff; /* blanco */
     background: transparent;
+    font-weight: 700; /* más grueso */
+    text-decoration: underline; /* subrayado */
 }
 
 .sidebar .nav.sub-menu .nav-item .nav-link:hover {

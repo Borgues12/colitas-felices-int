@@ -1,10 +1,12 @@
-﻿$(window).on('load', function () { //esperar a que la pagina cargue completamente
-   
-    //// Eliminar en produccion y colocar el comentado para produccion
-    //setTimeout(function () {
-    //    $('#preloader').addClass('hidden'); //ocultar el preloader despueś de 3 segundos
-    //}, 300000);
+﻿$(window).on('load', function () {
 
-        $('#preloader').addClass('hidden');
-    
+    // Si ya cargó antes en esta sesión, ocultar inmediatamente
+    if (sessionStorage.getItem('visitado')) {
+        $('#preloader').remove(); // lo elimina del DOM directamente
+        return;
+    }
+
+    // Primera visita — mostrar loader y ocultarlo al terminar
+    $('#preloader').addClass('hidden');
+    sessionStorage.setItem('visitado', 'true');
 });

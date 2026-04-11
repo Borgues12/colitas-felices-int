@@ -49,7 +49,7 @@
                 </div>
                 <ul class="nav">
                     <li class="nav-item"  style="padding-top: 1rem;">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href='<%=ResolveUrl("~/Admin") %>'>
                             <i class="mdi mdi-home menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
@@ -57,13 +57,13 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                             <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-                            <span class="menu-title">CRUD</span>
+                            <span class="menu-title">Operaciones</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href='<%= ResolveUrl("~/src/webform/admin/ad_main.aspx") %>'>Cuentas</a>
+                                    <a class="nav-link" href='<%= ResolveUrl("~/CuentasAdmin") %>'>Cuentas</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href='<%= ResolveUrl("~/MascotasAdmin") %>'>Mascotas</a>
@@ -230,30 +230,17 @@
                                     <h6 class="p-3 mb-0">See all activity</h6>
                                 </div>
                             </li>
-                            <li class="nav-item nav-search border-0 ml-1 ml-md-3 ml-lg-5 d-none d-md-flex">
-                                <div class="nav-link form-inline mt-2 mt-md-0">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search" />
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="mdi mdi-magnify"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
                         </ul>
                         <ul class="navbar-nav navbar-nav-right ml-lg-auto">
                             <li class="nav-item dropdown d-none d-xl-flex border-0">
                                 <a class="nav-link dropdown-toggle" id="languageDropdown" href="#" data-toggle="dropdown">
-                                    <i class="mdi mdi-earth"></i>English </a>
+                                    <i class="mdi mdi-earth"></i>Español</a>
                                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
-                                    <a class="dropdown-item" href="#">French </a>
-                                    <a class="dropdown-item" href="#">Spain </a>
-                                    <a class="dropdown-item" href="#">Latin </a>
-                                    <a class="dropdown-item" href="#">Japanese </a>
+                                    <a class="dropdown-item" href="#">Español </a>
+                                    <a class="dropdown-item" href="#">Inglés </a>
                                 </div>
                             </li>
+                            <li class="nav-item nav-profile dropdown border-0">
                             <li class="nav-item nav-profile dropdown border-0">
                                 <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown">
                                     <img class="nav-profile-img mr-2" alt=""

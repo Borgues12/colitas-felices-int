@@ -16,6 +16,7 @@ namespace colitas_felices.src.masterPage
         protected void Logout_Click(object sender, EventArgs e)
         {
             Sessions.CerrarSesion();
+            Response.Redirect("~/iniciar_sesion");
         }
     }
 }

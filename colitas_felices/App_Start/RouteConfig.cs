@@ -14,8 +14,8 @@ namespace colitas_felices
             //no buscar archivos fisicos
             routes.RouteExistingFiles = false;
 
-            routes.MapPageRoute("Default", "", "~/src/webform/frontend/start.aspx");
-            routes.MapPageRoute("Principal", "principal", "~/src/webform/frontend/start.aspx");
+            routes.MapPageRoute("Default", "", "~/src/webform/frontend/index.aspx");
+            routes.MapPageRoute("Principal", "principal", "~/src/webform/frontend/index.aspx");
             //LOGIN Y REGISTRO
             routes.MapPageRoute("Login", "iniciar_sesion", "~/src/webform/login/login_registro.aspx");
             routes.MapPageRoute("VerificarCodigo", "verificar", "~/src/webform/login/verificarCodigo.aspx");
@@ -27,11 +27,13 @@ namespace colitas_felices
             routes.MapPageRoute("Panel_admin", "Admin", "~/src/webform/admin/ad_main.aspx");
             routes.MapPageRoute("Voluntariado", "Voluntariado", "~/src/webform/frontend/voluntariado.aspx");
             routes.MapPageRoute("Nosotros", "Nosotros", "~/src/webform/frontend/nosotros.aspx");
-            routes.MapPageRoute("Adopta", "Adopta", "~/src/webform/frontend/fr_adopta.aspx");
+            routes.MapPageRoute("Adopta", "Adopta", "~/src/webform/frontend/adopciones.aspx");
+            routes.MapPageRoute("Mascotas", "Mascotas", "~/src/webform/frontend/mascota_detalle.aspx");
 
             //ADMIN PAGES
             routes.MapPageRoute("MascotasAdmin", "MascotasAdmin", "~/src/webform/admin/Mascotas/view_mascotas.aspx");
             routes.MapPageRoute("CrearEditMascotas", "MascotasAdmin/Form", "~/src/webform/admin/Mascotas/mascotasForm.aspx");
+            routes.MapPageRoute("CuentasAdmin", "CuentasAdmin", "~/src/webform/admin/Cuentas/view_cuentas.aspx");
 
         }
     }

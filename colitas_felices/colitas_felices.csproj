@@ -157,6 +157,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="src\css\base\global.css" />
+    <Content Include="src\css\components\buttons.css" />
+    <Content Include="src\css\components\cards.css" />
+    <Content Include="src\css\components\footer.css" />
+    <Content Include="src\css\components\navbar.css" />
+    <Content Include="src\css\base\reset.css" />
+    <Content Include="src\css\base\variables.css" />
+    <Content Include="src\css\cuentas\cuentas_style.css" />
+    <Content Include="src\css\landing_page\ayudar_styles.css" />
     <Content Include="src\assets\css\style.css" />
     <Content Include="src\assets\images\auth\lockscreen-bg.jpg" />
     <Content Include="src\assets\images\auth\login-bg.jpg" />
@@ -863,8 +872,13 @@
     <Content Include="src\assets\vendors\twbs-pagination\jquery.twbsPagination.min.js" />
     <Content Include="src\assets\vendors\typeahead.js\typeahead.bundle.min.js" />
     <Content Include="src\css\custom-panel-admin-styles.css" />
-    <Content Include="src\css\frontend\ayudar_styles.css" />
-    <Content Include="src\css\frontend\nosotros_styles.css" />
+    <Content Include="src\css\landing_page\adopciones_styles.css" />
+    <Content Include="src\css\base_styles.css" />
+    <Content Include="src\css\landing_page\index.css" />
+    <Content Include="src\css\landing_page\mascota_detalle_styles.css" />
+    <Content Include="src\css\landing_page\nosotros_styles.css" />
+    <Content Include="src\css\mascotas\mascotas_style.css" />
+    <Content Include="src\css\start_styles.css" />
     <Content Include="src\css\global.css" />
     <Content Include="src\css\index.css" />
     <Content Include="src\css\loader.css" />
@@ -873,28 +887,28 @@
     <Content Include="src\css\login_styles.css" />
     <Content Include="src\css\ad_admin.css" />
     <Content Include="src\css\registro_style.css" />
-    <Content Include="src\css\start_styles.css" />
     <Content Include="src\css\verificar_style.css" />
     <Content Include="src\images\como_ayudar_foto.jpg" />
     <Content Include="src\images\logo_pagina_rosa.jpeg" />
     <Content Include="src\images\perro_ayudar.png" />
+    <Content Include="src\images\testing\dog_photo3.jpg" />
     <Content Include="src\images\principal.jpg" />
+    <Content Include="src\images\testing\dog_photo4.jpg" />
     <Content Include="src\js\js_login.js" />
     <Content Include="src\js\pruebas.js" />
     <Content Include="src\js\loader.js" />
+    <Content Include="src\webform\admin\Cuentas\view_cuentas.aspx" />
     <Content Include="src\webform\admin\Mascotas\mascotasForm.aspx" />
     <Content Include="src\webform\admin\Mascotas\view_mascotas.aspx" />
-    <Content Include="src\webform\frontend\fr_adopta.aspx" />
+    <Content Include="src\webform\frontend\adopciones.aspx" />
+    <Content Include="src\webform\frontend\mascota_detalle.aspx" />
     <Content Include="src\webform\frontend\nosotros.aspx" />
     <Content Include="src\webform\frontend\voluntariado.aspx" />
     <Content Include="src\webform\login\login_registro.aspx" />
-    <Content Include="src\webform\admin\ad_main.aspx" />
-    <Content Include="src\webform\admin\prueba_design.aspx" />
-    <Content Include="src\webform\admin\ad_perfiles.aspx" />
     <Content Include="src\webform\login\recuperarPassword.aspx" />
     <Content Include="src\webform\login\verificarCodigo.aspx" />
     <Content Include="src\webform\usuario\user_main.aspx" />
-    <Content Include="src\webform\frontend\start.aspx" />
+    <Content Include="src\webform\frontend\index.aspx" />
     <Content Include="src\webform\volutario\vol_main.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -911,12 +925,20 @@
     </Compile>
     <Compile Include="Helpers\Sessions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="src\css\base\boostrap_overrides.css" />
     <Compile Include="src\masterPage\index.Master.cs">
       <DependentUpon>index.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="src\masterPage\index.Master.designer.cs">
       <DependentUpon>index.Master</DependentUpon>
+    </Compile>
+    <Compile Include="src\webform\admin\Cuentas\view_cuentas.aspx.cs">
+      <DependentUpon>view_cuentas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="src\webform\admin\Cuentas\view_cuentas.aspx.designer.cs">
+      <DependentUpon>view_cuentas.aspx</DependentUpon>
     </Compile>
     <Compile Include="src\webform\admin\Mascotas\mascotasForm.aspx.cs">
       <DependentUpon>mascotasForm.aspx</DependentUpon>
@@ -932,12 +954,19 @@
     <Compile Include="src\webform\admin\Mascotas\view_mascotas.aspx.designer.cs">
       <DependentUpon>view_mascotas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="src\webform\frontend\fr_adopta.aspx.cs">
-      <DependentUpon>fr_adopta.aspx</DependentUpon>
+    <Compile Include="src\webform\frontend\adopciones.aspx.cs">
+      <DependentUpon>adopciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="src\webform\frontend\fr_adopta.aspx.designer.cs">
-      <DependentUpon>fr_adopta.aspx</DependentUpon>
+    <Compile Include="src\webform\frontend\adopciones.aspx.designer.cs">
+      <DependentUpon>adopciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="src\webform\frontend\mascota_detalle.aspx.cs">
+      <DependentUpon>mascota_detalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="src\webform\frontend\mascota_detalle.aspx.designer.cs">
+      <DependentUpon>mascota_detalle.aspx</DependentUpon>
     </Compile>
     <Compile Include="src\webform\frontend\nosotros.aspx.cs">
       <DependentUpon>nosotros.aspx</DependentUpon>
@@ -960,26 +989,6 @@
     <Compile Include="src\webform\login\login_registro.aspx.designer.cs">
       <DependentUpon>login_registro.aspx</DependentUpon>
     </Compile>
-    <Compile Include="src\webform\admin\ad_main.aspx.cs">
-      <DependentUpon>ad_main.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="src\webform\admin\ad_main.aspx.designer.cs">
-      <DependentUpon>ad_main.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="src\webform\admin\prueba_design.aspx.cs">
-      <DependentUpon>prueba_design.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="src\webform\admin\prueba_design.aspx.designer.cs">
-      <DependentUpon>prueba_design.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="src\webform\admin\ad_perfiles.aspx.cs">
-      <DependentUpon>ad_perfiles.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="src\webform\admin\ad_perfiles.aspx.designer.cs">
-      <DependentUpon>ad_perfiles.aspx</DependentUpon>
-    </Compile>
     <Compile Include="src\webform\login\recuperarPassword.aspx.cs">
       <DependentUpon>recuperarPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1001,12 +1010,12 @@
     <Compile Include="src\webform\usuario\user_main.aspx.designer.cs">
       <DependentUpon>user_main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="src\webform\frontend\start.aspx.cs">
-      <DependentUpon>start.aspx</DependentUpon>
+    <Compile Include="src\webform\frontend\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="src\webform\frontend\start.aspx.designer.cs">
-      <DependentUpon>start.aspx</DependentUpon>
+    <Compile Include="src\webform\frontend\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="src\masterPage\panel.Master.cs">
       <DependentUpon>panel.Master</DependentUpon>
@@ -1142,6 +1151,8 @@
     <Content Include="src\assets\css\style.css.map" />
     <Content Include="src\masterPage\panelUsuario.Master" />
     <Content Include="src\css\README.md" />
+    <Content Include="src\images\testing\dog_photo1.jpg" />
+    <Content Include="src\images\testing\dog_photo2.jpg" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

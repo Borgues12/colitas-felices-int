@@ -11,7 +11,7 @@ namespace colitas_felices.src.webform.frontend
 {
 
 
-    public partial class start
+    public partial class mascota_detalle
     {
     }
 }

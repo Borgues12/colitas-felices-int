@@ -166,6 +166,7 @@ namespace colitas_felices.src.webform.admin.Mascotas
         {
             var dto = new MascotaDto
             {
+                MascotaID = MascotaID,
                 Nombre = txtNombre.Text.Trim(),
                 Color = txtColor.Text.Trim(),
                 Descripcion = txtDescripcion.Text.Trim(),
